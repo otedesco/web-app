@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { unstable_setRequestLocale } from "next-intl/server";
 import { PropertyCard } from "~/components/property-card";
 import BaseTemplate from "~/components/templates/base-template";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
@@ -14,12 +14,7 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 
-export async function generateMetadata(props: { params: { locale: string } }) {
-  const t = await getTranslations({
-    locale: props.params.locale,
-    namespace: "HomePage",
-  });
-
+export async function generateMetadata() {
   return {
     title: "title",
     description: "meta description",
