@@ -1,12 +1,28 @@
 import type { ReactNode } from "react";
-import "./styles.css";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+import { cn } from "~/lib/utils";
+
+import "~/styles/globals.css";
+import { TailwindIndicator } from "~/components/ui/tailwind-indicator";
 
 type Props = {
   children: ReactNode;
 };
 
-// Since we have a `not-found.tsx` page on the root, a layout file
-// is required, even if it's just passing children through.
 export default function RootLayout({ children }: Props) {
-  return children;
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans text-foreground antialiased",
+          GeistSans.variable,
+          GeistMono.variable,
+        )}
+      >
+        {children}
+        <TailwindIndicator />
+      </body>
+    </html>
+  );
 }
