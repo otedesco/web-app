@@ -1,9 +1,69 @@
 {
-    "HomePage": {
-        "title": "Hello world!",
-        "about": "Go to the about page"
+    "pages->landing-page": {
+        "Find Your Dream Property": "Find Your Dream Property",
+        "Discover the perfect space in your ideal location": "Discover the perfect space in your ideal location",
+        "Start Your Search": "Start Your Search",
+        "Featured Properties": "Featured Properties",
+        "Popular Locations": "Popular Locations",
+        "What Our Users Say": "What Our Users Say",
+        "properties-count": "{count, plural, =0 {properties} =1 {property} other {# properties}}"
     },
     "GuestsHomePage": {
         "title": "Home Page"
+    },
+    "components->main-footer": {
+        "brand-catch-frase": "Find your perfect property with ease. Apart is your trusted partner in real estate.",
+        "Facebook": "Facebook",
+        "Twitter": "Twitter",
+        "Instagram": "Instagram",
+        "LinkedIn": "LinkedIn",
+        "explore": "Explore",
+        "Buy Property": "Buy Property",
+        "Rent Property": "Rent Property",
+        "Commercial Property": "Commercial Property",
+        "New Developments": "New Developments",
+        "Find an Agent": "Find an Agent",
+        "List Property": "List Property",
+        "Sell Your Property": "Sell Your Property",
+        "Rent Your Property": "Rent Your Property",
+        "Property Valuation": "Property Valuation",
+        "Advertise with Us": "Advertise with Us",
+        "Resources": "Resources",
+        "Buying Guide": "Buying Guide",
+        "Renting Guide": "Renting Guide",
+        "Property News": "Property News",
+        "Market Insights": "Market Insights",
+        "Mortgage Calculator": "Mortgage Calculator",
+        "About Us": "About Us",
+        "Our Story": "Our Story",
+        "Careers": "Careers",
+        "Press": "Press",
+        "Contact Us": "Contact Us",
+        "Privacy Policy": "Privacy Policy",
+        "Terms of Service": "Terms of Service",
+        "Subscribe to our newsletter": "Subscribe to our newsletter",
+        "Enter your email": "Enter your email",
+        "Subscribe": "Subscribe",
+        "copyright": "Apart. All rights reserved."
+    },
+    "components->main-nav": {
+        "Become an Agent": "Become an Agent",
+        "Saved Properties": "Saved Properties",
+        "My Investments": "My Investments",
+        "Search": "Search",
+        "Saved": "Saved",
+        "Profile": "Profile"
+    },
+    "components->search-modal": {
+        "Find properties": "Find properties",
+        "Any location": "Any location",
+        "Any size": "Any size",
+        "Any Price": "Any Price"
+    },
+    "components->theme-toggle": {
+        "Toggle theme": "Toggle theme",
+        "Light": "Light",
+        "Dark": "Dark",
+        "System": "System"
     }
 }

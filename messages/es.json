@@ -1,6 +1,66 @@
 {
-    "HomePage": {
-        "title": "Hola mundo!",
-        "about": "Visita la pagina Nosotros"
+    "pages->landing-page": {
+        "Find Your Dream Property": "Encuentra la propiedad de tus sueños",
+        "Discover the perfect space in your ideal location": "Descubre el espacio perfecto en tu ubicación ideal",
+        "Start Your Search": "Comienza tu búsqueda",
+        "Featured Properties": "Propiedades Destacadas",
+        "Popular Locations": "Ubicaciones Populares",
+        "What Our Users Say": "Lo que dicen nuestros usuarios",
+        "properties-count": "{count, plural, =0 {propiedades} =1 {propiedad} other {# propiedades}}"
+    },
+    "components->main-footer": {
+        "brand-catch-frase": "Encuentra tu propiedad perfecta con facilidad. Apart es tu socio de confianza en bienes raíces.",
+        "Facebook": "Facebook",
+        "Twitter": "Twitter",
+        "Instagram": "Instagram",
+        "LinkedIn": "LinkedIn",
+        "explore": "Explorar",
+        "Buy Property": "Comprar Propiedad",
+        "Rent Property": "Alquilar Propiedad",
+        "Commercial Property": "Propiedad Comercial",
+        "New Developments": "Nuevos Desarrollos",
+        "Find an Agent": "Encontrar un Agente",
+        "List Property": "Listar Propiedad",
+        "Sell Your Property": "Vender Tu Propiedad",
+        "Rent Your Property": "Alquilar Tu Propiedad",
+        "Property Valuation": "Valoración de Propiedad",
+        "Advertise with Us": "Anunciar con Nosotros",
+        "Resources": "Recursos",
+        "Buying Guide": "Guía de Compra",
+        "Renting Guide": "Guía de Alquiler",
+        "Property News": "Noticias de Propiedades",
+        "Market Insights": "Perspectivas del Mercado",
+        "Mortgage Calculator": "Calculadora de Hipotecas",
+        "About Us": "Sobre Nosotros",
+        "Our Story": "Nuestra Historia",
+        "Careers": "Carreras",
+        "Press": "Prensa",
+        "Contact Us": "Contáctanos",
+        "Privacy Policy": "Política de Privacidad",
+        "Terms of Service": "Términos de Servicio",
+        "Subscribe to our newsletter": "Suscríbete a nuestro boletín",
+        "Enter your email": "Ingresa tu correo electrónico",
+        "Subscribe": "Suscribirse",
+        "copyright": "Apart. Todos los derechos reservados."
+    },
+    "components->main-nav": {
+        "Become an Agent": "Conviértete en Agente",
+        "Saved Properties": "Propiedades Guardadas",
+        "My Investments": "Mis Inversiones",
+        "Search": "Buscar",
+        "Saved": "Guardado",
+        "Profile": "Perfil"
+    },
+    "components->search-modal": {
+        "Find properties": "Encontrar propiedades",
+        "Any location": "Toda ubicación",
+        "Any size": "Todo tamaño",
+        "Any Price": "Todo precio"
+    },
+    "components->theme-toggle": {
+        "Toggle theme": "Cambiar tema",
+        "Light": "Claro",
+        "Dark": "Oscuro",
+        "System": "Sistema"
     }
 }

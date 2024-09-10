@@ -2,9 +2,10 @@ import type { ReactNode } from "react";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import { cn } from "~/lib/utils";
+import { TailwindIndicator } from "~/components/ui/tailwind-indicator";
+import { ThemeProvider } from "~/components/theme-provider";
 
 import "~/styles/globals.css";
-import { TailwindIndicator } from "~/components/ui/tailwind-indicator";
 
 type Props = {
   children: ReactNode;
@@ -20,7 +21,14 @@ export default function RootLayout({ children }: Props) {
           GeistMono.variable,
         )}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <TailwindIndicator />
       </body>
     </html>
