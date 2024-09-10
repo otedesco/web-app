@@ -44,7 +44,6 @@ const DefaultTrigger = ({
       {...rest}
     >
       <div className="flex items-center space-x-4">
-        <Search className="h-4 w-4 text-primary" />
         <div className="flex flex-col">
           <span className="text-sm font-medium">{t("Find properties")}</span>
           <span className="text-xs text-muted-foreground">
