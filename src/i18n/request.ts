@@ -7,7 +7,6 @@ const locales = { ES: "es", EN: "en" } as const;
 type Locales = (typeof locales)[keyof typeof locales];
 
 export default getRequestConfig(async ({ locale }) => {
-  // Validate that the incoming `locale` parameter is valid
   if (!routing.locales.includes(locale as Locales)) notFound();
 
   return {

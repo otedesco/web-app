@@ -1,17 +1,33 @@
 "use client";
 import React, { useState } from "react";
-import { DollarSign, Heart, Menu, Search, User, User2Icon } from "lucide-react";
+import {
+  DollarSign,
+  Heart,
+  HelpCircle,
+  LogIn,
+  Menu,
+  Search,
+  User,
+  User2Icon,
+  UserPlus,
+} from "lucide-react";
 import { BrandLogo, BrandLogoWithText } from "~/components/brand-icon";
 import { Button } from "~/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
 import { SearchModal } from "./search-modal";
 import {
   DropdownMenu,
+  DropdownMenuGroup,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { DropdownMenuContent, DropdownMenuItem } from "./ui/dropdown-menu";
+import {
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "./ui/dropdown-menu";
 import { useTranslations } from "next-intl";
+import { Link } from "~/i18n/routing";
 
 export interface MainNavProps {
   children: React.ReactNode;
@@ -81,6 +97,27 @@ const DesktopMenu = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuGroup>
+          <Link href="/auth" passHref legacyBehavior>
+            <DropdownMenuItem>
+              <LogIn className="mr-2 h-4 w-4" />
+              <span>{t("Log in")}</span>
+            </DropdownMenuItem>
+          </Link>
+          <Link href="/auth" passHref legacyBehavior>
+            <DropdownMenuItem>
+              <UserPlus className="mr-2 h-4 w-4" />
+              <span>{t("Sign up")}</span>
+            </DropdownMenuItem>
+          </Link>
+        </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem>
+          <HelpCircle className="mr-2 h-4 w-4" />
+          <span>{t("Help Center")}</span>
+        </DropdownMenuItem>
         <DropdownMenuItem>
           <User className="mr-2 h-4 w-4" />
           <span>{t("Profile")}</span>
@@ -104,18 +141,24 @@ const MobileMenu = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 border-t border-border bg-background/80 backdrop-blur-md md:hidden">
       <div className="flex justify-around py-2">
-        <Button variant="ghost" className="flex flex-col items-center py-0">
-          <Search className="mb-1 h-6 w-6" />
-          <span className="text-xs">{t("Search")}</span>
-        </Button>
-        <Button variant="ghost" className="flex flex-col items-center py-0">
-          <Heart className="mb-1 h-6 w-6" />
-          <span className="text-xs">{t("Saved")}</span>
-        </Button>
-        <Button variant="ghost" className="flex flex-col items-center py-0">
-          <User className="mb-1 h-6 w-6" />
-          <span className="text-xs">{t("Profile")}</span>
-        </Button>
+        <Link href="/" className="flex flex-col items-center py-0">
+          <div className="flex flex-col items-center">
+            <Search className="mb-1 h-6 w-6" />
+            <span className="text-xs">{t("Explore")}</span>
+          </div>
+        </Link>
+        <Link href="/wishlist" className="flex flex-col items-center py-0">
+          <div className="flex flex-col items-center">
+            <Heart className="mb-1 h-6 w-6" />
+            <span className="text-xs">{t("Wishlist")}</span>
+          </div>
+        </Link>
+        <Link href="/auth" className="flex flex-col items-center py-0">
+          <div className="flex flex-col items-center">
+            <User className="mb-1 h-6 w-6" />
+            <span className="text-xs">{t("Log in")}</span>
+          </div>
+        </Link>
       </div>
     </div>
   );

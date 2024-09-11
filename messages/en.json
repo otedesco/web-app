@@ -8,9 +8,6 @@
         "What Our Users Say": "What Our Users Say",
         "properties-count": "{count, plural, =0 {properties} =1 {property} other {# properties}}"
     },
-    "GuestsHomePage": {
-        "title": "Home Page"
-    },
     "components->main-footer": {
         "brand-catch-frase": "Find your perfect property with ease. Apart is your trusted partner in real estate.",
         "Facebook": "Facebook",
@@ -48,10 +45,13 @@
     },
     "components->main-nav": {
         "Become an Agent": "Become an Agent",
+        "Log in": "Log in",
+        "Sign up": "Sign up",
+        "Help Center": "Help Center",
         "Saved Properties": "Saved Properties",
         "My Investments": "My Investments",
-        "Search": "Search",
-        "Saved": "Saved",
+        "Explore": "Explore",
+        "Wishlist": "Wishlist",
         "Profile": "Profile"
     },
     "components->search-modal": {

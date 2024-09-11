@@ -45,10 +45,13 @@
     },
     "components->main-nav": {
         "Become an Agent": "Conviértete en Agente",
+        "Log in": "Iniciar sesión",
+        "Sign up": "Registrarse",
+        "Help Center": "Centro de ayuda",
         "Saved Properties": "Propiedades Guardadas",
         "My Investments": "Mis Inversiones",
-        "Search": "Buscar",
-        "Saved": "Guardado",
+        "Explore": "Explorar",
+        "Wishlist": "Favoritos",
         "Profile": "Perfil"
     },
     "components->search-modal": {
