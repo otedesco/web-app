@@ -18,16 +18,17 @@ import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-  InputOTPSeparator,
 } from "~/components/ui/input-otp";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { ChevronRightIcon, Home } from "lucide-react";
+import { ArrowLeft, ChevronRightIcon } from "lucide-react";
 import { BrandLogo } from "~/components/brand-icon";
+import { useRouter } from "next/navigation";
 
 export default function AuthPage() {
   const [authMethod, setAuthMethod] = useState<"login" | "signup">("login");
   const [showOTP, setShowOTP] = useState(false);
   const [showProfiles, setShowProfiles] = useState(false);
+  const router = useRouter();
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,6 +51,16 @@ export default function AuthPage() {
   const handleProfileSelect = (profile: string) => {
     console.log(`Selected profile: ${profile}`);
     // Here you would handle the profile selection
+  };
+
+  const handleBack = () => {
+    if (showProfiles) {
+      setShowProfiles(false);
+    } else if (showOTP) {
+      setShowOTP(false);
+    } else {
+      router.push("/");
+    }
   };
 
   const profiles = [
@@ -75,8 +86,17 @@ export default function AuthPage() {
         <div className="bg-[url('data:image/svg+xml;charset=utf-8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><g fill-opacity=%22.1%22><circle r=%2220%22 cx=%2221%22 cy=%2220%22 /><circle r=%2245%22 cx=%2270%22 cy=%2270%22 /><circle r=%2230%22 cx=%2250%22 cy=%2250%22 /></g></svg>')] animate-subtle-drift absolute inset-0 bg-[length:100px_100px]"></div>
       </div>
       <Card className="z-10 w-full max-w-[95%] overflow-hidden sm:max-w-md">
-        <div className="flex justify-center pt-6">
+        <div className="flex items-center justify-between px-6 pt-6">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleBack}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
           <BrandLogo />
+          <div className="w-8" /> {/* Spacer for centering */}
         </div>
         <CardHeader className="space-y-1 p-4 sm:p-6">
           <CardTitle className="text-center text-xl font-bold sm:text-2xl">
