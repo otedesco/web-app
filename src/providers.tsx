@@ -1,15 +1,15 @@
 import { ThemeProvider } from "~/components/theme-provider";
 import { getMessages } from "next-intl/server";
-import { type Locale } from "./i18n";
 import { NextIntlClientProvider } from "next-intl";
 import StoreProvider from "~/state/store-provider";
 import QueryClientProvider from "./lib/query-client-provider";
 
 const Providers: React.FC<
   React.PropsWithChildren<{
-    locale: Locale;
+    locale: string;
   }>
 > = async (props) => {
+  console.log();
   const messages = await getMessages({ locale: props.locale });
   return (
     <StoreProvider>

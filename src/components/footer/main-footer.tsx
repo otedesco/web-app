@@ -1,10 +1,9 @@
 import React from "react";
 import { Facebook, Twitter, Instagram, Linkedin, Mail } from "lucide-react";
-
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-import { BrandLogoWithText } from "~/components/brand-icon";
 import { useTranslations } from "next-intl";
+
+import { Button, Input } from "~/components/ui";
+import { BrandLogoWithText } from "~/components/brand-logo";
 
 export type MainFooterProps = object;
 

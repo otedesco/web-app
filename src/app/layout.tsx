@@ -1,21 +1,21 @@
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+import { getLocale } from "next-intl/server";
 import { TailwindIndicator } from "~/components/ui/tailwind-indicator";
-import { defaultLocale, type Locale } from "~/i18n";
+
 import { cn } from "~/lib/utils";
 import Providers from "~/providers";
 
 import "~/styles/globals.css";
 
-export default async function LocaleLayout({
+export default async function RootLayout({
   children,
-  params: { locale },
 }: {
   children: React.ReactNode;
-  params: { locale: Locale };
 }) {
+  const locale = await getLocale();
   return (
-    <html lang={defaultLocale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans text-foreground antialiased",

@@ -21,7 +21,7 @@ import {
 } from "~/components/ui/input-otp";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { ArrowLeft, ChevronRightIcon } from "lucide-react";
-import { BrandLogo } from "~/components/brand-icon";
+import { BrandLogo } from "~/components/brand-logo";
 import { useRouter } from "next/navigation";
 
 type Tab = "login" | "signup";

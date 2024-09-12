@@ -118,8 +118,8 @@ const testimonials = [
   },
 ];
 
-export default function LandingPage(props: { params: { locale: string } }) {
-  unstable_setRequestLocale(props.params.locale);
+export default function LandingPage() {
+  // unstable_setRequestLocale(props.params.locale);
   const t = useTranslations("pages->landing-page");
 
   return (

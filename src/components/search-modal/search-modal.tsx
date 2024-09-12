@@ -6,16 +6,16 @@ import {
   DialogTrigger,
   DialogContent,
   DialogTitle,
-} from "./ui/dialog";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+} from "~/components/ui/dialog";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from "~/components/ui/select";
 import { useTranslations } from "next-intl";
 
 export interface SearchModalProps {
@@ -64,7 +64,7 @@ DefaultTrigger.defaultProps = {
   price: "Any Price",
 };
 
-export const SearchModal = ({
+const SearchModal = ({
   Trigger,
   setIsSearchOpen,
   isSearchOpen,
@@ -135,3 +135,4 @@ export const SearchModal = ({
     </Dialog>
   );
 };
+export default SearchModal;

@@ -6,8 +6,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Button } from "./ui/button";
+} from "~/components/ui/card";
+import { Button } from "~/components/ui/button";
 
 interface Property {
   id: number;
@@ -24,7 +24,7 @@ export interface PropertyCardProps {
   property: Property;
 }
 
-export const PropertyCard = ({ property }: PropertyCardProps) => (
+const PropertyCard = ({ property }: PropertyCardProps) => (
   <Card>
     {/* eslint-disable-next-line @next/next/no-img-element */}
     <img
@@ -49,3 +49,5 @@ export const PropertyCard = ({ property }: PropertyCardProps) => (
     </CardFooter>
   </Card>
 );
+
+export default PropertyCard;

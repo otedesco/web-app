@@ -1,5 +1,5 @@
-import MainFooter from "../main-footer";
-import { MainNav } from "../main-nav";
+import { MainFooter } from "~/components/footer";
+import { MainNav } from "~/components/navigation-menu";
 
 export default function BaseTemplate({
   children,

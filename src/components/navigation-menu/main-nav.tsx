@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   DollarSign,
   Heart,
@@ -11,68 +12,30 @@ import {
   User2Icon,
   UserPlus,
 } from "lucide-react";
-import { BrandLogo, BrandLogoWithText } from "~/components/brand-icon";
+import { BrandLogo, BrandLogoWithText } from "~/components/brand-logo";
 import { Button } from "~/components/ui/button";
-import { ThemeToggle } from "./theme-toggle";
-import { SearchModal } from "./search-modal";
+import { ThemeToggle } from "~/components/theme-toggle";
+import { SearchModal } from "~/components/search-modal";
+// import {
+//   DropdownMenu,
+//   DropdownMenuGroup,
+//   DropdownMenuTrigger,
+// } from "@radix-ui/react-dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuGroup,
   DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "./ui/dropdown-menu";
-import { useTranslations } from "next-intl";
-import { Link } from "~/i18n/routing";
+} from "~/components/ui/dropdown-menu";
+import Link from "next/link";
+// import { Link } from "~/i18n/routing";
 
 export interface MainNavProps {
   children: React.ReactNode;
 }
-
-export const MainNav = (props: MainNavProps) => {
-  const t = useTranslations("components->main-nav");
-
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-  return (
-    <>
-      <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur-md">
-        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center">
-              <BrandLogoWithText className="hidden lg:block" />
-              <BrandLogo className="lg:hidden" />
-            </div>
-            <div className="mx-4 max-w-2xl flex-1">
-              <SearchModal
-                isSearchOpen={isSearchOpen}
-                setIsSearchOpen={setIsSearchOpen}
-              />
-            </div>
-            <div className="hidden items-center space-x-4 md:flex">
-              {/* Should receive this components as props  */}
-              <Button variant="ghost" className="text-sm font-medium">
-                {t("Become an Agent")}
-              </Button>
-              <ThemeToggle />
-              {/* should receive menu options as props */}
-              <DesktopMenu />
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {props.children}
-
-      {/* should receive menu options as props */}
-      <MobileMenu />
-    </>
-  );
-};
 
 const DesktopMenu = () => {
   const t = useTranslations("components->main-nav");
@@ -98,27 +61,13 @@ const DesktopMenu = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuGroup>
-          <Link
-            href={{
-              pathname: "/auth/[tab]",
-              params: { tab: "login" },
-            }}
-            passHref
-            legacyBehavior
-          >
+          <Link href={`/auth/login`}>
             <DropdownMenuItem>
               <LogIn className="mr-2 h-4 w-4" />
               <span>{t("Log in")}</span>
             </DropdownMenuItem>
           </Link>
-          <Link
-            href={{
-              pathname: "/auth/[tab]",
-              params: { tab: "signup" },
-            }}
-            passHref
-            legacyBehavior
-          >
+          <Link href={`/auth/signup`}>
             <DropdownMenuItem>
               <UserPlus className="mr-2 h-4 w-4" />
               <span>{t("Sign up")}</span>
@@ -167,13 +116,7 @@ const MobileMenu = () => {
             <span className="text-xs">{t("Wishlist")}</span>
           </div>
         </Link>
-        <Link
-          href={{
-            pathname: "/auth/[tab]",
-            params: { tab: "login" },
-          }}
-          className="flex flex-col items-center py-0"
-        >
+        <Link href="/auth/login" className="flex flex-col items-center py-0">
           <div className="flex flex-col items-center">
             <User className="mb-1 h-6 w-6" />
             <span className="text-xs">{t("Log in")}</span>
@@ -183,3 +126,46 @@ const MobileMenu = () => {
     </div>
   );
 };
+
+export const MainNav = (props: MainNavProps) => {
+  const t = useTranslations("components->main-nav");
+
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  return (
+    <>
+      <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur-md">
+        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <div className="flex items-center">
+              <BrandLogoWithText className="hidden lg:block" />
+              <BrandLogo className="lg:hidden" />
+            </div>
+            <div className="mx-4 max-w-2xl flex-1">
+              <SearchModal
+                isSearchOpen={isSearchOpen}
+                setIsSearchOpen={setIsSearchOpen}
+              />
+            </div>
+            <div className="hidden items-center space-x-4 md:flex">
+              {/* Should receive this components as props  */}
+              <Button variant="ghost" className="text-sm font-medium">
+                {t("Become an Agent")}
+              </Button>
+              <ThemeToggle />
+              {/* should receive menu options as props */}
+              <DesktopMenu />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {props.children}
+
+      {/* should receive menu options as props */}
+      <MobileMenu />
+    </>
+  );
+};
+
+export default MainNav;
