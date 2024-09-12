@@ -24,8 +24,12 @@ import { ArrowLeft, ChevronRightIcon } from "lucide-react";
 import { BrandLogo } from "~/components/brand-icon";
 import { useRouter } from "next/navigation";
 
-export default function AuthPage() {
-  const [authMethod, setAuthMethod] = useState<"login" | "signup">("login");
+type Tab = "login" | "signup";
+
+export type AuthPageProps = { params: { tab: Tab } };
+
+export default function AuthPage({ params: { tab } }: AuthPageProps) {
+  const [authMethod, setAuthMethod] = useState<Tab>(tab);
   const [showOTP, setShowOTP] = useState(false);
   const [showProfiles, setShowProfiles] = useState(false);
   const router = useRouter();
@@ -83,7 +87,7 @@ export default function AuthPage() {
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden p-2 sm:p-4">
       <div className="absolute inset-0 z-0 h-full w-full bg-gradient-to-br from-primary/20 via-background to-secondary/20">
-        <div className="bg-[url('data:image/svg+xml;charset=utf-8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><g fill-opacity=%22.1%22><circle r=%2220%22 cx=%2221%22 cy=%2220%22 /><circle r=%2245%22 cx=%2270%22 cy=%2270%22 /><circle r=%2230%22 cx=%2250%22 cy=%2250%22 /></g></svg>')] animate-subtle-drift absolute inset-0 bg-[length:100px_100px]"></div>
+        <div className="bg-[url('data:image/svg+xml;charset=utf-8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><g fill-opacity=%22.1%22><circle r=%2220%22 cx=%2221%22 cy=%2220%22 /><circle r=%2245%22 cx=%2270%22 cy=%2270%22 /><circle r=%2230%22 cx=%2250%22 cy=%2250%22 /></g></svg>')] absolute inset-0 animate-subtle-drift bg-[length:100px_100px]"></div>
       </div>
       <Card className="z-10 w-full max-w-[95%] overflow-hidden sm:max-w-md">
         <div className="flex items-center justify-between px-6 pt-6">

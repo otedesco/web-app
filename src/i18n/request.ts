@@ -1,16 +1,16 @@
 import { notFound } from "next/navigation";
-import { getRequestConfig } from "next-intl/server";
-import { routing } from "./routing";
+import { routing, type Locale } from "./routing";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const locales = { ES: "es", EN: "en" } as const;
-type Locales = (typeof locales)[keyof typeof locales];
+type getRequestConfig = (params: {
+  locale: Locale;
+}) => Promise<void | Record<string, unknown>>;
 
-export default getRequestConfig(async ({ locale }) => {
-  if (!routing.locales.includes(locale as Locales)) notFound();
-
+const getRequestConfig: getRequestConfig = async ({ locale }) => {
+  if (!routing.locales.includes(locale)) notFound();
   return {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     messages: (await import(`../../messages/${locale}.json`)).default,
   };
-});
+};
+
+export default getRequestConfig;

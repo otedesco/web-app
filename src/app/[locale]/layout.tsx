@@ -1,10 +1,10 @@
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import { ThemeProvider } from "~/components/theme-provider";
 import { TailwindIndicator } from "~/components/ui/tailwind-indicator";
+import { defaultLocale, type Locale } from "~/i18n";
 import { cn } from "~/lib/utils";
+import Providers from "~/providers";
+
 import "~/styles/globals.css";
 
 export default async function LocaleLayout({
@@ -12,12 +12,10 @@ export default async function LocaleLayout({
   params: { locale },
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: Locale };
 }) {
-  const messages = await getMessages({ locale });
-
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={defaultLocale} suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans text-foreground antialiased",
@@ -25,17 +23,10 @@ export default async function LocaleLayout({
           GeistMono.variable,
         )}
       >
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </NextIntlClientProvider>
-        <TailwindIndicator />
+        <Providers locale={locale}>
+          {children}
+          <TailwindIndicator />
+        </Providers>
       </body>
     </html>
   );

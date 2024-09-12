@@ -98,13 +98,27 @@ const DesktopMenu = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuGroup>
-          <Link href="/auth" passHref legacyBehavior>
+          <Link
+            href={{
+              pathname: "/auth/[tab]",
+              params: { tab: "login" },
+            }}
+            passHref
+            legacyBehavior
+          >
             <DropdownMenuItem>
               <LogIn className="mr-2 h-4 w-4" />
               <span>{t("Log in")}</span>
             </DropdownMenuItem>
           </Link>
-          <Link href="/auth" passHref legacyBehavior>
+          <Link
+            href={{
+              pathname: "/auth/[tab]",
+              params: { tab: "signup" },
+            }}
+            passHref
+            legacyBehavior
+          >
             <DropdownMenuItem>
               <UserPlus className="mr-2 h-4 w-4" />
               <span>{t("Sign up")}</span>
@@ -153,7 +167,13 @@ const MobileMenu = () => {
             <span className="text-xs">{t("Wishlist")}</span>
           </div>
         </Link>
-        <Link href="/auth" className="flex flex-col items-center py-0">
+        <Link
+          href={{
+            pathname: "/auth/[tab]",
+            params: { tab: "login" },
+          }}
+          className="flex flex-col items-center py-0"
+        >
           <div className="flex flex-col items-center">
             <User className="mb-1 h-6 w-6" />
             <span className="text-xs">{t("Log in")}</span>
