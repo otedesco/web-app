@@ -1,6 +1,5 @@
 import { Star } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { unstable_setRequestLocale } from "next-intl/server";
 import { PropertyCard } from "~/components/property-card";
 import BaseTemplate from "~/components/templates/base-template";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";

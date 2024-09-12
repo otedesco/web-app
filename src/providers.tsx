@@ -21,9 +21,7 @@ const Providers: React.FC<
             enableSystem
             disableTransitionOnChange
           >
-            {/* <HistoryManagerProvider> */}
             {props.children}
-            {/* </HistoryManagerProvider> */}
           </ThemeProvider>
         </NextIntlClientProvider>
       </QueryClientProvider>
