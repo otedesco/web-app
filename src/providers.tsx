@@ -9,7 +9,6 @@ const Providers: React.FC<
     locale: string;
   }>
 > = async (props) => {
-  console.log();
   const messages = await getMessages({ locale: props.locale });
   return (
     <StoreProvider>

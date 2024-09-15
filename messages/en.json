@@ -8,6 +8,20 @@
         "What Our Users Say": "What Our Users Say",
         "properties-count": "{count, plural, =0 {properties} =1 {property} other {# properties}}"
     },
+    "views->auth-view": {
+        "Welcome": "Welcome",
+        "Log In": "Log In",
+        "Sign Up": "Sign Up",
+        "Select your profile to continue": "Select your profile to continue",
+        "Enter the OTP sent to your email": "Enter the OTP sent to your email",
+        "Verify OTP": "Verify OTP",
+        "Email address": "Email address",
+        "Password": "Password",
+        "Confirm Password": "Confirm Password",
+        "Sign in to your account": "Sign in to your account",
+        "Create a new account": "Create a new account",
+        "By continuing, you agree to our Terms of Service and Privacy Policy": "By continuing, you agree to our Terms of Service and Privacy Policy"
+    },
     "components->main-footer": {
         "brand-catch-frase": "Find your perfect property with ease. Apart is your trusted partner in real estate.",
         "Facebook": "Facebook",

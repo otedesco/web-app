@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Linkedin, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Button, Input } from "~/components/ui";
-import { BrandLogoWithText } from "~/components/brand-logo";
+import { Logo } from "~/components/brand-logo";
 
 export type MainFooterProps = object;
 
@@ -14,7 +14,7 @@ export default function MainFooter() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-4">
-            <BrandLogoWithText />
+            <Logo withText />
             <p className="text-sm text-muted-foreground">
               {t("brand-catch-frase")}
             </p>

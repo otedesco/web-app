@@ -12,15 +12,10 @@ import {
   User2Icon,
   UserPlus,
 } from "lucide-react";
-import { BrandLogo, BrandLogoWithText } from "~/components/brand-logo";
+import { Logo } from "~/components/brand-logo";
 import { Button } from "~/components/ui/button";
 import { ThemeToggle } from "~/components/theme-toggle";
 import { SearchModal } from "~/components/search-modal";
-// import {
-//   DropdownMenu,
-//   DropdownMenuGroup,
-//   DropdownMenuTrigger,
-// } from "@radix-ui/react-dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
   DropdownMenu,
@@ -31,7 +26,7 @@ import {
   DropdownMenuSeparator,
 } from "~/components/ui/dropdown-menu";
 import Link from "next/link";
-// import { Link } from "~/i18n/routing";
+import { BrandLogo, BrandLogoWithText } from "../brand-logo";
 
 export interface MainNavProps {
   children: React.ReactNode;
@@ -138,6 +133,7 @@ export const MainNav = (props: MainNavProps) => {
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
+              <Logo />
               <BrandLogoWithText className="hidden lg:block" />
               <BrandLogo className="lg:hidden" />
             </div>

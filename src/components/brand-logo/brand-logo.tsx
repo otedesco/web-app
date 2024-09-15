@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 interface SVGLogoProps {
   className?: string;
@@ -49,3 +49,19 @@ export function BrandLogoWithText({ ...rest }: SVGLogoProps = {}) {
     </svg>
   );
 }
+
+export interface LogoProps {
+  withText?: boolean;
+  className?: string;
+}
+
+const Logo: React.FC<LogoProps> = (props) => {
+  const { withText = false } = props;
+  if (withText) {
+    return <BrandLogoWithText className={props.className} />;
+  }
+
+  return <BrandLogo />;
+};
+
+export default memo(Logo);
