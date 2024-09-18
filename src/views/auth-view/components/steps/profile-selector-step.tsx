@@ -46,7 +46,7 @@ const ProfileStep: React.FC = () => {
   };
 
   return (
-    <AnimatedStepContainer className="space-y-4">
+    <AnimatedStepContainer className="flex flex-col items-center space-y-4">
       {profiles.map((profile) => (
         <ProfileCard
           key={profile.email}

@@ -18,7 +18,11 @@ export interface AuthCardHeaderProps {
 
 const descriptions = {
   [Tabs.LOGIN]: ["Sign in to your account", "Select your profile to continue"],
-  [Tabs.SIGNUP]: ["Create a new account", "Enter the OTP sent to your email"],
+  [Tabs.SIGNUP]: [
+    "Create a new account",
+    "Enter your name",
+    "Enter the OTP sent to your email",
+  ],
 };
 
 const AuthCardHeader: React.FC<AuthCardHeaderProps> = ({ onStepChange }) => {

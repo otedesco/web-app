@@ -2,19 +2,19 @@ import { useMutation } from "@tanstack/react-query";
 
 import { type MutationConfig } from "../../types/react-query";
 import React from "react";
-import { signUp } from "~/lib/api/auth";
-import { SignUpReponse, SignUpRequest } from "~/lib/api/auth/types";
+import { signIn } from "~/lib/api/auth";
+import { LoginRequest } from "~/lib/api/auth/types";
 
-const mutationFn = async (payload: SignUpRequest) => {
-  return signUp(payload);
+const mutationFn = async (payload: LoginRequest) => {
+  return signIn(payload);
 };
 
-export const useSignUp = ({
+export const useSignIn = ({
   onError,
   onMutate,
   onSuccess,
   onSettled,
-}: MutationConfig<SignUpReponse, unknown, SignUpRequest>) => {
+}: MutationConfig<void, unknown, LoginRequest>) => {
   const {
     data,
     error,
@@ -35,19 +35,17 @@ export const useSignUp = ({
     onSettled,
   });
 
-  const signUp = React.useCallback(
-    (args?: SignUpRequest) => {
-      // TODO: login user after suceessful sign up
-      return mutate({ ...args } as SignUpRequest);
+  const signIn = React.useCallback(
+    (args?: LoginRequest) => {
+      return mutate({ ...args } as LoginRequest);
     },
     [mutate],
   );
 
-  const signUpAsync = React.useCallback(
-    async (args: SignUpRequest) => {
+  const signInAsync = React.useCallback(
+    async (args: LoginRequest) => {
       try {
-        // TODO: login user after suceessful sign up
-        const res = await mutateAsync({ ...args } as SignUpRequest);
+        const res = await mutateAsync({ ...args } as LoginRequest);
 
         // TODO: dispatch set profile data on redux when success
         return res;
@@ -65,8 +63,8 @@ export const useSignUp = ({
     isIdle,
     isPending,
     isSuccess,
-    signUp,
-    signUpAsync,
+    signIn,
+    signInAsync,
     reset,
     status,
     variables,

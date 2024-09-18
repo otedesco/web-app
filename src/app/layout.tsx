@@ -1,6 +1,7 @@
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import { getLocale } from "next-intl/server";
+import { Toaster } from "~/components/ui/sonner";
 import { TailwindIndicator } from "~/components/ui/tailwind-indicator";
 
 import { cn } from "~/lib/utils";
@@ -25,6 +26,7 @@ export default async function RootLayout({
       >
         <Providers locale={locale}>
           {children}
+          <Toaster />
           <TailwindIndicator />
         </Providers>
       </body>

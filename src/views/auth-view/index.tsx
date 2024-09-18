@@ -1,32 +1,61 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Card, CardFooter } from "~/components/ui/card";
 import AuthCardHeader from "./components/auth-card-header";
 import AuthCardBody from "./components/auth-card-body";
 
-import { type TabsEnum, type StepType, StepsByTab } from "./types";
+import {
+  type TabsEnum,
+  type StepType,
+  StepsByTab,
+  Tabs,
+  SignUpSteps,
+  LoginSteps,
+} from "./types";
 import { AuthContext } from "./context";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+
+import { useSignUp } from "~/lib/hooks/auth/useSignUp";
+import { SignUpRequest } from "~/lib/api/auth/types";
 
 export type AuthPageProps = { tab: TabsEnum };
 
 const AuthView = ({ tab }: AuthPageProps) => {
   const [selectedTab, setSelectedTab] = useState<TabsEnum>(tab);
   const [step, setStep] = useState<StepType>(StepsByTab[tab][0]);
+  const [formState, setFormState] = useState<Record<string, any>>({});
+
+  const router = useRouter();
+
   const t = useTranslations("views->auth-view");
 
-  const handleTabChange = (value: string) => {
-    const selectedTab = value as TabsEnum;
-    setSelectedTab(selectedTab);
+  const handleTabChange = useCallback((value: string) => {
+    const newTab = value as TabsEnum;
+    setSelectedTab(newTab);
+    setStep(StepsByTab[newTab][0]);
+  }, []);
 
-    setStep(StepsByTab[selectedTab][0]);
+  const setNextStep = () => {
+    const nextStep = StepsByTab[selectedTab][step + 1];
+    if (nextStep !== undefined) {
+      setStep(nextStep);
+    } else {
+      setFormState({});
+      router.push("/");
+    }
+  };
+
+  const handleSubmit = (values: Record<string, any>) => {
+    setFormState((prevState) => ({ ...prevState, ...values }));
+    setNextStep();
   };
 
   const providerValue = useMemo(
-    () => ({ selectedTab, step }),
-    [selectedTab, step],
+    () => ({ selectedTab, step, formState }),
+    [selectedTab, step, formState],
   );
 
   return (
@@ -39,6 +68,7 @@ const AuthView = ({ tab }: AuthPageProps) => {
           <AuthCardHeader onStepChange={setStep} />
           <AuthCardBody
             selectedTab={selectedTab}
+            onSubmit={handleSubmit}
             step={step}
             onTabChange={handleTabChange}
           />

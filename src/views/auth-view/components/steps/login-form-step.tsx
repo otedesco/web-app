@@ -1,67 +1,129 @@
-import React, { memo } from "react";
-import { ChevronRightIcon } from "lucide-react";
-import { Button, Input, Label } from "~/components/ui";
+import React, { memo, useEffect } from "react";
+import { ChevronRightIcon, Loader2 } from "lucide-react";
+import { Button, Input } from "~/components/ui";
 import { useTranslations } from "next-intl";
+import { Control, useForm } from "react-hook-form";
+import {
+  SignInStepForm,
+  signInStepValidator,
+  signUpStepValidator,
+} from "../../validators";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "~/components/ui/form";
+import { useSignIn } from "~/lib/hooks/auth/useSignIn";
+import { toast } from "sonner";
 
-// Define a reusable FormField component
 interface FormFieldProps {
-  id: string;
-  type: string;
+  name: "email" | "password";
   label: string;
   placeholder?: string;
+  control: Control<SignInStepForm>;
+  error?: string;
+  type: "email" | "password";
 }
 
-const FormField: React.FC<FormFieldProps> = ({
-  id,
-  type,
+const Field: React.FC<FormFieldProps> = ({
+  name,
+  control,
   label,
   placeholder,
+  type,
 }) => {
   const t = useTranslations("views->auth-view");
 
   return (
-    <div className="space-y-1 sm:space-y-2">
-      <Label htmlFor={id} className="text-xs sm:text-sm">
-        {t(label)}
-      </Label>
-      <Input
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        required
-        className="text-sm sm:text-base"
-      />
-    </div>
+    <FormField
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <FormItem className="space-y-1 sm:space-y-2">
+          <FormLabel className="text-xs sm:text-sm">{t(label)}</FormLabel>
+          <FormControl>
+            <Input
+              className="text-sm sm:text-base"
+              placeholder={placeholder}
+              type={type}
+              {...field}
+            />
+          </FormControl>
+        </FormItem>
+      )}
+    />
   );
 };
 
-const LogInFormStep: React.FC = () => {
+export interface SignInStepProps {
+  onSubmit: (values: Record<string, any>) => void;
+}
+
+const defaultValues = {
+  email: "",
+  password: "",
+};
+
+const LogInFormStep: React.FC<SignInStepProps> = (props) => {
+  const { signIn, isPending, isSuccess, isError } = useSignIn({});
+  const form = useForm<SignInStepForm>({
+    resolver: zodResolver(signInStepValidator),
+    defaultValues,
+  });
+
   const t = useTranslations("views->auth-view");
 
-  // Handle form submission
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    // Implement login logic here
-    console.log("Form submitted");
+  const handleSubmit = (values: SignInStepForm) => {
+    signIn({ email: values.email, password: values.password });
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      props.onSubmit({});
+    }
+    if (isError) {
+      toast.error(t("Sign in failed"));
+    }
+  }, [isSuccess, isError]);
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-      <FormField
-        id="login-email"
-        type="email"
-        label="Email address"
-        placeholder="you@example.com"
-      />
-      <FormField id="login-password" type="password" label="Password" />
-      <Button
-        type="submit"
-        className="group mt-2 w-full py-2 text-sm sm:py-3 sm:text-base"
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="space-y-3 sm:space-y-4"
       >
-        {t("Log In")}
-        <ChevronRightIcon className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-      </Button>
-    </form>
+        <Field
+          name="email"
+          type="email"
+          control={form.control}
+          label="Email address"
+          placeholder="you@example.com"
+        />
+        <Field
+          name="password"
+          control={form.control}
+          label="Password"
+          type="password"
+        />
+        <Button
+          type="submit"
+          variant={isPending ? "ghost" : "default"}
+          className="group mt-2 w-full py-2 text-sm sm:py-3 sm:text-base"
+        >
+          {isPending ? (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            <>
+              {t("Log In")}
+              <ChevronRightIcon className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </>
+          )}
+        </Button>
+      </form>
+    </Form>
   );
 };
 

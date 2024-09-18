@@ -20,7 +20,14 @@
         "Confirm Password": "Confirm Password",
         "Sign in to your account": "Sign in to your account",
         "Create a new account": "Create a new account",
-        "By continuing, you agree to our Terms of Service and Privacy Policy": "By continuing, you agree to our Terms of Service and Privacy Policy"
+        "Enter your name": "Enter your name",
+        "First name": "First name",
+        "Last name": "Last name",
+        "Continue": "Continue",
+        "Enter OTP": "Enter OTP",
+        "By continuing, you agree to our Terms of Service and Privacy Policy": "By continuing, you agree to our Terms of Service and Privacy Policy",
+        "Sign up failed": "Sign up failed",
+        "Verify OTP failed": "Verify OTP failed"
     },
     "components->main-footer": {
         "brand-catch-frase": "Encuentra tu propiedad perfecta con facilidad. Apart es tu socio de confianza en bienes raíces.",

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import {
@@ -133,7 +134,6 @@ export const MainNav = (props: MainNavProps) => {
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
-              <Logo />
               <BrandLogoWithText className="hidden lg:block" />
               <BrandLogo className="lg:hidden" />
             </div>

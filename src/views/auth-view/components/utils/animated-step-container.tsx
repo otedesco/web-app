@@ -15,7 +15,7 @@ const AnimatedStepContainer: React.FC<
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.2 }}
-      className={cn("flex flex-col items-center", props.className)}
+      className={props.className}
     >
       {props.children}
     </motion.div>
