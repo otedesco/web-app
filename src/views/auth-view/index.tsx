@@ -1,25 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import { Card, CardFooter } from "~/components/ui/card";
 import AuthCardHeader from "./components/auth-card-header";
 import AuthCardBody from "./components/auth-card-body";
 
-import {
-  type TabsEnum,
-  type StepType,
-  StepsByTab,
-  Tabs,
-  SignUpSteps,
-  LoginSteps,
-} from "./types";
+import { type TabsEnum, type StepType, StepsByTab } from "./types";
 import { AuthContext } from "./context";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-
-import { useSignUp } from "~/lib/hooks/auth/useSignUp";
-import { SignUpRequest } from "~/lib/api/auth/types";
 
 export type AuthPageProps = { tab: TabsEnum };
 

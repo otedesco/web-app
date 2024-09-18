@@ -2,12 +2,8 @@ import React, { memo, useEffect } from "react";
 import { ChevronRightIcon, Loader2 } from "lucide-react";
 import { Button, Input } from "~/components/ui";
 import { useTranslations } from "next-intl";
-import { Control, useForm } from "react-hook-form";
-import {
-  SignInStepForm,
-  signInStepValidator,
-  signUpStepValidator,
-} from "../../validators";
+import { type Control, useForm } from "react-hook-form";
+import { type SignInStepForm, signInStepValidator } from "../../validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -87,7 +83,7 @@ const LogInFormStep: React.FC<SignInStepProps> = (props) => {
     if (isError) {
       toast.error(t("Sign in failed"));
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, props, t]);
 
   return (
     <Form {...form}>

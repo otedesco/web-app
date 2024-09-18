@@ -9,16 +9,10 @@ import {
 } from "~/components/ui";
 import AnimatedStepContainer from "../utils/animated-step-container";
 import { useTranslations } from "next-intl";
+import { Form, FormControl, FormField, FormItem } from "~/components/ui/form";
+import { type ControllerRenderProps, useForm } from "react-hook-form";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "~/components/ui/form";
-import { ControllerRenderProps, useForm } from "react-hook-form";
-import {
-  VerifyAccountStepForm,
+  type VerifyAccountStepForm,
   verifyAccountStepValidator,
 } from "../../validators";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,7 +29,7 @@ const OTPInput: React.FC<
   <InputOTP {...field} maxLength={maxLength}>
     <InputOTPGroup>
       {Array.from({ length: maxLength }).map((_, index) => (
-        <InputOTPSlot index={index} />
+        <InputOTPSlot key={index} index={index} />
       ))}
     </InputOTPGroup>
   </InputOTP>
@@ -59,7 +53,7 @@ const OTPStep = (props: OTPStepProps) => {
   const t = useTranslations("views->auth-view");
 
   const handleSubmit = (values: VerifyAccountStepForm) => {
-    verifyAccount({ token: formState.token, otp: values.otp });
+    verifyAccount({ token: formState.token as string, otp: values.otp });
   };
 
   useEffect(() => {
@@ -70,7 +64,7 @@ const OTPStep = (props: OTPStepProps) => {
     if (isError) {
       toast.error(t("Verify OTP failed"));
     }
-  }, [isSuccess]);
+  }, [isError, isSuccess, props, t]);
 
   return (
     <AnimatedStepContainer className="flex flex-col items-center">

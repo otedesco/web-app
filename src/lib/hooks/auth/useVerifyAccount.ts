@@ -1,13 +1,9 @@
+import React from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { type MutationConfig } from "../../types/react-query";
-import React from "react";
-// import { signUp, verifyAccount } from "~/lib/api/auth";
-import {
-  SignUpReponse,
-  SignUpRequest,
-  VerifyAccountRequest,
-} from "~/lib/api/auth/types";
+
+import { type VerifyAccountRequest } from "~/lib/api/auth/types";
 import { verifyAccount } from "~/lib/api/auth";
 
 const mutationFn = async (payload: VerifyAccountRequest) => {
@@ -50,13 +46,8 @@ export const useVerifyAccount = ({
 
   const verifyAccountAsync = React.useCallback(
     async (args: VerifyAccountRequest) => {
-      try {
-        // TODO: login user after verify account
-        const res = await mutateAsync({ ...args } as VerifyAccountRequest);
-        return res;
-      } catch (error) {
-        throw error;
-      }
+      // TODO: login user after verify account
+      return mutateAsync({ ...args } as VerifyAccountRequest);
     },
     [mutateAsync],
   );

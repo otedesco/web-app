@@ -19,8 +19,8 @@ export const signUpStepValidator = z
 export type SignUpStepForm = z.infer<typeof signUpStepValidator>;
 
 export const personalInfoStepValidator = z.object({
-  name: z.string().min(2),
-  lastname: z.string().min(2),
+  name: z.string().min(3),
+  lastname: z.string().min(3),
 });
 
 export type PersonalInfoStepForm = z.infer<typeof personalInfoStepValidator>;

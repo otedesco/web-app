@@ -37,6 +37,6 @@ export interface VerifyAccountRequest {
   otp: string;
 }
 
-export interface SignUpReponse {
+export interface SignUpResponse {
   account: Account;
 }

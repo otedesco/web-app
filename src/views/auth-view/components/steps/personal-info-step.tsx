@@ -17,7 +17,7 @@ import {
   FormLabel,
 } from "~/components/ui/form";
 import { useSignUp } from "~/lib/hooks/auth/useSignUp";
-import { SignUpReponse, SignUpRequest } from "~/lib/api/auth/types";
+import { type SignUpRequest } from "~/lib/api/auth/types";
 import { AuthContext } from "../../context";
 import { toast } from "sonner";
 
@@ -96,7 +96,7 @@ const PersonalInfoStep = (props: PersonalInfoStepProps) => {
     if (isError) {
       toast.error(t("Sign up failed"));
     }
-  }, [isSuccess, isError, formState, data]);
+  }, [isSuccess, isError, formState, data, props, t]);
 
   return (
     <AnimatedStepContainer className="w-full">

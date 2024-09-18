@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import React, { memo } from "react";
-import { cn } from "~/lib/utils";
 
 export interface AnimatedStepContainerProps {
   className?: string;

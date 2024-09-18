@@ -1,14 +1,14 @@
 import { AUTH_SERVER_API } from "~/config/constants";
-import {
+import type {
   LoginRequest,
-  SignUpReponse,
+  SignUpResponse,
   SignUpRequest,
   VerifyAccountRequest,
 } from "./types";
 
 export const signUp = async (
   payload: SignUpRequest,
-): Promise<SignUpReponse> => {
+): Promise<SignUpResponse> => {
   const res = await fetch(`${AUTH_SERVER_API}/auth/sign-up`, {
     method: "POST",
     headers: {
@@ -18,10 +18,11 @@ export const signUp = async (
   });
 
   if (res.status !== 201) {
+    // FIXME : handle error
     throw new Error("Sign up failed");
   }
 
-  return res.json();
+  return res.json() as Promise<SignUpResponse>;
 };
 
 export const signIn = async (payload: LoginRequest): Promise<void> => {
@@ -34,6 +35,7 @@ export const signIn = async (payload: LoginRequest): Promise<void> => {
   });
 
   if (res.status !== 200) {
+    // FIXME : handle error
     throw new Error("Sign in failed");
   }
 };
@@ -51,6 +53,7 @@ export const verifyAccount = async (
   });
 
   if (res.status !== 204) {
+    // FIXME : handle error
     throw new Error("Email verification failed");
   }
   return;

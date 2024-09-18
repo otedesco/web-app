@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { type MutationConfig } from "../../types/react-query";
 import React from "react";
 import { signIn } from "~/lib/api/auth";
-import { LoginRequest } from "~/lib/api/auth/types";
+import type { LoginRequest } from "~/lib/api/auth/types";
 
 const mutationFn = async (payload: LoginRequest) => {
   return signIn(payload);
@@ -44,14 +44,8 @@ export const useSignIn = ({
 
   const signInAsync = React.useCallback(
     async (args: LoginRequest) => {
-      try {
-        const res = await mutateAsync({ ...args } as LoginRequest);
-
-        // TODO: dispatch set profile data on redux when success
-        return res;
-      } catch (error) {
-        throw error;
-      }
+      // TODO: dispatch set profile data on redux when success
+      return mutateAsync({ ...args } as LoginRequest);
     },
     [mutateAsync],
   );

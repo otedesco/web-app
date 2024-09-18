@@ -13,7 +13,7 @@ import {
   User2Icon,
   UserPlus,
 } from "lucide-react";
-import { Logo } from "~/components/brand-logo";
+
 import { Button } from "~/components/ui/button";
 import { ThemeToggle } from "~/components/theme-toggle";
 import { SearchModal } from "~/components/search-modal";
