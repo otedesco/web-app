@@ -81,22 +81,25 @@ const PersonalInfoStep = (props: PersonalInfoStepProps) => {
   const handleSubmit = useCallback(
     (values: PersonalInfoStepForm) => {
       signUp({
-        ...formState,
-        ...values,
+        email: formState.email,
+        password: formState.password,
+        passwordConfirmation: formState.passwordConfirmation,
+        name: values.name,
+        lastname: values.lastname,
       } as SignUpRequest);
     },
     [formState, signUp],
   );
 
   useEffect(() => {
-    if (isSuccess && data?.account?.token) {
-      props.onSubmit({ token: data.account.token });
+    if (isSuccess && data?.token) {
+      props.onSubmit({ token: data.token });
     }
     // TODO: Implement error toast when isError on useSignUp hook
     if (isError) {
       toast.error(t("Sign up failed"));
     }
-  }, [isSuccess, isError, formState, data, props, t]);
+  }, [data, isError, isSuccess, props, t]);
 
   return (
     <AnimatedStepContainer className="w-full">

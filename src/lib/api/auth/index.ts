@@ -9,7 +9,7 @@ import type {
 export const signUp = async (
   payload: SignUpRequest,
 ): Promise<SignUpResponse> => {
-  const res = await fetch(`${AUTH_SERVER_API}/auth/sign-up`, {
+  const response = await fetch(`${AUTH_SERVER_API}/auth/sign-up`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -17,25 +17,22 @@ export const signUp = async (
     body: JSON.stringify(payload),
   });
 
-  if (res.status !== 201) {
-    // FIXME : handle error
-    throw new Error("Sign up failed");
+  if (response.ok) {
+    return (await response.json()) as SignUpResponse;
   }
 
-  return res.json() as Promise<SignUpResponse>;
+  throw new Error("Sign up failed");
 };
 
 export const signIn = async (payload: LoginRequest): Promise<void> => {
-  const res = await fetch(`${AUTH_SERVER_API}/auth/sign-in`, {
+  const response = await fetch(`${AUTH_SERVER_API}/auth/sign-in`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
   });
-
-  if (res.status !== 200) {
-    // FIXME : handle error
+  if (!response.ok) {
     throw new Error("Sign in failed");
   }
 };
@@ -43,7 +40,7 @@ export const signIn = async (payload: LoginRequest): Promise<void> => {
 export const verifyAccount = async (
   payload: VerifyAccountRequest,
 ): Promise<void> => {
-  const res = await fetch(`${AUTH_SERVER_API}/account/verify`, {
+  const response = await fetch(`${AUTH_SERVER_API}/account/verify`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -52,9 +49,7 @@ export const verifyAccount = async (
     body: JSON.stringify({ otp: payload.otp }),
   });
 
-  if (res.status !== 204) {
-    // FIXME : handle error
+  if (!response.ok) {
     throw new Error("Email verification failed");
   }
-  return;
 };

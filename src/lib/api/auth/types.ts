@@ -2,6 +2,10 @@ export enum AccountStatus {
   EMAIL_VERIFICATION_PENDING = "email_verification_pending",
 }
 
+export type ApiReponse<T> = {
+  data: T;
+};
+
 export type Account = {
   created_at: string;
   email: string;
@@ -37,6 +41,4 @@ export interface VerifyAccountRequest {
   otp: string;
 }
 
-export interface SignUpResponse {
-  account: Account;
-}
+export type SignUpResponse = ApiReponse<Account>;

@@ -53,7 +53,7 @@ const OTPStep = (props: OTPStepProps) => {
   const t = useTranslations("views->auth-view");
 
   const handleSubmit = (values: VerifyAccountStepForm) => {
-    verifyAccount({ token: formState.token as string, otp: values.otp });
+    verifyAccount({ token: formState.token!, otp: values.otp });
   };
 
   useEffect(() => {

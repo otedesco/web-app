@@ -28,7 +28,7 @@ const AuthView = ({ tab }: AuthPageProps) => {
     setStep(StepsByTab[newTab][0]);
   }, []);
 
-  const setNextStep = () => {
+  const setNextStep = useCallback(() => {
     const nextStep = StepsByTab[selectedTab][step + 1];
     if (nextStep !== undefined) {
       setStep(nextStep);
@@ -36,12 +36,15 @@ const AuthView = ({ tab }: AuthPageProps) => {
       setFormState({});
       router.push("/");
     }
-  };
+  }, [router, selectedTab, step]);
 
-  const handleSubmit = (values: Record<string, any>) => {
-    setFormState((prevState) => ({ ...prevState, ...values }));
-    setNextStep();
-  };
+  const handleSubmit = useCallback(
+    (values: Record<string, any>) => {
+      setFormState((prevState) => ({ ...prevState, ...values }));
+      setNextStep();
+    },
+    [setNextStep],
+  );
 
   const providerValue = useMemo(
     () => ({ selectedTab, step, formState }),
