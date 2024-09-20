@@ -73,7 +73,11 @@
         "My Investments": "My Investments",
         "Explore": "Explore",
         "Wishlist": "Wishlist",
-        "Profile": "Profile"
+        "Profile": "Profile",
+        "Contact Us": "Contact Us",
+        "Sell or Rent Property": "Sell or Rent Property",
+        "News": "News",
+        "Cancel": "Cancel"
     },
     "components->simple-nav": {
         "Help Center": "Help Center",
