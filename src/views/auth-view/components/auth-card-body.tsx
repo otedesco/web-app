@@ -41,7 +41,7 @@ const AuthCardBody: React.FC<AuthCardBodyProps> = ({
   );
 
   if (selectedTab === Tabs.LOGIN && step === LoginSteps.SELECT_PROFILE) {
-    Component = <ProfileStep />;
+    Component = <ProfileStep onSubmit={onSubmit} />;
   }
 
   if (selectedTab === Tabs.SIGNUP && step === SignUpSteps.PERSONAL_INFO_FORM) {

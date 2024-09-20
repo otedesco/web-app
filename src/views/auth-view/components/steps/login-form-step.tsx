@@ -12,7 +12,7 @@ import {
   FormItem,
   FormLabel,
 } from "~/components/ui/form";
-import { useSignIn } from "~/lib/hooks/auth/useSignIn";
+import { useSignIn } from "~/lib/hooks/useSignIn";
 import { toast } from "sonner";
 
 interface FormFieldProps {

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useContext, useEffect } from "react";
+import React, { memo, useCallback, useContext } from "react";
 import { ChevronRightIcon, Loader2 } from "lucide-react";
 import { Button, Input } from "~/components/ui";
 import AnimatedStepContainer from "../utils/animated-step-container";
@@ -16,10 +16,25 @@ import {
   FormItem,
   FormLabel,
 } from "~/components/ui/form";
-import { useSignUp } from "~/lib/hooks/auth/useSignUp";
-import { type SignUpRequest } from "~/lib/api/auth/types";
+import { useSignUp } from "~/lib/hooks/useSignUp";
+// import { type Account, type SignUpRequest } from "~/lib/api/auth/types";
 import { AuthContext } from "../../context";
 import { toast } from "sonner";
+import _ from "lodash";
+import { Account, SignUpRequest } from "~/lib/services/cerberus";
+
+const signUpKeys = [
+  "email",
+  "password",
+  "passwordConfirmation",
+  "name",
+  "lastname",
+];
+
+const defaultValues = {
+  name: "",
+  lastname: "",
+};
 
 interface FieldProps {
   name: "name" | "lastname";
@@ -27,6 +42,10 @@ interface FieldProps {
   placeholder?: string;
   control: Control<PersonalInfoStepForm>;
   isPending: boolean;
+}
+
+export interface PersonalInfoStepProps {
+  onSubmit: (values: { token: string }) => void;
 }
 
 const Field: React.FC<FieldProps> = ({
@@ -58,48 +77,36 @@ const Field: React.FC<FieldProps> = ({
     />
   );
 };
-const defaultValues = {
-  name: "",
-  lastname: "",
-};
 
-export interface PersonalInfoStepProps {
-  onSubmit: (values: { token: string }) => void;
-}
-
-const PersonalInfoStep = (props: PersonalInfoStepProps) => {
-  const { signUp, data, isPending, isSuccess, isError } = useSignUp({});
+const PersonalInfoStep = ({ onSubmit }: PersonalInfoStepProps) => {
   const { formState } = useContext(AuthContext);
+  const t = useTranslations("views->auth-view");
 
   const form = useForm<PersonalInfoStepForm>({
     resolver: zodResolver(personalInfoStepValidator),
     defaultValues,
   });
 
-  const t = useTranslations("views->auth-view");
+  const onSuccess = useCallback(
+    (data: Account) => {
+      if (data?.token) onSubmit({ token: data.token });
+    },
+    [onSubmit],
+  );
+
+  const onError = useCallback(() => {
+    toast.error(t("Sign up failed"));
+  }, [t]);
+
+  const { signUp, isPending } = useSignUp({ onSuccess, onError });
 
   const handleSubmit = useCallback(
     (values: PersonalInfoStepForm) => {
-      signUp({
-        email: formState.email,
-        password: formState.password,
-        passwordConfirmation: formState.passwordConfirmation,
-        name: values.name,
-        lastname: values.lastname,
-      } as SignUpRequest);
+      const payload = _.pick({ ...formState, ...values }, signUpKeys);
+      signUp(payload as SignUpRequest);
     },
     [formState, signUp],
   );
-
-  useEffect(() => {
-    if (isSuccess && data?.token) {
-      props.onSubmit({ token: data.token });
-    }
-    // TODO: Implement error toast when isError on useSignUp hook
-    if (isError) {
-      toast.error(t("Sign up failed"));
-    }
-  }, [data, isError, isSuccess, props, t]);
 
   return (
     <AnimatedStepContainer className="w-full">

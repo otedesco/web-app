@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useCallback, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 import { Card, CardFooter } from "~/components/ui/card";
 import AuthCardHeader from "./components/auth-card-header";
@@ -8,8 +10,6 @@ import AuthCardBody from "./components/auth-card-body";
 
 import { type TabsEnum, type StepType, StepsByTab } from "./types";
 import { AuthContext } from "./context";
-import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 
 export type AuthPageProps = { tab: TabsEnum };
 

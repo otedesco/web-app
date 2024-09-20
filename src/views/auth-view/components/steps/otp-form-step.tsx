@@ -16,7 +16,7 @@ import {
   verifyAccountStepValidator,
 } from "../../validators";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useVerifyAccount } from "~/lib/hooks/auth/useVerifyAccount";
+import { useVerifyAccount } from "~/lib/hooks/useVerifyAccount";
 import { AuthContext } from "../../context";
 import { toast } from "sonner";
 
