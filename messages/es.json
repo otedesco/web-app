@@ -75,11 +75,30 @@
         "Wishlist": "Favoritos",
         "Profile": "Perfil"
     },
+    "components->simple-nav": {
+        "Help Center": "Centro de ayuda",
+        "Resource Center": "Centro de recursos",
+        "Newsroom": "Newsroom"
+    },
     "components->search-modal": {
         "Find properties": "Encontrar propiedades",
         "Any location": "Toda ubicación",
         "Any size": "Todo tamaño",
         "Any Price": "Todo precio"
+    },
+    "components->user-dropdown-menu": {
+        "Log in": "Iniciar sesión",
+        "Sign up": "Registrarse",
+        "Help Center": "Centro de ayuda",
+        "Contact Us": "Contáctanos",
+        "Sell or Rent Property": "Vender o Alquilar Propiedad",
+        "News": "Noticias",
+        "All help topics": "Todos los temas de ayuda",
+        "Agent resources": "Recursos para agentes",
+        "Topics": "Temas",
+        "Learning": "Aprendizaje",
+        "Press resources": "Recursos de prensa",
+        "About Us": "Sobre Nosotros"
     },
     "components->theme-toggle": {
         "Toggle theme": "Cambiar tema",

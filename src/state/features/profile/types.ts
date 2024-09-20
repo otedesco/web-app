@@ -10,26 +10,26 @@ export const RoleTypeEnum = {
 export interface Role {
   id: number;
   role: RoleType;
-  organization_id: string;
+  organizationId: string;
   organization?: Organization;
-  created_at: string;
-  updated_at?: string | null;
+  createdAt: string;
+  updatedAt?: string | null;
 }
 
 export interface Profile {
   id: string | null;
   name: string | null;
   lastname: string | null;
-  avatar_url?: string | null;
+  avatarUrl?: string | null;
   account: string | null;
-  created_at: string | null;
-  updated_at?: string | null;
+  createdAt: string | null;
+  updatedAt?: string | null;
 }
 
 export interface ProfileState {
   currentProfile: Profile;
   roles: Role[] | [];
-  selected_role: Role["id"] | Profile["id"] | null;
+  selectedRole: Role["id"] | Profile["id"] | null;
   isLoading: boolean;
 }
 

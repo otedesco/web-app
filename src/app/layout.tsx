@@ -26,6 +26,7 @@ export default async function RootLayout({
       >
         <Providers locale={locale}>
           {children}
+
           <Toaster />
           <TailwindIndicator />
         </Providers>

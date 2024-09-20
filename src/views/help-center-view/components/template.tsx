@@ -1,11 +1,11 @@
 import { MainFooter } from "~/components/footer";
 import { MainNav } from "~/components/navigation-menu";
 
-export default function BaseTemplate({
+export const HelpCenterViewTemplate = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   return (
     <div className="flex min-h-screen flex-col">
       <MainNav>
@@ -14,4 +14,6 @@ export default function BaseTemplate({
       </MainNav>
     </div>
   );
-}
+};
+
+export default HelpCenterViewTemplate;

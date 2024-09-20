@@ -1,3 +1,5 @@
+"use client";
+
 import { useTheme } from "next-themes";
 import { Laptop, Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";

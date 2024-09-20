@@ -17,10 +17,10 @@ export const useSignIn = ({
 }: MutationConfig<Authentication, unknown, SignInRequest>) => {
   const onSuccess = useCallback(
     (data: Authentication, variables: SignInRequest, ctx: unknown) => {
-      const { access_token, refresh_token } = data;
+      const { accessToken, refreshToken } = data;
       if (data) {
-        localStorage.setItem("access_token", access_token);
-        localStorage.setItem("refresh_token", refresh_token);
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
       }
 
       return _onSuccess?.(data, variables, ctx);

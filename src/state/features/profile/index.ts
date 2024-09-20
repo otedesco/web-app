@@ -7,13 +7,13 @@ const initialState: ProfileState = Object.freeze({
     id: null,
     name: null,
     lastname: null,
-    avatar_url: null,
+    avatarUrl: null,
     account: null,
-    created_at: null,
-    updated_at: null,
+    createdAt: null,
+    updatedAt: null,
   },
   roles: [],
-  selected_role: null,
+  selectedRole: null,
   isLoading: false,
 });
 
@@ -34,7 +34,7 @@ const userSlice = createSlice({
       state,
       action: PayloadAction<Role["id"] | Profile["id"]>,
     ) => {
-      state.selected_role = action.payload;
+      state.selectedRole = action.payload;
     },
   },
   extraReducers: (builder) => {

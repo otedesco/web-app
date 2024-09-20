@@ -15,13 +15,12 @@ export type ApiReponse<T> = {
 };
 
 export type Authentication = {
-  access_token: string;
-  refresh_token: string;
-  account: Account;
+  accessToken: string;
+  refreshToken: string;
 };
 
 export type Account = {
-  created_at: string;
+  createdAt: string;
   email: string;
   id: string;
   status: AccountStatus;
@@ -33,33 +32,33 @@ export interface Organization {
   id: string;
   name: string;
   collaborators: Profile[] | Profile["id"][];
-  logo_url?: string;
+  logoUrl?: string;
   country: string;
 
-  created_at: string;
-  updated_at?: string;
+  createdAt: string;
+  updatedAt?: string;
 }
 
 export type Role = {
   id: number;
   role: RoleType;
-  profile_id: Profile["id"];
-  organization_id: Organization["id"];
+  profileId: Profile["id"];
+  organizationId: Organization["id"];
 
-  created_at: string;
-  updated_at?: string;
+  createdAt: string;
+  updatedAt?: string;
 };
 
 export type Profile = {
   id: string;
   name: string;
   lastname: string;
-  avatar_url?: string;
+  avatarUrl?: string;
 
   roles?: Role[];
 
   account: Account["id"];
 
-  created_at: string;
-  updated_at?: string;
+  createdAt: string;
+  updatedAt?: string;
 };

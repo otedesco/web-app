@@ -1,10 +1,10 @@
 export const getHeaders = () => {
-  const access_token = localStorage.getItem("access_token");
-  //   const refresh_token = localStorage.getItem("refresh_token");
+  const accessToken = localStorage.getItem("accessToken");
+  //   const refreshToken = localStorage.getItem("refreshToken");
 
   const headers = new Headers();
-  if (access_token) {
-    headers.append("Authorization", `Bearer ${access_token}`);
+  if (accessToken) {
+    headers.append("Authorization", `Bearer ${accessToken}`);
   }
 
   return headers;

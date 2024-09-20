@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { DollarSign, MapPin, Maximize2, Search } from "lucide-react";
 import {
   Dialog,
@@ -19,8 +21,6 @@ import {
 import { useTranslations } from "next-intl";
 
 export interface SearchModalProps {
-  isSearchOpen: boolean;
-  setIsSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
   Trigger?: (props: object) => React.JSX.Element;
 }
 
@@ -64,13 +64,9 @@ DefaultTrigger.defaultProps = {
   price: "Any Price",
 };
 
-const SearchModal = ({
-  Trigger,
-  setIsSearchOpen,
-  isSearchOpen,
-}: SearchModalProps) => {
+const SearchModal = ({ Trigger }: SearchModalProps) => {
   const TriggerComponent = Trigger ?? DefaultTrigger;
-
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   return (
     <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
       <DialogTrigger asChild>

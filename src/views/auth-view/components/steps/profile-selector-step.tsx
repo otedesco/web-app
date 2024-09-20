@@ -78,7 +78,7 @@ const ProfileStep = ({ onSubmit }: ProfileStepProps) => {
     },
     [onSubmit, selectRole],
   );
-
+  console.log(currentProfile.avatarUrl);
   return (
     <AnimatedStepContainer className="flex flex-col items-center space-y-4">
       {isLoading && (
@@ -92,7 +92,7 @@ const ProfileStep = ({ onSubmit }: ProfileStepProps) => {
           <ProfileCard
             key={currentProfile.id}
             id={currentProfile.id}
-            avatarUrl={currentProfile.avatar_url}
+            avatarUrl={currentProfile.avatarUrl}
             name={`${currentProfile.name} ${currentProfile.lastname}`}
             onClick={handleProfileClick}
           />
@@ -100,7 +100,7 @@ const ProfileStep = ({ onSubmit }: ProfileStepProps) => {
             <ProfileCard
               key={role.id}
               id={role.id}
-              avatarUrl={role.organization?.logo_url}
+              avatarUrl={role.organization?.logoUrl}
               name={currentProfile.name!}
               organizationName={role.organization?.name}
               role={role.role}

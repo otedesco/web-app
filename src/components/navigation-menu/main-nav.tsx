@@ -1,98 +1,65 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import {
   DollarSign,
   Heart,
   HelpCircle,
   LogIn,
-  Menu,
+  Newspaper,
+  Phone,
   Search,
   User,
-  User2Icon,
   UserPlus,
 } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 import { ThemeToggle } from "~/components/theme-toggle";
 import { SearchModal } from "~/components/search-modal";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuGroup,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-} from "~/components/ui/dropdown-menu";
+
 import Link from "next/link";
 import { BrandLogo, BrandLogoWithText } from "../brand-logo";
+import UserDropdownMenu from "../user-dropdown-menu";
+
+const menuOptions = {
+  highlightedOptions: [
+    {
+      label: "Log in",
+      href: "/auth/login",
+      icon: <LogIn className="mr-2 h-4 w-4" />,
+    },
+    {
+      label: "Sign up",
+      href: "/auth/signup",
+      icon: <UserPlus className="mr-2 h-4 w-4" />,
+    },
+  ],
+  options: [
+    {
+      label: "Help Center",
+      href: "/help",
+      icon: <HelpCircle className="mr-2 h-4 w-4" />,
+    },
+    {
+      label: "Contact Us",
+      href: "/contact-us",
+      icon: <Phone className="mr-2 h-4 w-4" />,
+    },
+    {
+      label: "Sell or Rent Property",
+      href: "/publish",
+      icon: <DollarSign className="mr-2 h-4 w-4" />,
+    },
+    {
+      label: "News",
+      href: "/news",
+      icon: <Newspaper className="mr-2 h-4 w-4" />,
+    },
+  ],
+};
 
 export interface MainNavProps {
   children: React.ReactNode;
 }
-
-const DesktopMenu = () => {
-  const t = useTranslations("components->main-nav");
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          className="relative flex items-center space-x-2 rounded-full p-2 hover:bg-accent"
-        >
-          <Menu className="h-5 w-5" />
-          <Avatar className="h-8 w-8">
-            <AvatarImage
-              src="/placeholder.svg?height=32&width=32"
-              alt="User avatar"
-            />
-            <AvatarFallback>
-              <User2Icon />
-            </AvatarFallback>
-          </Avatar>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuGroup>
-          <Link href={`/auth/login`}>
-            <DropdownMenuItem>
-              <LogIn className="mr-2 h-4 w-4" />
-              <span>{t("Log in")}</span>
-            </DropdownMenuItem>
-          </Link>
-          <Link href={`/auth/signup`}>
-            <DropdownMenuItem>
-              <UserPlus className="mr-2 h-4 w-4" />
-              <span>{t("Sign up")}</span>
-            </DropdownMenuItem>
-          </Link>
-        </DropdownMenuGroup>
-
-        <DropdownMenuSeparator />
-
-        <DropdownMenuItem>
-          <HelpCircle className="mr-2 h-4 w-4" />
-          <span>{t("Help Center")}</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <User className="mr-2 h-4 w-4" />
-          <span>{t("Profile")}</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Heart className="mr-2 h-4 w-4" />
-          <span>{t("Saved Properties")}</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <DollarSign className="mr-2 h-4 w-4" />
-          <span>{t("My Investments")}</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-};
 
 const MobileMenu = () => {
   const t = useTranslations("components->main-nav");
@@ -126,8 +93,6 @@ const MobileMenu = () => {
 export const MainNav = (props: MainNavProps) => {
   const t = useTranslations("components->main-nav");
 
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-
   return (
     <>
       <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur-md">
@@ -138,19 +103,18 @@ export const MainNav = (props: MainNavProps) => {
               <BrandLogo className="lg:hidden" />
             </div>
             <div className="mx-4 max-w-2xl flex-1">
-              <SearchModal
-                isSearchOpen={isSearchOpen}
-                setIsSearchOpen={setIsSearchOpen}
-              />
+              <SearchModal />
             </div>
             <div className="hidden items-center space-x-4 md:flex">
               {/* Should receive this components as props  */}
-              <Button variant="ghost" className="text-sm font-medium">
-                {t("Become an Agent")}
-              </Button>
+              <Link href="/publish">
+                <Button variant="ghost" className="text-sm font-medium">
+                  {t("Become an Agent")}
+                </Button>
+              </Link>
               <ThemeToggle />
               {/* should receive menu options as props */}
-              <DesktopMenu />
+              <UserDropdownMenu menuOptions={menuOptions} />
             </div>
           </div>
         </div>

@@ -75,6 +75,25 @@
         "Wishlist": "Wishlist",
         "Profile": "Profile"
     },
+    "components->simple-nav": {
+        "Help Center": "Help Center",
+        "Resource Center": "Resource Center",
+        "Newsroom": "Newsroom"
+    },
+    "components->user-dropdown-menu": {
+        "Log in": "Log in",
+        "Sign up": "Sign up",
+        "Help Center": "Help Center",
+        "Contact Us": "Contact Us",
+        "Sell or Rent Property": "Sell or Rent Property",
+        "News": "News",
+        "All help topics": "All help topics",
+        "Agent resources": "Agent resources",
+        "Topics": "Topics",
+        "Learning": "Learning",
+        "Press resources": "Press resources",
+        "About Us": "About Us"
+    },
     "components->search-modal": {
         "Find properties": "Find properties",
         "Any location": "Any location",
