@@ -15,7 +15,7 @@ import {
   Button,
 } from "~/components/ui";
 
-import { Menu, MoreVertical, User2Icon } from "lucide-react";
+import { Menu, User2Icon } from "lucide-react";
 import { useAppSelector } from "~/state/hooks";
 import { selectCurrentProfile } from "~/state/features/profile/selectors";
 import { useMediaQuery } from "~/hooks/useMediaQuery";

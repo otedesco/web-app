@@ -1,4 +1,4 @@
-import { LogIn, Newspaper, Phone, UserPlus } from "lucide-react";
+import { LogIn, Newspaper, UserPlus } from "lucide-react";
 import { MainFooter } from "~/components/footer";
 import SimpleNav from "~/components/navigation-menu/simple-nav";
 import UserDropdownMenu from "~/components/user-dropdown-menu";
@@ -30,11 +30,7 @@ const menuOptions = {
   ],
 };
 
-export const ContactUsLayout = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const ContactUsLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex min-h-screen flex-col">
       <SimpleNav>

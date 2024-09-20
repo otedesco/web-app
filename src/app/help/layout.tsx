@@ -30,11 +30,7 @@ const menuOptions = {
   ],
 };
 
-export const HelpCenterLayout = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const HelpCenterLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex min-h-screen flex-col">
       <SimpleNav pathname="Help Center">

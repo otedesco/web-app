@@ -2,7 +2,7 @@ import { MainFooter } from "~/components/footer";
 import SimpleNav from "~/components/navigation-menu/simple-nav";
 import { Button } from "~/components/ui";
 
-export const PublishLayout = ({ children }: { children: React.ReactNode }) => {
+const PublishLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex min-h-screen flex-col">
       <SimpleNav>

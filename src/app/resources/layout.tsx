@@ -35,11 +35,7 @@ const menuOptions = {
   ],
 };
 
-export const ResourceCenterLayout = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const ResourceCenterLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex min-h-screen flex-col">
       <SimpleNav pathname="Resource Center">

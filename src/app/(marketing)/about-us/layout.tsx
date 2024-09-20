@@ -30,7 +30,7 @@ const menuOptions = {
   ],
 };
 
-export const AboutUsLayout = ({ children }: { children: React.ReactNode }) => {
+const AboutUsLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex min-h-screen flex-col">
       <SimpleNav>
