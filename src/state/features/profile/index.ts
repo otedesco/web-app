@@ -20,9 +20,18 @@ const initialState: ProfileState = Object.freeze({
 export const fetchCurrentProfile = createAsyncThunk(
   ProfileActionTypes.FETCH_CURRENT_PROFILE,
   async () => {
-    const { data } = await getCurrentProfile();
+    const response = await fetch("/api/profile", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-    return data;
+    if (!response.ok) {
+      throw new Error("Failed to get in");
+    }
+
+    return response.json();
   },
 );
 

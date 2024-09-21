@@ -77,7 +77,8 @@
         "Contact Us": "Contact Us",
         "Sell or Rent Property": "Sell or Rent Property",
         "News": "News",
-        "Cancel": "Cancel"
+        "Cancel": "Cancel",
+        "Publish a Property": "Publish a Property"
     },
     "components->simple-nav": {
         "Help Center": "Help Center",
@@ -96,7 +97,11 @@
         "Topics": "Topics",
         "Learning": "Learning",
         "Press resources": "Press resources",
-        "About Us": "About Us"
+        "About Us": "About Us",
+        "Messages": "Messages",
+        "Wishlist": "Wishlist",
+        "Settings": "Settings",
+        "Log out": "Log out"
     },
     "components->search-modal": {
         "Find properties": "Find properties",

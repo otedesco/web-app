@@ -7,9 +7,25 @@ import { type MutationConfig } from "~/lib/types/react-query";
 import { useSignIn } from "./useSignIn";
 
 const mutationFn = async (payload: SignUpRequest) => {
-  const { data } = await signUp(payload);
-  return data;
+  const response = await fetch("/api/sign-up", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to sign up");
+  }
+
+  return response.json();
 };
+
+// const mutationFn = async (payload: SignUpRequest) => {
+//   const { data } = await signUp(payload);
+//   return data;
+// };
 
 export const useSignUp = ({
   onError,

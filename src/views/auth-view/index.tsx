@@ -53,22 +53,20 @@ const AuthView = ({ tab }: AuthPageProps) => {
 
   return (
     <AuthContext.Provider value={providerValue}>
-      <Card className="z-10 w-full max-w-[95%] overflow-hidden sm:max-w-md">
-        <AuthCardHeader onStepChange={setStep} />
-        <AuthCardBody
-          selectedTab={selectedTab}
-          onSubmit={handleSubmit}
-          step={step}
-          onTabChange={handleTabChange}
-        />
-        <CardFooter className="flex justify-center p-4 sm:p-6">
-          <p className="text-center text-[10px] text-muted-foreground sm:text-xs">
-            {t(
-              "By continuing, you agree to our Terms of Service and Privacy Policy",
-            )}
-          </p>
-        </CardFooter>
-      </Card>
+      <AuthCardHeader onStepChange={setStep} />
+      <AuthCardBody
+        selectedTab={selectedTab}
+        onSubmit={handleSubmit}
+        step={step}
+        onTabChange={handleTabChange}
+      />
+      <CardFooter className="flex justify-center p-4 sm:p-6">
+        <p className="text-center text-[10px] text-muted-foreground sm:text-xs">
+          {t(
+            "By continuing, you agree to our Terms of Service and Privacy Policy",
+          )}
+        </p>
+      </CardFooter>
     </AuthContext.Provider>
   );
 };

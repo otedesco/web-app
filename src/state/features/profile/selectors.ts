@@ -17,3 +17,8 @@ export const selectIsLoading = createSelector(
   selectProfileState,
   (profileState) => profileState.isLoading,
 );
+
+export const selectSelectedRole = createSelector(
+  selectProfileState,
+  (profileState) => profileState.selectedRole,
+);

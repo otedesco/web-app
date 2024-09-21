@@ -104,14 +104,12 @@ const testimonials = [
   },
 ];
 
-export default function LandingPage() {
-  // unstable_setRequestLocale(props.params.locale);
+const LandingPage = () => (
+  <LandingView
+    featuredProperties={featuredProperties}
+    popularLocations={popularLocations}
+    testimonials={testimonials}
+  />
+);
 
-  return (
-    <LandingView
-      featuredProperties={featuredProperties}
-      popularLocations={popularLocations}
-      testimonials={testimonials}
-    />
-  );
-}
+export default LandingPage;

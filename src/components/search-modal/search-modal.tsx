@@ -1,25 +1,19 @@
-"use client";
-
-import React, { useState } from "react";
-import { DollarSign, MapPin, Maximize2, Search } from "lucide-react";
+import { useTranslations } from "next-intl";
+import React, { useEffect, useRef, useState } from "react";
+import { MapPin, Search, Home, Umbrella, ShoppingBag } from "lucide-react";
 import {
   Dialog,
-  DialogHeader,
-  DialogTrigger,
   DialogContent,
+  DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "~/components/ui/dialog";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
-import { useTranslations } from "next-intl";
+import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { Slider } from "~/components/ui/slider";
 
+// Type definitions for props and state
 export interface SearchModalProps {
   Trigger?: (props: object) => React.JSX.Element;
 }
@@ -30,12 +24,13 @@ export interface DefaultTriggerProps {
   price?: string;
 }
 
-const DefaultTrigger = ({
-  location,
-  size,
-  price,
+// Default Trigger component with typed props
+const DefaultTrigger: React.FC<DefaultTriggerProps> = ({
+  location = "Any location", // Default values can be typed directly
+  size = "Any size",
+  price = "Any Price",
   ...rest
-}: DefaultTriggerProps) => {
+}) => {
   const t = useTranslations("components->search-modal");
   return (
     <Button
@@ -58,15 +53,79 @@ const DefaultTrigger = ({
   );
 };
 
-DefaultTrigger.defaultProps = {
-  location: "Any location",
-  size: "Any size",
-  price: "Any Price",
-};
+const locations: string[] = [
+  "New York",
+  "Los Angeles",
+  "Chicago",
+  "Houston",
+  "Phoenix",
+  "Philadelphia",
+  "San Antonio",
+  "San Diego",
+  "Dallas",
+  "San Jose",
+];
 
-const SearchModal = ({ Trigger }: SearchModalProps) => {
+// Main SearchModal component
+export default function SearchModal({ Trigger }: SearchModalProps) {
   const TriggerComponent = Trigger ?? DefaultTrigger;
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [operationType, setOperationType] = useState<string>("rent");
+  const [location, setLocation] = useState<string>("");
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [minSize, setMinSize] = useState<number>(0);
+  const [maxSize, setMaxSize] = useState<number>(500);
+  const [priceRange, setPriceRange] = useState<number[]>([0, 1000000]);
+
+  const suggestionRef = useRef<HTMLUListElement | null>(null);
+
+  const handleSearch = () => {
+    console.log({ operationType, location, minSize, maxSize, priceRange });
+    setIsSearchOpen(false);
+  };
+
+  const formatPrice = (price: number): string => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
+  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setLocation(value);
+    if (value.length > 0) {
+      const filtered = locations.filter((loc) =>
+        loc.toLowerCase().includes(value.toLowerCase()),
+      );
+      setSuggestions(filtered);
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setLocation(suggestion);
+    setSuggestions([]);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        suggestionRef.current &&
+        !suggestionRef.current.contains(event.target as Node)
+      ) {
+        setSuggestions([]);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
       <DialogTrigger asChild>
@@ -74,50 +133,95 @@ const SearchModal = ({ Trigger }: SearchModalProps) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] md:max-w-[700px]">
         <DialogHeader>
-          <DialogTitle>Search for properties</DialogTitle>
+          <DialogTitle className="text-2xl font-bold">
+            Find Your Dream Property
+          </DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid gap-2">
-            <div className="flex items-center space-x-2 rounded-md bg-accent/50 p-3">
-              <MapPin className="h-5 w-5 text-primary" />
-              <Input
-                placeholder="Enter location"
-                className="border-none bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+        <div className="grid gap-6 py-4">
+          <Tabs defaultValue="rent" onValueChange={setOperationType}>
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="rent" className="flex items-center">
+                <Home className="mr-2 h-4 w-4" />
+                Rent
+              </TabsTrigger>
+              <TabsTrigger value="vacation" className="flex items-center">
+                <Umbrella className="mr-2 h-4 w-4" />
+                Vacation
+              </TabsTrigger>
+              <TabsTrigger value="buy" className="flex items-center">
+                <ShoppingBag className="mr-2 h-4 w-4" />
+                Buy
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+
+          <div className="space-y-4">
+            <div className="rounded-md bg-accent/50 p-3">
+              <div className="relative">
+                <MapPin className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-primary" />
+                <Input
+                  type="text"
+                  placeholder="Enter location"
+                  value={location}
+                  onChange={handleLocationChange}
+                  className="pl-10"
+                />
+                {suggestions.length > 0 && (
+                  <ul
+                    ref={suggestionRef}
+                    className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                  >
+                    {suggestions.map((suggestion, index) => (
+                      <li
+                        key={index}
+                        className="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 hover:bg-accent"
+                        onClick={() => handleSuggestionClick(suggestion)}
+                      >
+                        {suggestion}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+            <div className="rounded-md bg-accent/50 p-3">
+              <label className="mb-2 block text-sm font-medium">
+                Property Size (sq mts)
+              </label>
+              <div className="flex items-center space-x-4">
+                <Input
+                  type="number"
+                  placeholder="Min size"
+                  value={minSize}
+                  onChange={(e) => setMinSize(Number(e.target.value))}
+                  className="w-1/2"
+                />
+                <Input
+                  type="number"
+                  placeholder="Max size"
+                  value={maxSize}
+                  onChange={(e) => setMaxSize(Number(e.target.value))}
+                  className="w-1/2"
+                />
+              </div>
+            </div>
+
+            <div className="rounded-md bg-accent/50 p-3">
+              <label className="mb-2 block text-sm font-medium">
+                Price Range
+              </label>
+              <Slider
+                min={0}
+                max={1000000}
+                step={1000}
+                value={priceRange}
+                onValueChange={setPriceRange}
+                className="py-4"
               />
-            </div>
-            <div className="flex items-center space-x-2 rounded-md bg-accent/50 p-3">
-              <Maximize2 className="h-5 w-5 text-primary" />
-              <Select>
-                <SelectTrigger className="border-none bg-transparent focus:ring-0">
-                  <SelectValue placeholder="Property size" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="small">
-                    Small (up to 1000 sq ft)
-                  </SelectItem>
-                  <SelectItem value="medium">
-                    Medium (1000-2000 sq ft)
-                  </SelectItem>
-                  <SelectItem value="large">Large (2000-3000 sq ft)</SelectItem>
-                  <SelectItem value="xlarge">
-                    Extra Large (3000+ sq ft)
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex items-center space-x-2 rounded-md bg-accent/50 p-3">
-              <DollarSign className="h-5 w-5 text-primary" />
-              <Select>
-                <SelectTrigger className="border-none bg-transparent focus:ring-0">
-                  <SelectValue placeholder="Price range" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="0-100k">$0 - $100,000</SelectItem>
-                  <SelectItem value="100k-250k">$100,000 - $250,000</SelectItem>
-                  <SelectItem value="250k-500k">$250,000 - $500,000</SelectItem>
-                  <SelectItem value="500k+">$500,000+</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="flex justify-between text-sm">
+                <span>{formatPrice(priceRange[0]!)}</span>
+                <span>{formatPrice(priceRange[1]!)}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -125,10 +229,15 @@ const SearchModal = ({ Trigger }: SearchModalProps) => {
           <Button variant="outline" onClick={() => setIsSearchOpen(false)}>
             Cancel
           </Button>
-          <Button onClick={() => setIsSearchOpen(false)}>Search</Button>
+          <Button
+            onClick={handleSearch}
+            className="bg-primary text-primary-foreground hover:bg-primary/90"
+          >
+            <Search className="mr-2 h-4 w-4" />
+            Search Properties
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
   );
-};
-export default SearchModal;
+}

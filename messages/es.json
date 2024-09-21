@@ -77,7 +77,8 @@
         "Contact Us": "Contáctanos",
         "Sell or Rent Property": "Vender o Alquilar Propiedad",
         "News": "Noticias",
-        "Cancel": "Cancelar"
+        "Cancel": "Cancelar",
+        "Publish a Property": "Publica una Propiedad"
     },
     "components->simple-nav": {
         "Help Center": "Centro de ayuda",
@@ -102,7 +103,11 @@
         "Topics": "Temas",
         "Learning": "Aprendizaje",
         "Press resources": "Recursos de prensa",
-        "About Us": "Sobre Nosotros"
+        "About Us": "Sobre Nosotros",
+        "Messages": "Mensajes",
+        "Wishlist": "Favoritos",
+        "Settings": "Configuraciones",
+        "Log out": "Cerrar sesión"
     },
     "components->theme-toggle": {
         "Toggle theme": "Cambiar tema",

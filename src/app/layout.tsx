@@ -9,11 +9,7 @@ import Providers from "~/providers";
 
 import "~/styles/globals.css";
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout(props: { children: React.ReactNode }) {
   const locale = await getLocale();
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -25,8 +21,7 @@ export default async function RootLayout({
         )}
       >
         <Providers locale={locale}>
-          {children}
-
+          {props.children}
           <Toaster />
           <TailwindIndicator />
         </Providers>

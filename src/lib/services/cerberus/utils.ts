@@ -1,6 +1,7 @@
+import { cookies } from "next/headers";
+
 export const getHeaders = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  //   const refreshToken = localStorage.getItem("refreshToken");
+  const accessToken = cookies().get("accessToken")?.value;
 
   const headers = new Headers();
   if (accessToken) {

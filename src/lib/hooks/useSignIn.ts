@@ -5,9 +5,19 @@ import { MutationConfig } from "~/lib/types/react-query";
 import { Authentication, SignInRequest, signIn } from "~/lib/services/cerberus";
 
 const mutationFn = async (payload: SignInRequest): Promise<Authentication> => {
-  const { data } = await signIn(payload);
+  const response = await fetch("/api/sign-in", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 
-  return data;
+  if (!response.ok) {
+    throw new Error("Failed to sign in");
+  }
+
+  return response.json();
 };
 
 export const useSignIn = ({
@@ -18,10 +28,9 @@ export const useSignIn = ({
   const onSuccess = useCallback(
     (data: Authentication, variables: SignInRequest, ctx: unknown) => {
       const { accessToken, refreshToken } = data;
-      if (data) {
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
-      }
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("isLoggedIn", "true");
 
       return _onSuccess?.(data, variables, ctx);
     },
