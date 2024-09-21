@@ -17,7 +17,7 @@ export const getCurrentProfile = async () => {
   if (response.ok) {
     return (await response.json()) as CurrentProfileResponse;
   }
-  const error = await response.json();
+  const error = (await response.json()) as unknown;
   console.log(error);
   // TODO: Handle error response and refresh token if needed
   throw new Error("Get current profile failed");

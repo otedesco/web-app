@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ProfileActionTypes, ProfileState, Role } from "./types";
-import { getCurrentProfile, Profile } from "~/lib/services/cerberus";
+import { Profile } from "~/lib/services/cerberus";
 
 const initialState: ProfileState = Object.freeze({
   currentProfile: {
@@ -31,7 +31,7 @@ export const fetchCurrentProfile = createAsyncThunk(
       throw new Error("Failed to get in");
     }
 
-    return response.json();
+    return response.json() as Promise<Profile>;
   },
 );
 

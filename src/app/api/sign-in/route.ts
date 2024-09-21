@@ -1,14 +1,13 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import {
   ACCESS_TOKEN_COOKIE_OPTIONS,
   REFRESH_TOKEN_COOKIE_OPTIONS,
 } from "~/config/constants";
-import { signIn } from "~/lib/services/cerberus";
+import { signIn, SignInRequest } from "~/lib/services/cerberus";
 
-export async function POST(request: Request, res: NextApiResponse) {
-  const body = await request.json();
+export async function POST(request: Request) {
+  const body = (await request.json()) as SignInRequest;
   const { data } = await signIn(body);
 
   cookies().set("accessToken", data.accessToken, ACCESS_TOKEN_COOKIE_OPTIONS);

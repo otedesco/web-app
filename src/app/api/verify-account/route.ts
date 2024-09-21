@@ -1,9 +1,7 @@
-import { NextApiResponse } from "next";
+import { verifyAccount, VerifyAccountRequest } from "~/lib/services/cerberus";
 
-import { verifyAccount } from "~/lib/services/cerberus";
-
-export async function POST(request: Request, res: NextApiResponse) {
-  const body = await request.json();
+export async function POST(request: Request) {
+  const body = (await request.json()) as VerifyAccountRequest;
   await verifyAccount(body);
 
   return;

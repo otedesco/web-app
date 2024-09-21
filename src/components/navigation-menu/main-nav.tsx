@@ -1,34 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
-import { cookies } from "next/headers";
-import {
-  DollarSign,
-  Heart,
-  HelpCircle,
-  LogIn,
-  Menu,
-  Newspaper,
-  Phone,
-  Search,
-  User,
-  UserPlus,
-} from "lucide-react";
-
+import { Heart, Search, User } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { ThemeToggle } from "~/components/theme-toggle";
 import { SearchModal } from "~/components/search-modal";
-
 import Link from "next/link";
 import { BrandLogo, BrandLogoWithText } from "../brand-logo";
 import UserDropdownMenu from "../user-dropdown-menu";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerFooter,
-  DrawerTrigger,
-} from "../ui/drawer";
 import { useMediaQuery } from "~/hooks/useMediaQuery";
 import { useAppSelector } from "~/state/hooks";
 import { selectSelectedRole } from "~/state/features/profile/selectors";

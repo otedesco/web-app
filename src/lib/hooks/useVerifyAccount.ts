@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { VerifyAccountRequest, verifyAccount } from "~/lib/services/cerberus";
+import { VerifyAccountRequest } from "~/lib/services/cerberus";
 import { MutationConfig } from "~/lib/types/react-query";
 
 const mutationFn = async (payload: VerifyAccountRequest) => {
@@ -17,11 +17,8 @@ const mutationFn = async (payload: VerifyAccountRequest) => {
     throw new Error("Failed to verify account");
   }
 
-  return response.json();
+  return;
 };
-
-// const mutationFn = async (payload: VerifyAccountRequest) =>
-//   verifyAccount(payload);
 
 export const useVerifyAccount = ({
   onError,

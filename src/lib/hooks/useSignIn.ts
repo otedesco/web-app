@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { MutationConfig } from "~/lib/types/react-query";
-import { Authentication, SignInRequest, signIn } from "~/lib/services/cerberus";
+import { Authentication, SignInRequest } from "~/lib/services/cerberus";
 
 const mutationFn = async (payload: SignInRequest): Promise<Authentication> => {
   const response = await fetch("/api/sign-in", {
@@ -17,7 +17,7 @@ const mutationFn = async (payload: SignInRequest): Promise<Authentication> => {
     throw new Error("Failed to sign in");
   }
 
-  return response.json();
+  return response.json() as Promise<Authentication>;
 };
 
 export const useSignIn = ({

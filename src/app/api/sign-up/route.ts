@@ -1,9 +1,7 @@
-import { NextApiResponse } from "next";
+import { signUp, SignUpRequest } from "~/lib/services/cerberus";
 
-import { signUp } from "~/lib/services/cerberus";
-
-export async function POST(request: Request, res: NextApiResponse) {
-  const body = await request.json();
+export async function POST(request: Request) {
+  const body = (await request.json()) as SignUpRequest;
   await signUp(body);
 
   return;
