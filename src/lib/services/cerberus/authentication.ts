@@ -35,7 +35,7 @@ export const signUp = async (
   if (response.ok) {
     return (await response.json()) as SignUpResponse;
   }
-
+  console.log(await response.json());
   throw new Error("Sign up failed");
 };
 
