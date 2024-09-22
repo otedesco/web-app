@@ -1,6 +1,5 @@
 import { MainFooter } from "~/components/footer";
-
-import { MainNav } from "~/components/navigation-menu";
+import { MainNav, MobileMenu } from "~/components/navigation-menu";
 
 export const LandingViewTemplate = ({
   children,
@@ -9,10 +8,10 @@ export const LandingViewTemplate = ({
 }) => {
   return (
     <div className="flex min-h-screen flex-col">
-      <MainNav>
-        {children}
-        <MainFooter />
-      </MainNav>
+      <MainNav />
+      {children}
+      <MainFooter className="mb-8 md:mb-0" />
+      <MobileMenu />
     </div>
   );
 };

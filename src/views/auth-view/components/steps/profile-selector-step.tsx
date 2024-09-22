@@ -65,7 +65,6 @@ export interface ProfileStepProps {
 }
 
 const ProfileStep = ({ onSubmit }: ProfileStepProps) => {
-  // load current profile
   const { selectRole } = useProfileActions();
   const currentProfile = useAppSelector(selectCurrentProfile);
   const roles = useAppSelector(selectRoles);
@@ -78,7 +77,7 @@ const ProfileStep = ({ onSubmit }: ProfileStepProps) => {
     },
     [onSubmit, selectRole],
   );
-  console.log(currentProfile.avatarUrl);
+
   return (
     <AnimatedStepContainer className="flex flex-col items-center space-y-4">
       {isLoading && (

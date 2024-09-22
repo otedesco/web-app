@@ -78,7 +78,9 @@
         "Sell or Rent Property": "Vender o Alquilar Propiedad",
         "News": "Noticias",
         "Cancel": "Cancelar",
-        "Publish a Property": "Publica una Propiedad"
+        "Publish a Property": "Publica una Propiedad",
+        "History": "Historial",
+        "Messages": "Mensajes"
     },
     "components->simple-nav": {
         "Help Center": "Centro de ayuda",

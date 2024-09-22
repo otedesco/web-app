@@ -7,21 +7,20 @@ import { ThemeToggle } from "~/components/theme-toggle";
 import { SearchModal } from "~/components/search-modal";
 import Link from "next/link";
 import { BrandLogo, BrandLogoWithText } from "../brand-logo";
-import UserDropdownMenu from "../user-dropdown-menu";
+import UserDropdownMenu, { UserDropdownMenuProps } from "../user-dropdown-menu";
 import { useMediaQuery } from "~/hooks/useMediaQuery";
 import { useAppSelector } from "~/state/hooks";
 import { selectSelectedRole } from "~/state/features/profile/selectors";
 import { loggedHighlightedOptions, loggedOptions, menuOptions } from "./config";
 
 export interface MainNavProps {
-  children: React.ReactNode;
   isMinimal?: boolean;
   rightSideComponent?: React.ReactNode;
   menuOptions?: typeof menuOptions;
   showSearchBox?: boolean;
 }
 
-const MobileMenu = () => {
+export const MobileMenu = () => {
   const t = useTranslations("components->main-nav");
 
   return (
@@ -52,18 +51,16 @@ const MobileMenu = () => {
 
 const DefaultRightSideComponent = (props: {
   label: string;
-  menuOptions: typeof menuOptions;
+  menuOptions: UserDropdownMenuProps["menuOptions"];
 }) => {
   return (
     <div className="hidden items-center space-x-4 md:flex">
-      {/* Should receive this components as props  */}
       <Link href="/publish">
         <Button variant="ghost" className="text-sm font-medium">
           {props.label}
         </Button>
       </Link>
       <ThemeToggle />
-      {/* should receive menu options as props */}
       <UserDropdownMenu menuOptions={props.menuOptions} />
     </div>
   );
@@ -94,29 +91,22 @@ export const MainNav = (props: MainNavProps) => {
   } = props;
 
   return (
-    <>
-      <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur-md">
-        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center">
-              {isDesktop && !isMinimal && <BrandLogoWithText />}
-              {(!isDesktop || isMinimal) && <BrandLogo />}
-            </div>
-            {showSearchBox && (
-              <div className="mx-4 max-w-2xl flex-1">
-                <SearchModal />
-              </div>
-            )}
-            {rightSideComponent}
+    <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur-md">
+      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          <div className="flex items-center">
+            {isDesktop && !isMinimal && <BrandLogoWithText />}
+            {(!isDesktop || isMinimal) && <BrandLogo />}
           </div>
+          {showSearchBox && (
+            <div className="mx-4 max-w-2xl flex-1">
+              <SearchModal />
+            </div>
+          )}
+          {rightSideComponent}
         </div>
-      </header>
-
-      {props.children}
-
-      {/* should receive menu options as props */}
-      <MobileMenu />
-    </>
+      </div>
+    </header>
   );
 };
 

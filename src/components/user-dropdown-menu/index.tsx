@@ -28,13 +28,19 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 
-interface MenuOption {
+export type LinkProps = {
+  target?: string;
+  rel?: string;
+};
+
+export interface MenuOption {
   label: string;
   href: string;
+  linkProps?: LinkProps;
   icon?: React.ReactNode;
 }
 
-interface UserDropdownMenuProps {
+export interface UserDropdownMenuProps {
   menuOptions: {
     highlightedOptions?: MenuOption[];
     options: MenuOption[];
@@ -51,8 +57,19 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({ menuOptions }) => {
     avatarUrl && name ? (
       <AvatarImage src={avatarUrl} alt={name} />
     ) : (
-      <AvatarFallback>{<User2Icon />}</AvatarFallback>
+      <AvatarFallback>
+        <User2Icon className="h-4 w-4" />
+      </AvatarFallback>
     );
+
+  const renderOption = ({ href, icon: Icon, label, linkProps }: MenuOption) => (
+    <Link key={href} href={href} {...linkProps}>
+      <DropdownMenuItem>
+        {Icon && Icon}
+        <span>{t(label)}</span>
+      </DropdownMenuItem>
+    </Link>
+  );
 
   if (isDesktop) {
     return (
@@ -68,26 +85,10 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({ menuOptions }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">
           <DropdownMenuGroup>
-            {menuOptions.highlightedOptions?.map((option) => (
-              <Link key={option.href} href={option.href}>
-                <DropdownMenuItem>
-                  {option.icon ?? null}
-                  <span>{t(option.label)}</span>
-                </DropdownMenuItem>
-              </Link>
-            ))}
+            {menuOptions.highlightedOptions?.map(renderOption)}
           </DropdownMenuGroup>
-
           <DropdownMenuSeparator />
-
-          {menuOptions.options.map((option) => (
-            <Link key={option.href} href={option.href}>
-              <DropdownMenuItem>
-                {option.icon}
-                <span>{t(option.label)}</span>
-              </DropdownMenuItem>
-            </Link>
-          ))}
+          {menuOptions.options.map(renderOption)}
         </DropdownMenuContent>
       </DropdownMenu>
     );
@@ -106,30 +107,24 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({ menuOptions }) => {
       </DrawerTrigger>
       <DrawerContent>
         <div className="mt-4 border-t">
-          {menuOptions.highlightedOptions?.map((option) => (
-            <DrawerClose key={option.label} asChild>
-              <Link key={option.href} href={option.href}>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start"
-                  //   onClick={item.onClick}
-                >
-                  {option.icon ?? null}
-                  <span>{t(option.label)}</span>
-                </Button>
-              </Link>
-            </DrawerClose>
-          ))}
-          {menuOptions.options.map((option) => (
-            <DrawerClose key={option.label} asChild>
-              <Link key={option.href} href={option.href}>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start"
-                  //   onClick={item.onClick}
-                >
-                  {option.icon ?? null}
-                  <span>{t(option.label)}</span>
+          {menuOptions.highlightedOptions?.map(
+            ({ href, icon: Icon, label }) => (
+              <DrawerClose key={href} asChild>
+                <Link href={href}>
+                  <Button variant="ghost" className="w-full justify-start">
+                    {Icon ?? Icon}
+                    <span>{t(label)}</span>
+                  </Button>
+                </Link>
+              </DrawerClose>
+            ),
+          )}
+          {menuOptions.options.map(({ href, icon: Icon, label }) => (
+            <DrawerClose key={href} asChild>
+              <Link href={href}>
+                <Button variant="ghost" className="w-full justify-start">
+                  {Icon ?? Icon}
+                  <span>{t(label)}</span>
                 </Button>
               </Link>
             </DrawerClose>

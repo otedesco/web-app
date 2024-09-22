@@ -35,6 +35,7 @@ const AuthView = ({ tab }: AuthPageProps) => {
     } else {
       setFormState({});
       router.push("/");
+      router.refresh();
     }
   }, [router, selectedTab, step]);
 

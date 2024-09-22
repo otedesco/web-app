@@ -4,13 +4,17 @@ import { useTranslations } from "next-intl";
 
 import { Button, Input } from "~/components/ui";
 import { Logo } from "~/components/brand-logo";
+import { cn } from "~/lib/utils";
 
-export type MainFooterProps = object;
+export type MainFooterProps = {
+  className?: string;
+};
 
-export default function MainFooter() {
+export default function MainFooter({ className }: MainFooterProps) {
   const t = useTranslations("components->main-footer");
+
   return (
-    <footer className="border-t bg-background">
+    <footer className={cn("border-t bg-background", className)}>
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-4">
