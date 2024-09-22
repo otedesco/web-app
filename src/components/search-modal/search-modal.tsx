@@ -12,6 +12,7 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { Slider } from "~/components/ui/slider";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // Type definitions for props and state
 export interface SearchModalProps {
@@ -80,8 +81,17 @@ export default function SearchModal({ Trigger }: SearchModalProps) {
 
   const suggestionRef = useRef<HTMLUListElement | null>(null);
 
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const handleSearch = () => {
-    console.log({ operationType, location, minSize, maxSize, priceRange });
+    const params = new URLSearchParams(searchParams);
+    params.set("operationType", operationType);
+    params.set("location", location);
+    params.set("minSize", minSize.toString());
+    params.set("maxSize", maxSize.toString());
+    params.set("priceRange", priceRange.toString());
+    router.push(`/listings?${params.toString()}`);
     setIsSearchOpen(false);
   };
 

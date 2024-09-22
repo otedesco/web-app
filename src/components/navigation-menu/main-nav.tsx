@@ -95,8 +95,10 @@ export const MainNav = (props: MainNavProps) => {
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            {isDesktop && !isMinimal && <BrandLogoWithText />}
-            {(!isDesktop || isMinimal) && <BrandLogo />}
+            <Link href="/" className="flex items-center">
+              {isDesktop && !isMinimal && <BrandLogoWithText />}
+              {(!isDesktop || isMinimal) && <BrandLogo />}
+            </Link>
           </div>
           {showSearchBox && (
             <div className="mx-4 max-w-2xl flex-1">
