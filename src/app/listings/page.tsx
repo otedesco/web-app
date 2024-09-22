@@ -21,7 +21,7 @@ const properties = [
     price: 300000,
     description: "City Center",
     highlightedFeatures: ["1 bedroom", "1 bath", "open plan"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300?random=1",
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const properties = [
     price: 750000,
     description: "Ocean View",
     highlightedFeatures: ["3 bedrooms", "3 baths", "private pool"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=2",
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const properties = [
     price: 180000,
     description: "Countryside",
     highlightedFeatures: ["2 bedrooms", "1 bath", "large garden"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=3",
   },
   {
     id: 5,
@@ -45,7 +45,7 @@ const properties = [
     price: 1200000,
     description: "Downtown Skyline View",
     highlightedFeatures: ["4 bedrooms", "4 baths", "roof terrace"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=4",
   },
   {
     id: 6,
@@ -53,7 +53,7 @@ const properties = [
     price: 400000,
     description: "Quiet Neighborhood",
     highlightedFeatures: ["3 bedrooms", "2 baths", "garage"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=5",
   },
   {
     id: 7,
@@ -61,7 +61,7 @@ const properties = [
     price: 350000,
     description: "Energy Efficient",
     highlightedFeatures: ["3 bedrooms", "2 baths", "solar panels"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=6",
   },
   {
     id: 8,
@@ -69,7 +69,7 @@ const properties = [
     price: 220000,
     description: "Perfect for Professionals",
     highlightedFeatures: ["Studio apartment", "1 bath", "close to amenities"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=7",
   },
   {
     id: 9,
@@ -77,7 +77,7 @@ const properties = [
     price: 275000,
     description: "Secluded Retreat",
     highlightedFeatures: ["2 bedrooms", "2 baths", "fireplace"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=8",
   },
   {
     id: 10,
@@ -85,7 +85,7 @@ const properties = [
     price: 500000,
     description: "Modern Design",
     highlightedFeatures: ["3 bedrooms", "3 baths", "2-car garage"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=9",
   },
   {
     id: 11,
@@ -93,7 +93,7 @@ const properties = [
     price: 350000,
     description: "Scenic View",
     highlightedFeatures: ["3 bedrooms", "2 baths", "private dock"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=10",
   },
   {
     id: 12,
@@ -101,7 +101,7 @@ const properties = [
     price: 2500000,
     description: "Architectural Landmark",
     highlightedFeatures: ["6 bedrooms", "5 baths", "library"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=11",
   },
   {
     id: 13,
@@ -109,7 +109,7 @@ const properties = [
     price: 450000,
     description: "Expansive Land",
     highlightedFeatures: ["4 bedrooms", "3 baths", "barn"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=12",
   },
   {
     id: 14,
@@ -117,7 +117,7 @@ const properties = [
     price: 800000,
     description: "Ski-In/Ski-Out",
     highlightedFeatures: ["5 bedrooms", "4 baths", "heated floors"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=13",
   },
   {
     id: 15,
@@ -125,7 +125,7 @@ const properties = [
     price: 350000,
     description: "High-Rise Living",
     highlightedFeatures: ["2 bedrooms", "2 baths", "balcony"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=14",
   },
   {
     id: 16,
@@ -133,7 +133,7 @@ const properties = [
     price: 450000,
     description: "Isolated Haven",
     highlightedFeatures: ["3 bedrooms", "2 baths", "outdoor oasis"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=15",
   },
   {
     id: 17,
@@ -141,7 +141,7 @@ const properties = [
     price: 1500000,
     description: "Breathtaking Views",
     highlightedFeatures: ["4 bedrooms", "3 baths", "infinity pool"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=16",
   },
   {
     id: 18,
@@ -149,7 +149,7 @@ const properties = [
     price: 650000,
     description: "Nature Surroundings",
     highlightedFeatures: ["4 bedrooms", "3 baths", "horse stables"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=17",
   },
   {
     id: 19,
@@ -157,7 +157,7 @@ const properties = [
     price: 350000,
     description: "Beachfront",
     highlightedFeatures: ["2 bedrooms", "2 baths", "hammock garden"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=18",
   },
   {
     id: 20,
@@ -165,7 +165,7 @@ const properties = [
     price: 275000,
     description: "Close to Transport",
     highlightedFeatures: ["1 bedroom", "1 bath", "modern kitchen"],
-    image: "https://picsum.photos/300",
+    image: "https://loremflickr.com/300/300/houses?random=19",
   },
 ];
 
