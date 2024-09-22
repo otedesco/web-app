@@ -1,6 +1,9 @@
+"use client";
+
 import { Star } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { PropertyCard } from "~/components/property-card";
+import { SearchModal } from "~/components/search-modal";
 import {
   Avatar,
   AvatarFallback,
@@ -53,6 +56,11 @@ const LandingView = ({
   testimonials,
 }: LandingViewProps) => {
   const t = useTranslations("pages->landing-page");
+  const Trigger = ({ ...props }) => (
+    <Button size="lg" className="px-8 text-lg" {...props}>
+      {t("Start Your Search")}
+    </Button>
+  );
   return (
     <main className="flex-grow">
       <div className="mx-auto max-w-7xl space-y-12 px-4 py-12 sm:px-6 lg:px-8">
@@ -63,9 +71,7 @@ const LandingView = ({
           <p className="mb-8 text-xl text-muted-foreground">
             {t("Discover the perfect space in your ideal location")}
           </p>
-          <Button size="lg" className="px-8 text-lg">
-            {t("Start Your Search")}
-          </Button>
+          <SearchModal Trigger={Trigger} />
         </section>
 
         <section>
