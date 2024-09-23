@@ -1,7 +1,9 @@
-import { Heart, Search, User } from "lucide-react";
+"use client";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
+import { useLayoutConfig } from "~/hooks/useLayoutConfig";
+import { cn } from "~/lib/utils";
 
 // Type definition for a single menu option
 export type MenuOption = {
@@ -10,41 +12,33 @@ export type MenuOption = {
   icon: React.ReactNode;
 };
 
-const defaultMenuOptions: MenuOption[] = [
-  {
-    label: "Explore",
-    href: "/",
-    icon: <Search className="mb-1 h-6 w-6" />,
-  },
-  {
-    label: "Wishlist",
-    href: "/wishlist",
-    icon: <Heart className="mb-1 h-6 w-6" />,
-  },
-  {
-    label: "Log in",
-    href: "/auth/login",
-    icon: <User className="mb-1 h-6 w-6" />,
-  },
-];
+export type MobileConfig = {
+  loggedOptions?: MenuOption[];
+  options?: MenuOption[];
+};
 
 export type MobileMenuProps = {
   className?: string;
-  menuOptions?: MenuOption[];
 };
 
-export const MobileMenu = ({
-  className = "",
-  menuOptions = defaultMenuOptions,
-}: MobileMenuProps) => {
+export const MobileMenu = ({ className }: MobileMenuProps) => {
   const t = useTranslations("components->main-nav");
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const { mobileConfig } = useLayoutConfig();
+
+  const menuOptions = isLoggedIn
+    ? mobileConfig?.loggedOptions
+    : mobileConfig?.options;
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 border-t border-border bg-background/80 backdrop-blur-md md:hidden ${className}`}
+      className={cn(
+        "fixed bottom-0 left-0 right-0 border-t border-border bg-background/80 backdrop-blur-md md:hidden",
+        className,
+      )}
     >
       <div className="flex justify-around py-2">
-        {menuOptions.map((option) => (
+        {menuOptions?.map((option) => (
           <Link
             key={option.href}
             href={option.href}

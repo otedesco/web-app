@@ -1,6 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import React, { useContext } from "react";
-import { Logo } from "~/components/brand-logo";
+import BrandLogo from "~/components/brand-logo";
 import {
   Button,
   CardDescription,
@@ -44,7 +44,7 @@ const AuthCardHeader: React.FC<AuthCardHeaderProps> = ({ onStepChange }) => {
         >
           <ArrowLeft className="h-4 w-4" />
         </Button>
-        <Logo />
+        <BrandLogo logoType="minimal" />
         <div className="w-8" /> {/* Spacer for centering */}
       </div>
       <CardHeader className="space-y-1 p-4 sm:p-6">

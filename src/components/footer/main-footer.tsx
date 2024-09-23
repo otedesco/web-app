@@ -1,10 +1,20 @@
+"use client";
+
 import React from "react";
 import { Facebook, Twitter, Instagram, Linkedin, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Button, Input } from "~/components/ui";
-import { Logo } from "~/components/brand-logo";
+import BrandLogo from "~/components/brand-logo";
 import { cn } from "~/lib/utils";
+import { useLayoutConfig } from "~/hooks/useLayoutConfig";
+import MinimalFooter from "./minimal-footer";
+import { useMediaQuery } from "~/hooks/useMediaQuery";
+
+export type FooterConfig = {
+  type: "minimal" | "default";
+  showOnMobile: boolean;
+};
 
 export type MainFooterProps = {
   className?: string;
@@ -12,13 +22,19 @@ export type MainFooterProps = {
 
 export default function MainFooter({ className }: MainFooterProps) {
   const t = useTranslations("components->main-footer");
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const { footerConfig } = useLayoutConfig();
+
+  if (!footerConfig) return null;
+  if (!footerConfig.showOnMobile && !isDesktop) return null;
+  if (footerConfig.type === "minimal") return <MinimalFooter />;
 
   return (
     <footer className={cn("border-t bg-background", className)}>
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-4">
-            <Logo withText />
+            <BrandLogo logoType="full" />
             <p className="text-sm text-muted-foreground">
               {t("brand-catch-frase")}
             </p>

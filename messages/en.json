@@ -103,7 +103,8 @@
         "Messages": "Messages",
         "Wishlist": "Wishlist",
         "Settings": "Settings",
-        "Log out": "Log out"
+        "Log out": "Log out",
+        "Profile": "Profile"
     },
     "components->search-modal": {
         "Find properties": "Find properties",
@@ -116,5 +117,9 @@
         "Light": "Light",
         "Dark": "Dark",
         "System": "System"
+    },
+    "components->publish-link": {
+        "Become an Agent": "Become an Agent",
+        "Publish a Property": "Publish a Property"
     }
 }

@@ -109,12 +109,17 @@
         "Messages": "Mensajes",
         "Wishlist": "Favoritos",
         "Settings": "Configuraciones",
-        "Log out": "Cerrar sesión"
+        "Log out": "Cerrar sesión",
+        "Profile": "Perfil"
     },
     "components->theme-toggle": {
         "Toggle theme": "Cambiar tema",
         "Light": "Claro",
         "Dark": "Oscuro",
         "System": "Sistema"
+    },
+    "components->publish-link": {
+        "Become an Agent": "Become an Agent",
+        "Publish a Property": "Publish a Property"
     }
 }

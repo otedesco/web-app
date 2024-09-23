@@ -15,7 +15,7 @@ import {
   Button,
 } from "~/components/ui";
 
-import { Menu, User2Icon } from "lucide-react";
+import { LogIn, LogOut, Menu, User2Icon, UserPlus } from "lucide-react";
 import { useAppSelector } from "~/state/hooks";
 import { selectCurrentProfile } from "~/state/features/profile/selectors";
 import { useMediaQuery } from "~/hooks/useMediaQuery";
@@ -41,17 +41,44 @@ export interface MenuOption {
 }
 
 export interface UserDropdownMenuProps {
-  menuOptions: {
-    highlightedOptions?: MenuOption[];
-    options: MenuOption[];
-  };
+  showOnMobile?: boolean;
+  loggedHighlightedOptions?: MenuOption[];
+  loggedOptions?: MenuOption[];
+  highlightedOptions?: MenuOption[];
+  options?: MenuOption[];
 }
 
-const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({ menuOptions }) => {
+const nonLoggedOptions = [
+  {
+    label: "Log in",
+    href: "/auth/login",
+    icon: <LogIn className="mr-2 h-4 w-4" />,
+  },
+  {
+    label: "Sign up",
+    href: "/auth/signup",
+    icon: <UserPlus className="mr-2 h-4 w-4" />,
+  },
+];
+
+const logOutOption = {
+  label: "Log out",
+  href: "/logout",
+  icon: <LogOut className="mr-2 h-4 w-4" />,
+};
+
+const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
+  showOnMobile,
+  loggedHighlightedOptions,
+  loggedOptions,
+  highlightedOptions,
+  options,
+}) => {
   const t = useTranslations("components->user-dropdown-menu");
-  const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const { avatarUrl, name } = useAppSelector(selectCurrentProfile);
+  const [open, setOpen] = useState(false);
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   const avatar =
     avatarUrl && name ? (
@@ -71,6 +98,59 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({ menuOptions }) => {
     </Link>
   );
 
+  const renderDrawerOption = ({ href, icon: Icon, label }: MenuOption) => (
+    <DrawerClose key={href} asChild>
+      <Link href={href}>
+        <Button variant="ghost" className="w-full justify-start">
+          {Icon ?? Icon}
+          <span>{t(label)}</span>
+        </Button>
+      </Link>
+    </DrawerClose>
+  );
+
+  const nonLoggedOptionsGroup = (
+    <>
+      <DropdownMenuGroup>
+        {nonLoggedOptions.map(renderOption)}
+      </DropdownMenuGroup>
+      <DropdownMenuSeparator />
+    </>
+  );
+
+  const loggedHighlightedOptionsGroup = loggedHighlightedOptions ? (
+    <>
+      <DropdownMenuGroup>
+        {loggedHighlightedOptions?.map(renderOption)}
+      </DropdownMenuGroup>
+      <DropdownMenuSeparator />
+    </>
+  ) : null;
+
+  const loggedOptionsGroup = loggedOptions ? (
+    <>
+      <DropdownMenuGroup>{loggedOptions?.map(renderOption)}</DropdownMenuGroup>
+      <DropdownMenuSeparator />
+    </>
+  ) : null;
+
+  const optionGroup = options ? (
+    <>
+      <DropdownMenuGroup>{options?.map(renderOption)}</DropdownMenuGroup>
+      <DropdownMenuSeparator />
+    </>
+  ) : null;
+
+  const highlightedOptionsGroup = highlightedOptions ? (
+    <>
+      <DropdownMenuGroup>
+        {highlightedOptions?.map(renderOption)}
+      </DropdownMenuGroup>
+    </>
+  ) : null;
+
+  if (!isDesktop && !showOnMobile) return null;
+
   if (isDesktop) {
     return (
       <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -84,11 +164,18 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({ menuOptions }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">
-          <DropdownMenuGroup>
-            {menuOptions.highlightedOptions?.map(renderOption)}
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          {menuOptions.options.map(renderOption)}
+          {/* Non Logged default options (Log in, Sign up) */}
+          {!isLoggedIn && nonLoggedOptionsGroup}
+          {/* Non Logged configured highlighted options */}
+          {!isLoggedIn && highlightedOptionsGroup}
+          {/* Logged configured highlighted options */}
+          {isLoggedIn && loggedHighlightedOptionsGroup}
+          {/* Logged configured options  */}
+          {isLoggedIn && loggedOptionsGroup}
+          {/* Non Logged configured options */}
+          {!isLoggedIn && optionGroup}
+          {/* Logged default option (Log out) */}
+          {isLoggedIn && renderOption(logOutOption)}
         </DropdownMenuContent>
       </DropdownMenu>
     );
@@ -107,28 +194,24 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({ menuOptions }) => {
       </DrawerTrigger>
       <DrawerContent>
         <div className="mt-4 border-t">
-          {menuOptions.highlightedOptions?.map(
-            ({ href, icon: Icon, label }) => (
-              <DrawerClose key={href} asChild>
-                <Link href={href}>
-                  <Button variant="ghost" className="w-full justify-start">
-                    {Icon ?? Icon}
-                    <span>{t(label)}</span>
-                  </Button>
-                </Link>
-              </DrawerClose>
-            ),
-          )}
-          {menuOptions.options.map(({ href, icon: Icon, label }) => (
-            <DrawerClose key={href} asChild>
-              <Link href={href}>
-                <Button variant="ghost" className="w-full justify-start">
-                  {Icon ?? Icon}
-                  <span>{t(label)}</span>
-                </Button>
-              </Link>
-            </DrawerClose>
-          ))}
+          {/* Non Logged default options (Log in, Sign up) */}
+          {!isLoggedIn && nonLoggedOptions.map(renderDrawerOption)}
+          {/* Non Logged configured highlighted options */}
+          {!isLoggedIn && highlightedOptions
+            ? highlightedOptions?.map(renderDrawerOption)
+            : null}
+          {/* Logged configured highlighted options */}
+          {isLoggedIn && loggedHighlightedOptions
+            ? loggedHighlightedOptions?.map(renderDrawerOption)
+            : null}
+          {/* Logged configured options  */}
+          {isLoggedIn && loggedOptions
+            ? loggedOptions?.map(renderDrawerOption)
+            : null}
+          {/* Non Logged configured options */}
+          {!isLoggedIn && options ? options?.map(renderDrawerOption) : null}
+          {/* Logged default option (Log out) */}
+          {isLoggedIn && renderDrawerOption(logOutOption)}
         </div>
         <DrawerFooter>
           <DrawerClose asChild>

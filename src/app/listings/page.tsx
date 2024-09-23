@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button, Card, CardContent, CardFooter } from "~/components/ui";
 import { Badge } from "~/components/ui/badge";
+
 import {
   Pagination,
   PaginationContent,
@@ -202,11 +203,13 @@ const PropertyCard = ({
           : "Price not available"}
       </span>
     </CardContent>
-    <CardFooter></CardFooter>
+    {/* <CardFooter></CardFooter> */}
   </Card>
 );
 const MapPlaceholder = ({ onToggle, isExpanded }: any) => (
-  <div className="relative flex h-full w-full items-center justify-center bg-gray-200">
+  <div
+    className={`relative flex h-full w-full items-center justify-center bg-gray-200`}
+  >
     <Button
       variant="outline"
       size="icon"
