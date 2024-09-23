@@ -25,7 +25,10 @@ const MapPlaceholder = ({ onToggle, isExpanded }: any) => (
       {!isExpanded ? (
         <ArrowLeft className="h-6 w-6" />
       ) : (
-        <ArrowRight className="h-6 w-6" />
+        <>
+          <ArrowRight className="h-6 w-6" />
+          <span>Show List</span>
+        </>
       )}
     </Button>
     {/* <span className="text-2xl text-gray-500">Map Placeholder</span> */}
@@ -64,7 +67,7 @@ export default function ListingPage() {
 
   // TODO: Fix overflow issue on mobile
   return (
-    <main className="mb-14 mt-16 flex md:mb-0">
+    <main className="mb-14 flex md:mb-0">
       <div
         className={`transition-all duration-300 ease-in-out ${
           isExpanded ? "w-0 opacity-0" : "w-full opacity-100 md:w-1/2 xl:w-3/5"

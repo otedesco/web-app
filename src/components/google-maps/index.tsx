@@ -3,8 +3,10 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useCallback, useRef } from "react";
 import { Button } from "../ui";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+
 const MapComponent: React.FC<any> = ({ properties, onToggle, isExpanded }) => {
   const mapRef = useRef<google.maps.Map | null>(null);
+
   const center = useCallback(() => {
     return { lat: properties[0].lat, lng: properties[0].lng };
   }, [properties]);
@@ -22,7 +24,6 @@ const MapComponent: React.FC<any> = ({ properties, onToggle, isExpanded }) => {
       <Button
         variant="outline"
         size="icon"
-        // className="absolute left-4 top-4 z-10 hidden h-10 w-10 p-2 shadow-md md:block"
         className="absolute left-4 top-4 z-10 h-10 w-10 p-2 shadow-md"
         onClick={onToggle}
       >
