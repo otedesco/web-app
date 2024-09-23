@@ -106,8 +106,6 @@ const testimonials = [
   },
 ];
 
-export const foo = "bar";
-
 // Landing page component
 const LandingPage = () => {
   return (
