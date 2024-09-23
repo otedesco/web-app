@@ -52,7 +52,7 @@ export default function ListingPage() {
   }, [isMobile]);
 
   const PropertyCardsList = () => (
-    <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
       {currentProperties.map((property) => (
         <PropertyCardV2 key={property.id} {...property} />
       ))}
@@ -64,27 +64,25 @@ export default function ListingPage() {
 
   // TODO: Fix overflow issue on mobile
   return (
-    <main className="mb-14 mt-16 flex flex-grow overflow-hidden md:mb-0">
+    <main className="mb-14 mt-16 flex md:mb-0">
       <div
         className={`transition-all duration-300 ease-in-out ${
           isExpanded ? "w-0 opacity-0" : "w-full opacity-100 md:w-1/2 xl:w-3/5"
-        } h-[calc(100vh-4rem)] overflow-hidden`}
+        } `}
       >
-        <ScrollArea className="h-full">
-          <div className="flex-grow p-4">
-            <PropertyCardsList />
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </div>
-        </ScrollArea>
+        <div className="flex-grow p-4">
+          <PropertyCardsList />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
       </div>
       <div
         className={`transition-all duration-300 ease-in-out ${
           isExpanded ? "w-full" : "hidden md:block md:w-1/2 xl:w-2/5"
-        } h-[calc(100vh-4rem)]`}
+        } sticky top-16 h-[calc(100vh-4rem)]`}
       >
         <GoogleMaps
           properties={currentProperties}
