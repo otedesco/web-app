@@ -62,7 +62,7 @@ const LandingView = ({
     </Button>
   );
   return (
-    <main className="flex-grow">
+    <>
       <div className="mx-auto max-w-7xl space-y-12 px-4 py-12 sm:px-6 lg:px-8">
         <section className="py-12 text-center">
           <h1 className="mb-4 text-4xl font-bold">
@@ -152,7 +152,7 @@ const LandingView = ({
           </div>
         </section>
       </div>
-    </main>
+    </>
   );
 };
 

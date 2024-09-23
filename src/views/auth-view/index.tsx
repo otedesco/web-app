@@ -13,7 +13,7 @@ import { AuthContext } from "./context";
 
 export type AuthPageProps = { tab: TabsEnum };
 
-const AuthView = ({ tab }: AuthPageProps) => {
+const AuthView = ({ tab = "login" }: AuthPageProps) => {
   const [selectedTab, setSelectedTab] = useState<TabsEnum>(tab);
   const [step, setStep] = useState<StepType>(StepsByTab[tab][0]);
   const [formState, setFormState] = useState<Record<string, any>>({});

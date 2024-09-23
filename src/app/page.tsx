@@ -12,11 +12,13 @@ export async function generateMetadata() {
 // Landing page component
 const LandingPage = () => {
   return (
-    <LandingView
-      featuredProperties={featuredProperties}
-      popularLocations={popularLocations}
-      testimonials={testimonials}
-    />
+    <main className="mb-8 mt-16 md:mb-0">
+      <LandingView
+        featuredProperties={featuredProperties}
+        popularLocations={popularLocations}
+        testimonials={testimonials}
+      />
+    </main>
   );
 };
 

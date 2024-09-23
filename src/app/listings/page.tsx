@@ -10,6 +10,7 @@ import { Button } from "~/components/ui";
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { useMediaQuery } from "~/hooks/useMediaQuery";
 import properties from "./data";
+import GoogleMaps from "~/components/google-maps";
 
 const MapPlaceholder = ({ onToggle, isExpanded }: any) => (
   <div
@@ -27,13 +28,14 @@ const MapPlaceholder = ({ onToggle, isExpanded }: any) => (
         <ArrowRight className="h-6 w-6" />
       )}
     </Button>
-    <span className="text-2xl text-gray-500">Map Placeholder</span>
+    {/* <span className="text-2xl text-gray-500">Map Placeholder</span> */}
+    <GoogleMaps />
   </div>
 );
 
 export default function ListingPage() {
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const [isExpanded, setIsExpanded] = useState(!isMobile);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const propertiesPerPage = 18;
   const totalPages = Math.ceil(properties.length / propertiesPerPage);
@@ -62,7 +64,7 @@ export default function ListingPage() {
 
   // TODO: Fix overflow issue on mobile
   return (
-    <main className="mb-14 flex flex-grow overflow-hidden md:mb-0">
+    <main className="mb-14 mt-16 flex flex-grow overflow-hidden md:mb-0">
       <div
         className={`transition-all duration-300 ease-in-out ${
           isExpanded ? "w-0 opacity-0" : "w-full opacity-100 md:w-1/2 xl:w-3/5"
@@ -84,7 +86,8 @@ export default function ListingPage() {
           isExpanded ? "w-full" : "hidden md:block md:w-1/2 xl:w-2/5"
         } h-[calc(100vh-4rem)]`}
       >
-        <MapPlaceholder
+        <GoogleMaps
+          properties={currentProperties}
           onToggle={() => setIsExpanded(!isExpanded)}
           isExpanded={isExpanded}
         />

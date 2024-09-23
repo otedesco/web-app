@@ -21,7 +21,13 @@ const PropertyCardV2 = ({
   <Card className="p-3max-w-sm flex h-full w-full flex-col overflow-hidden rounded-none border-none shadow-none">
     <CardContent className="flex-grow">
       <div className="relative mb-2 aspect-square w-full overflow-hidden rounded-md">
-        <Image src={image} alt={title} className="h-full w-full object-cover" />
+        <Image
+          src={image}
+          alt={title}
+          width={300}
+          height={300}
+          className="h-full w-full object-cover"
+        />
         <Badge className="absolute left-2 top-2 rounded-sm bg-white text-black">
           Hot 🔥
         </Badge>

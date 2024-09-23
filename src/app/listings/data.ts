@@ -6,6 +6,8 @@ const properties = [
     description: "City Center",
     highlightedFeatures: ["1 bedroom", "1 bath", "open plan"],
     image: "https://loremflickr.com/300/300?random=1",
+    lat: 40.7128,
+    lng: -74.006,
   },
   {
     id: 3,
@@ -14,6 +16,8 @@ const properties = [
     description: "Ocean View",
     highlightedFeatures: ["3 bedrooms", "3 baths", "private pool"],
     image: "https://loremflickr.com/300/300/houses?random=2",
+    lat: 40.7282,
+    lng: -73.7949,
   },
   {
     id: 4,
@@ -22,6 +26,8 @@ const properties = [
     description: "Countryside",
     highlightedFeatures: ["2 bedrooms", "1 bath", "large garden"],
     image: "https://loremflickr.com/300/300/houses?random=3",
+    lat: 40.7484,
+    lng: -73.9857,
   },
   {
     id: 5,
@@ -30,6 +36,8 @@ const properties = [
     description: "Downtown Skyline View",
     highlightedFeatures: ["4 bedrooms", "4 baths", "roof terrace"],
     image: "https://loremflickr.com/300/300/houses?random=4",
+    lat: 41.0359,
+    lng: -73.7637,
   },
   {
     id: 6,
@@ -38,6 +46,8 @@ const properties = [
     description: "Quiet Neighborhood",
     highlightedFeatures: ["3 bedrooms", "2 baths", "garage"],
     image: "https://loremflickr.com/300/300/houses?random=5",
+    lat: 40.5795,
+    lng: -73.5502,
   },
   {
     id: 7,
@@ -46,6 +56,8 @@ const properties = [
     description: "Energy Efficient",
     highlightedFeatures: ["3 bedrooms", "2 baths", "solar panels"],
     image: "https://loremflickr.com/300/300/houses?random=6",
+    lat: 40.7831,
+    lng: -73.9712,
   },
   {
     id: 8,
@@ -54,6 +66,8 @@ const properties = [
     description: "Perfect for Professionals",
     highlightedFeatures: ["Studio apartment", "1 bath", "close to amenities"],
     image: "https://loremflickr.com/300/300/houses?random=7",
+    lat: 40.7614,
+    lng: -73.9776,
   },
   {
     id: 9,
@@ -70,6 +84,8 @@ const properties = [
     description: "Modern Design",
     highlightedFeatures: ["3 bedrooms", "3 baths", "2-car garage"],
     image: "https://loremflickr.com/300/300/houses?random=9",
+    lat: 40.7505,
+    lng: -73.9934,
   },
   {
     id: 11,
@@ -78,6 +94,8 @@ const properties = [
     description: "Scenic View",
     highlightedFeatures: ["3 bedrooms", "2 baths", "private dock"],
     image: "https://loremflickr.com/300/300/houses?random=10",
+    lat: 41.1918,
+    lng: -73.8785,
   },
   {
     id: 12,
@@ -86,6 +104,8 @@ const properties = [
     description: "Architectural Landmark",
     highlightedFeatures: ["6 bedrooms", "5 baths", "library"],
     image: "https://loremflickr.com/300/300/houses?random=11",
+    lat: 40.8847,
+    lng: -72.3895,
   },
   {
     id: 13,
@@ -94,6 +114,8 @@ const properties = [
     description: "Expansive Land",
     highlightedFeatures: ["4 bedrooms", "3 baths", "barn"],
     image: "https://loremflickr.com/300/300/houses?random=12",
+    lat: 41.7028,
+    lng: -74.9784,
   },
   {
     id: 14,
@@ -102,6 +124,8 @@ const properties = [
     description: "Ski-In/Ski-Out",
     highlightedFeatures: ["5 bedrooms", "4 baths", "heated floors"],
     image: "https://loremflickr.com/300/300/houses?random=13",
+    lat: 40.7112,
+    lng: -74.0123,
   },
   {
     id: 15,
@@ -110,6 +134,8 @@ const properties = [
     description: "High-Rise Living",
     highlightedFeatures: ["2 bedrooms", "2 baths", "balcony"],
     image: "https://loremflickr.com/300/300/houses?random=14",
+    lat: 41.9197,
+    lng: -73.9665,
   },
   {
     id: 16,
@@ -118,6 +144,8 @@ const properties = [
     description: "Isolated Haven",
     highlightedFeatures: ["3 bedrooms", "2 baths", "outdoor oasis"],
     image: "https://loremflickr.com/300/300/houses?random=15",
+    lat: 40.7061,
+    lng: -74.0092,
   },
   {
     id: 17,
@@ -126,6 +154,8 @@ const properties = [
     description: "Breathtaking Views",
     highlightedFeatures: ["4 bedrooms", "3 baths", "infinity pool"],
     image: "https://loremflickr.com/300/300/houses?random=16",
+    lat: 40.9517,
+    lng: -73.7845,
   },
   {
     id: 18,
@@ -134,6 +164,8 @@ const properties = [
     description: "Nature Surroundings",
     highlightedFeatures: ["4 bedrooms", "3 baths", "horse stables"],
     image: "https://loremflickr.com/300/300/houses?random=17",
+    lat: 41.0534,
+    lng: -73.5387,
   },
   {
     id: 19,
@@ -142,6 +174,8 @@ const properties = [
     description: "Beachfront",
     highlightedFeatures: ["2 bedrooms", "2 baths", "hammock garden"],
     image: "https://loremflickr.com/300/300/houses?random=18",
+    lat: 41.7676,
+    lng: -74.9968,
   },
   {
     id: 20,
@@ -150,6 +184,8 @@ const properties = [
     description: "Close to Transport",
     highlightedFeatures: ["1 bedroom", "1 bath", "modern kitchen"],
     image: "https://loremflickr.com/300/300/houses?random=19",
+    lat: 41.7676,
+    lng: -74.9968,
   },
 ];
 

@@ -6,6 +6,7 @@ import { MainFooter } from "~/components/footer";
 import { MainNav, MobileMenu } from "~/components/navigation-menu";
 import { Toaster } from "~/components/ui/sonner";
 import { TailwindIndicator } from "~/components/ui/tailwind-indicator";
+import { GOOGLE_MAPS_API_KEY } from "~/config/constants";
 
 import { cn } from "~/lib/utils";
 import Providers from "~/providers";
@@ -17,6 +18,13 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <script
+          src={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}`}
+          async
+          defer
+        ></script>
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans text-foreground antialiased",

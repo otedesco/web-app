@@ -31,7 +31,7 @@ export const MainNav = () => {
   }
 
   return (
-    <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur-md">
+    <header className="fixed top-0 z-20 w-full border-b border-border bg-background/80 backdrop-blur-md">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">

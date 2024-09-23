@@ -72,7 +72,7 @@ export const headerConfig: HeaderConfig = {
 
 export const footerConfig: FooterConfig = {
   type: "default",
-  showOnMobile: true,
+  showOnMobile: false,
 };
 
 const commonMobileOptions = [
