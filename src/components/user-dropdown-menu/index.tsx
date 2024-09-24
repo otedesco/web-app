@@ -19,7 +19,7 @@ import { LogIn, LogOut, Menu, User2Icon, UserPlus } from "lucide-react";
 import { useAppSelector } from "~/state/hooks";
 import { selectCurrentProfile } from "~/state/features/profile/selectors";
 import { useMediaQuery } from "~/hooks/useMediaQuery";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -27,6 +27,8 @@ import {
   DrawerFooter,
   DrawerTrigger,
 } from "../ui/drawer";
+import { useSignOut } from "~/lib/hooks/useLogOut";
+import { useRouter } from "next/navigation";
 
 export type LinkProps = {
   target?: string;
@@ -61,12 +63,6 @@ const nonLoggedOptions = [
   },
 ];
 
-const logOutOption = {
-  label: "Log out",
-  href: "/logout",
-  icon: <LogOut className="mr-2 h-4 w-4" />,
-};
-
 const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
   showOnMobile,
   loggedHighlightedOptions,
@@ -75,10 +71,18 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
   options,
 }) => {
   const t = useTranslations("components->user-dropdown-menu");
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const { avatarUrl, name } = useAppSelector(selectCurrentProfile);
   const [open, setOpen] = useState(false);
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const { signOutAsync } = useSignOut({});
+  const router = useRouter();
+
+  const handleLogOut = useCallback(async () => {
+    await signOutAsync(undefined);
+
+    router.push("/auth/login");
+  }, [router, signOutAsync]);
 
   const avatar =
     avatarUrl && name ? (
@@ -116,6 +120,21 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
     </>
+  );
+
+  const signOutOption = (
+    <DropdownMenuItem onClick={handleLogOut}>
+      <LogOut className="mr-2 h-4 w-4" />
+      <span>{t("Log out")}</span>
+    </DropdownMenuItem>
+  );
+
+  const drawerSignOutOption = (
+    <DrawerClose asChild onClick={handleLogOut}>
+      <Button variant="ghost" className="w-full justify-start">
+        {t("Log out")}
+      </Button>
+    </DrawerClose>
   );
 
   const loggedHighlightedOptionsGroup = loggedHighlightedOptions ? (
@@ -175,7 +194,7 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
           {/* Non Logged configured options */}
           {!isLoggedIn && optionGroup}
           {/* Logged default option (Log out) */}
-          {isLoggedIn && renderOption(logOutOption)}
+          {isLoggedIn && signOutOption}
         </DropdownMenuContent>
       </DropdownMenu>
     );
@@ -211,7 +230,7 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
           {/* Non Logged configured options */}
           {!isLoggedIn && options ? options?.map(renderDrawerOption) : null}
           {/* Logged default option (Log out) */}
-          {isLoggedIn && renderDrawerOption(logOutOption)}
+          {isLoggedIn && drawerSignOutOption}
         </div>
         <DrawerFooter>
           <DrawerClose asChild>

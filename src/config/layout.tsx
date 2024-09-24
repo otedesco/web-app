@@ -55,22 +55,27 @@ export const headerConfig: Record<Paths, HeaderConfig | null> = {
   [Paths.ABOUT_US]: aboutUsHeaderConfig,
 };
 
+const publicPagesFooterConfig: FooterConfig = {
+  type: "default",
+  showOnMobile: true,
+};
+
 export const footerConfig: Record<Paths, FooterConfig | null> = {
   [Paths.BASE]: baseFooterConfig,
   [Paths.LOGIN]: null,
   [Paths.SIGNUP]: null,
-  [Paths.LISTINGS]: baseFooterConfig,
-  [Paths.RESOURSES]: baseFooterConfig,
-  [Paths.RESOURCES_ALL_TOPICS]: baseFooterConfig,
-  [Paths.RESOURCES_LEARNING]: baseFooterConfig,
-  [Paths.RESOURCES_AGENTS]: baseFooterConfig,
-  [Paths.CONTACT_US]: baseFooterConfig,
-  [Paths.HELP]: baseFooterConfig,
-  [Paths.HELP_ALL_TOPICS]: baseFooterConfig,
-  [Paths.PUBLISH]: baseFooterConfig,
-  [Paths.NEWS]: baseFooterConfig,
-  [Paths.NEWS_RESOURCES]: baseFooterConfig,
-  [Paths.ABOUT_US]: baseFooterConfig,
+  [Paths.LISTINGS]: publicPagesFooterConfig,
+  [Paths.RESOURSES]: publicPagesFooterConfig,
+  [Paths.RESOURCES_ALL_TOPICS]: publicPagesFooterConfig,
+  [Paths.RESOURCES_LEARNING]: publicPagesFooterConfig,
+  [Paths.RESOURCES_AGENTS]: publicPagesFooterConfig,
+  [Paths.CONTACT_US]: publicPagesFooterConfig,
+  [Paths.HELP]: publicPagesFooterConfig,
+  [Paths.HELP_ALL_TOPICS]: publicPagesFooterConfig,
+  [Paths.PUBLISH]: publicPagesFooterConfig,
+  [Paths.NEWS]: publicPagesFooterConfig,
+  [Paths.NEWS_RESOURCES]: publicPagesFooterConfig,
+  [Paths.ABOUT_US]: publicPagesFooterConfig,
 };
 
 export const mobileConfig: Record<Paths, MobileConfig | null> = {

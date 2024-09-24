@@ -45,6 +45,12 @@ const userSlice = createSlice({
     ) => {
       state.selectedRole = action.payload;
     },
+    resetProfileState: (state) => {
+      state.currentProfile = initialState.currentProfile;
+      state.roles = initialState.roles;
+      state.selectedRole = initialState.selectedRole;
+      state.isLoading = initialState.isLoading;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCurrentProfile.pending, (state) => {
@@ -63,5 +69,5 @@ const userSlice = createSlice({
 });
 
 export type * from "./types";
-export const { setSelectedRole } = userSlice.actions;
+export const { setSelectedRole, resetProfileState } = userSlice.actions;
 export default userSlice.reducer;

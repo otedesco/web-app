@@ -1,5 +1,6 @@
 import { AUTH_SERVER_API } from "~/config/constants";
 import { Account, ApiReponse, Authentication } from "./types";
+import { getHeaders } from "./utils";
 
 export type SignUpResponse = ApiReponse<Account>;
 
@@ -55,4 +56,18 @@ export const signIn = async (
   }
 
   throw new Error("Sign in failed");
+};
+
+export const signOut = async (): Promise<void> => {
+  const headers = getHeaders();
+  const response = await fetch(`${BASE_PATH}/sign-out`, {
+    method: "POST",
+    headers,
+  });
+
+  if (response.ok) {
+    return;
+  }
+
+  throw new Error("Sign out failed");
 };
