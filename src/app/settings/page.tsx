@@ -79,7 +79,7 @@ export default function AccountSettingsPage() {
       </div>
 
       {/* Mobile version */}
-      <div className="md:hidden">
+      <div className="mb-4 pb-6 md:hidden">
         <div className="mb-6 flex items-center justify-between">
           <h1 className="text-2xl font-bold">{t("profile")}</h1>
           <Bell className="h-6 w-6" />
