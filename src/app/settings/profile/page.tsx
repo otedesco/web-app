@@ -15,7 +15,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="fixed left-0 right-0 top-0 z-10 flex items-center justify-between bg-white p-2 shadow-md md:hidden">
+    <nav className="fixed left-0 right-0 top-0 z-10 flex items-center justify-between bg-background p-2 shadow-md md:hidden">
       <Link href="/settings">
         <ChevronLeft className="h-6 w-6" />
       </Link>
@@ -85,7 +85,7 @@ const ProfileInfoCard = () => {
 
 const ProfileInfoContent = () => {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 pb-20">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">About Oswaldo</h1>
       </div>
@@ -157,7 +157,7 @@ export default function ProfileInfoPage() {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-4 pt-20">
+      <div className="container mx-auto px-4 pt-20 sm:pt-0">
         <div className="flex flex-col gap-8 md:flex-row md:gap-12">
           <div className="w-full pb-4 md:w-72">
             <ProfileInfoCard />
