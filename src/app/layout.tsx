@@ -33,12 +33,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         )}
       >
         <Providers locale={locale}>
-          <div className="flex min-h-screen flex-col">
-            <MainNav />
-            {props.children}
-            <MainFooter className="relative mb-8 md:mb-0" />
-            <MobileMenu />
-          </div>
+          <MainNav />
+          {props.children}
+          <MainFooter className="relative mb-8 md:mb-0" />
+          <MobileMenu />
           <Toaster />
           <TailwindIndicator />
         </Providers>

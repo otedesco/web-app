@@ -36,7 +36,7 @@ export default function AccountSettingsPage() {
   const t = useTranslations("pages->settings");
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto min-h-[calc(100vh-4rem)] px-4 py-8">
       {/* Desktop version */}
       <div className="hidden md:block">
         <h1 className="mb-2 text-4xl font-bold">{t("settings")}</h1>

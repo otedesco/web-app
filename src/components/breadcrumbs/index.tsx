@@ -45,7 +45,7 @@ export default function Breadcrumb({
   if (pathSegments.length == 1 && !showInBasePath) return null;
 
   return (
-    <nav aria-label="Breadcrumb" className={cn("mb-4", className)}>
+    <nav aria-label="Breadcrumb" className={cn("mb-4 min-h-8", className)}>
       <ol className="text-md flex items-center space-x-2 text-gray-500">
         {items.map((item, index) => (
           <li key={item.href} className="flex items-center">
