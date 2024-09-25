@@ -23,6 +23,7 @@ export const headerConfig: HeaderConfig = {
   extraComponent: null,
   showRightSideOnMobile: false,
   title: "Help Center",
+  showOnMobile: true,
   userMenuOptions: {
     showOnMobile: true,
     highlightedOptions: commonHighlightedOptions,

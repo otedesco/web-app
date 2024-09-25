@@ -54,17 +54,19 @@ const commonLoggedOptions = [
   },
 ];
 
+const extraComponent = <PublishLink />;
+
 export const headerConfig: HeaderConfig = {
-  type: "default",
+  type: "minimal",
   hasUserMenu: true,
   hasThemeToggle: true,
-  hasSearchBox: true,
+  hasSearchBox: false,
   logoType: "auto",
-  extraComponent: <PublishLink />,
-  showRightSideOnMobile: false,
-  showOnMobile: true,
+  showRightSideOnMobile: true,
+  showOnMobile: false,
+  extraComponent,
   userMenuOptions: {
-    showOnMobile: false,
+    showOnMobile: true,
     loggedHighlightedOptions: commonLoggedOptions,
     loggedOptions: commonOptions,
     options: commonOptions,
@@ -104,7 +106,7 @@ export const mobileConfig: MobileConfig = {
     },
     {
       label: "Profile",
-      href: "/settings",
+      href: "/profile",
       icon: <User className="mb-1 h-6 w-6" />,
     },
   ],

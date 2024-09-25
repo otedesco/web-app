@@ -9,10 +9,12 @@ import { useLayoutConfig } from "~/hooks/useLayoutConfig";
 import SimpleNav from "./simple-nav";
 import BrandLogo, { LogoType } from "../brand-logo";
 import { cn } from "~/lib/utils";
+import { useMediaQuery } from "~/hooks/useMediaQuery";
 
 export type HeaderConfig = {
   type: "minimal" | "default";
   hasUserMenu: boolean;
+  showOnMobile?: boolean;
   hasSearchBox: boolean;
   logoType: LogoType;
   userMenuOptions?: UserDropdownMenuProps;
@@ -24,15 +26,18 @@ export type HeaderConfig = {
 
 export const MainNav = () => {
   const { headerConfig } = useLayoutConfig();
-
+  const isDesktop = useMediaQuery("(min-width: 768px)");
   if (!headerConfig) return null;
+
   if (headerConfig.type === "minimal") {
     return <SimpleNav {...headerConfig} />;
   }
 
+  if (!headerConfig.showOnMobile && !isDesktop) return null;
+
   return (
     <header className="pl-[calc(100vw - 100%)] sticky top-0 z-20 w-full border-b border-border bg-background/80 backdrop-blur-md">
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">

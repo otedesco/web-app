@@ -4,13 +4,21 @@ import { useAppSelector } from "~/state/hooks";
 import { selectSelectedRole } from "~/state/features/profile/selectors";
 import { useTranslations } from "next-intl";
 
-const PublishLink = () => {
+const PublishLink = ({ asText = false }: { asText?: boolean }) => {
   const t = useTranslations("components->publish-link");
   const selectedRole = useAppSelector(selectSelectedRole);
+
+  const label = t(
+    selectedRole ? "Publish a Property" : "Ready to become an Agent?",
+  );
+
+  if (asText) {
+    return <span className="mr-4 hidden sm:inline">{label}</span>;
+  }
   return (
     <Link href="/publish">
       <Button variant="ghost" className="text-sm font-medium">
-        {t(selectedRole ? "Become an Agent" : "Publish a Property")}
+        <span className="mr-4 hidden sm:inline">{label}</span>
       </Button>
     </Link>
   );

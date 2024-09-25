@@ -28,6 +28,7 @@ export const headerConfig: HeaderConfig = {
   extraComponent: null,
   showRightSideOnMobile: false,
   title: "Resource Center",
+  showOnMobile: true,
   userMenuOptions: {
     showOnMobile: true,
     highlightedOptions: commonHighlightedOptions,

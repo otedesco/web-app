@@ -8,6 +8,103 @@
         "What Our Users Say": "What Our Users Say",
         "properties-count": "{count, plural, =0 {properties} =1 {property} other {# properties}}"
     },
+    "pages->settings": {
+        "mobileOptions": {
+            "sections": {
+                "0": {
+                    "title": "",
+                    "items": {
+                        "0": {
+                            "title": "Personal info"
+                        },
+                        "1": {
+                            "title": "Account"
+                        }
+                    }
+                },
+                "1": {
+                    "title": "Professional",
+                    "items": {
+                        "0": {
+                            "title": "Publish a property"
+                        },
+                        "1": {
+                            "title": "Manage your properties"
+                        }
+                    }
+                },
+                "2": {
+                    "title": "Referrals & credits",
+                    "items": {
+                        "0": {
+                            "title": "Gift cards"
+                        }
+                    }
+                },
+                "3": {
+                    "title": "Support",
+                    "items": {
+                        "0": {
+                            "title": "How Apart works"
+                        },
+                        "1": {
+                            "title": "Get help"
+                        },
+                        "2": {
+                            "title": "Contact us"
+                        }
+                    }
+                }
+            }
+        },
+        "options": {
+            "0": {
+                "title": "Personal info",
+                "description": "Provide personal details and how we can reach you"
+            },
+            "1": {
+                "title": "Login & security",
+                "description": "Update your password and secure your account"
+            },
+            "2": {
+                "title": "Payments & payouts",
+                "description": "Review payments, payouts, coupons, and gift cards"
+            },
+            "3": {
+                "title": "Taxes",
+                "description": "Manage taxpayer information and tax documents"
+            },
+            "4": {
+                "title": "Notifications",
+                "description": "Choose notification preferences and how you want to be contacted"
+            },
+            "5": {
+                "title": "Privacy & sharing",
+                "description": "Manage your personal data, connected services, and data sharing settings"
+            },
+            "6": {
+                "title": "Global preferences",
+                "description": "Set your default language, currency, and timezone"
+            },
+            "7": {
+                "title": "Professional tools",
+                "description": "Get professional tools if you manage several properties"
+            },
+            "8": {
+                "title": "Referral",
+                "description": "You have $0 USD referral credits. Learn more."
+            }
+        },
+        "profile": "Profile",
+        "hi": "Hi {fullname}!",
+        "rentItSellIt": "Rent it or Sell it",
+        "showProfile": "Show profile",
+        "rentCatchFrase": "Rent your property with ease. Apart is your trusted partner in real estate.",
+        "settings": "Settings",
+        "goToProfile": "Go to profile",
+        "NeedToDeactivateYourAccount": "Need to deactivate your account?",
+        "takeCareOfThatNow": "Take care of that now"
+    },
     "views->auth-view": {
         "Welcome": "Welcome",
         "Log In": "Log In",
@@ -119,7 +216,12 @@
         "System": "System"
     },
     "components->publish-link": {
+        "Ready to become an Agent?": "Ready to become an Agent?",
         "Become an Agent": "Become an Agent",
         "Publish a Property": "Publish a Property"
+    },
+    "components->breadcrumbs": {
+        "settings": "Settings",
+        "profile": "Profile"
     }
 }

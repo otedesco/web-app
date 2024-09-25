@@ -8,6 +8,103 @@
         "What Our Users Say": "Lo que dicen nuestros usuarios",
         "properties-count": "{count, plural, =0 {propiedades} =1 {propiedad} other {# propiedades}}"
     },
+    "pages->settings": {
+        "mobileOptions": {
+            "sections": {
+                "0": {
+                    "title": "",
+                    "items": {
+                        "0": {
+                            "title": "Información personal"
+                        },
+                        "1": {
+                            "title": "Cuenta"
+                        }
+                    }
+                },
+                "1": {
+                    "title": "Profesional",
+                    "items": {
+                        "0": {
+                            "title": "Publicar una propiedad"
+                        },
+                        "1": {
+                            "title": "Gestiona tus propiedades"
+                        }
+                    }
+                },
+                "2": {
+                    "title": "Referencias y créditos",
+                    "items": {
+                        "0": {
+                            "title": "Tarjetas de regalo"
+                        }
+                    }
+                },
+                "3": {
+                    "title": "Soporte",
+                    "items": {
+                        "0": {
+                            "title": "Cómo funciona Apart"
+                        },
+                        "1": {
+                            "title": "Centro de ayuda"
+                        },
+                        "2": {
+                            "title": "Contáctanos"
+                        }
+                    }
+                }
+            }
+        },
+        "options": {
+            "0": {
+                "title": "Información personal",
+                "description": "Proporcione detalles personales y cómo podemos contactarlo"
+            },
+            "1": {
+                "title": "Inicio de sesión y seguridad",
+                "description": "Actualiza tu contraseña y protege tu cuenta"
+            },
+            "2": {
+                "title": "Pagos y cobros",
+                "description": "Revisa pagos, cobros, cupones y tarjetas de regalo"
+            },
+            "3": {
+                "title": "Impuestos",
+                "description": "Gestiona la información del contribuyente y los documentos fiscales"
+            },
+            "4": {
+                "title": "Notificaciones",
+                "description": "Elige tus preferencias de notificación y cómo deseas ser contactado"
+            },
+            "5": {
+                "title": "Privacidad y compartir",
+                "description": "Gestiona tus datos personales, servicios conectados y configuraciones de intercambio de datos"
+            },
+            "6": {
+                "title": "Preferencias globales",
+                "description": "Configura tu idioma, moneda y zona horaria predeterminados"
+            },
+            "7": {
+                "title": "Herramientas profesionales",
+                "description": "Obtén herramientas profesionales si gestionas varias propiedades"
+            },
+            "8": {
+                "title": "Referencias",
+                "description": "Tienes $0 USD en créditos de referencia. Aprende más."
+            }
+        },
+        "profile": "Perfil",
+        "hi": "¡Hola {fullname}!",
+        "rentItSellIt": "Alquílalo o véndelo",
+        "showProfile": "Mostrar perfil",
+        "rentCatchFrase": "Alquila tu propiedad fácilmente. Apart es tu socio de confianza en bienes raíces.",
+        "settings": "Configuración",
+        "goToProfile": "Ir al perfil",
+        "NeedToDeactivateYourAccount": "¿Necesitas desactivar tu cuenta?",
+        "takeCareOfThatNow": "Hazlo ahora"
+    },
     "views->auth-view": {
         "Welcome": "Bienvenido",
         "Log In": "Iniciar sesión",
@@ -119,7 +216,12 @@
         "System": "Sistema"
     },
     "components->publish-link": {
+        "Ready to become an Agent?": "¿Listo para ser agente?",
         "Become an Agent": "Become an Agent",
         "Publish a Property": "Publish a Property"
+    },
+    "components->breadcrumbs": {
+        "settings": "Configuraciones",
+        "profile": "Perfil"
     }
 }

@@ -13,7 +13,6 @@ import {
 import { FooterConfig } from "~/components/footer/main-footer";
 import { HeaderConfig } from "~/components/navigation-menu/main-nav";
 import { MobileConfig } from "~/components/navigation-menu/mobile-menu";
-import PublishLink from "~/components/publish-link";
 
 const commonOptions = [
   {
@@ -58,11 +57,10 @@ export const headerConfig: HeaderConfig = {
   type: "default",
   hasUserMenu: true,
   hasThemeToggle: true,
-  hasSearchBox: true,
+  hasSearchBox: false,
   logoType: "auto",
-  extraComponent: <PublishLink />,
   showRightSideOnMobile: false,
-  showOnMobile: true,
+  showOnMobile: false,
   userMenuOptions: {
     showOnMobile: false,
     loggedHighlightedOptions: commonLoggedOptions,
@@ -104,7 +102,7 @@ export const mobileConfig: MobileConfig = {
     },
     {
       label: "Profile",
-      href: "/settings",
+      href: "/profile",
       icon: <User className="mb-1 h-6 w-6" />,
     },
   ],

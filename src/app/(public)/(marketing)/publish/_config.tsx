@@ -1,11 +1,10 @@
 import { HeaderConfig } from "~/components/navigation-menu/main-nav";
+import PublishLink from "~/components/publish-link";
 import { Button } from "~/components/ui";
 
 const extraComponent = (
   <div className="flex items-center">
-    <span className="mr-4 hidden text-gray-700 dark:text-gray-300 sm:inline">
-      Ready to become an agent?
-    </span>
+    <PublishLink asText />
     <Button variant="default" size="sm">
       Get Started
     </Button>
@@ -19,5 +18,6 @@ export const headerConfig: HeaderConfig = {
   hasSearchBox: false,
   logoType: "auto",
   showRightSideOnMobile: false,
+  showOnMobile: true,
   extraComponent,
 };

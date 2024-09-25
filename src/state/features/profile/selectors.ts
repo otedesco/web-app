@@ -22,3 +22,13 @@ export const selectSelectedRole = createSelector(
   selectProfileState,
   (profileState) => profileState.selectedRole,
 );
+
+export const selectFullName = createSelector(
+  selectCurrentProfile,
+  (profile) => `${profile.name} ${profile.lastname}`,
+);
+
+export const selectProfileAvatar = createSelector(
+  selectCurrentProfile,
+  (profile) => profile.avatarUrl,
+);

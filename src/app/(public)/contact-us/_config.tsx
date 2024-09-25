@@ -22,6 +22,7 @@ export const headerConfig: HeaderConfig = {
   logoType: "full",
   extraComponent: null,
   showRightSideOnMobile: false,
+  showOnMobile: true,
   userMenuOptions: {
     showOnMobile: true,
     highlightedOptions: commonHighlightedOptions,
