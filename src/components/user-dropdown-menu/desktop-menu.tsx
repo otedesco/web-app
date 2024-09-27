@@ -26,7 +26,7 @@ const nonLoggedOptions = [
   },
 ];
 
-const renderOption = ({ href, icon: Icon, label, linkProps }: MenuOption) => {
+const RenderOption = ({ href, icon: Icon, label, linkProps }: MenuOption) => {
   const t = useTranslations("components->user-dropdown-menu");
   return (
     <Link key={href} href={href} {...linkProps}>
@@ -46,7 +46,7 @@ const DesktopUserDropdownMenu = (props: MenuDialogProps) => {
   const nonLoggedOptionsGroup = (
     <>
       <DropdownMenuGroup>
-        {nonLoggedOptions.map(renderOption)}
+        {nonLoggedOptions.map(RenderOption)}
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
     </>
@@ -55,7 +55,7 @@ const DesktopUserDropdownMenu = (props: MenuDialogProps) => {
   const loggedHighlightedOptionsGroup = props.loggedHighlightedOptions ? (
     <>
       <DropdownMenuGroup>
-        {props.loggedHighlightedOptions?.map(renderOption)}
+        {props.loggedHighlightedOptions?.map(RenderOption)}
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
     </>
@@ -64,20 +64,20 @@ const DesktopUserDropdownMenu = (props: MenuDialogProps) => {
   const loggedOptionsGroup = props.loggedOptions ? (
     <>
       <DropdownMenuGroup>
-        {props.loggedOptions?.map(renderOption)}
+        {props.loggedOptions?.map(RenderOption)}
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
     </>
   ) : null;
 
   const optionGroup = props.options ? (
-    <DropdownMenuGroup>{props.options?.map(renderOption)}</DropdownMenuGroup>
+    <DropdownMenuGroup>{props.options?.map(RenderOption)}</DropdownMenuGroup>
   ) : null;
 
   const highlightedOptionsGroup = props.highlightedOptions ? (
     <>
       <DropdownMenuGroup>
-        {props.highlightedOptions?.map(renderOption)}
+        {props.highlightedOptions?.map(RenderOption)}
       </DropdownMenuGroup>
     </>
   ) : null;

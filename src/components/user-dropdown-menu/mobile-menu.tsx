@@ -26,7 +26,7 @@ const nonLoggedOptions = [
   },
 ];
 
-const renderDrawerOption = ({ href, icon: Icon, label }: MenuOption) => {
+const RenderDrawerOption = ({ href, icon: Icon, label }: MenuOption) => {
   const t = useTranslations("components->user-dropdown-menu");
   return (
     <DrawerClose key={href} asChild>
@@ -68,21 +68,21 @@ const MobileUserDropdownMenu = ({
       <DrawerContent>
         <div className="mt-4 border-t">
           {/* Non Logged default options (Log in, Sign up) */}
-          {!isLoggedIn && nonLoggedOptions.map(renderDrawerOption)}
+          {!isLoggedIn && nonLoggedOptions.map(RenderDrawerOption)}
           {/* Non Logged configured highlighted options */}
           {!isLoggedIn && highlightedOptions
-            ? highlightedOptions?.map(renderDrawerOption)
+            ? highlightedOptions?.map(RenderDrawerOption)
             : null}
           {/* Logged configured highlighted options */}
           {isLoggedIn && loggedHighlightedOptions
-            ? loggedHighlightedOptions?.map(renderDrawerOption)
+            ? loggedHighlightedOptions?.map(RenderDrawerOption)
             : null}
           {/* Logged configured options  */}
           {isLoggedIn && loggedOptions
-            ? loggedOptions?.map(renderDrawerOption)
+            ? loggedOptions?.map(RenderDrawerOption)
             : null}
           {/* Non Logged configured options */}
-          {!isLoggedIn && options ? options?.map(renderDrawerOption) : null}
+          {!isLoggedIn && options ? options?.map(RenderDrawerOption) : null}
           {/* Logged default option (Log out) */}
           {isLoggedIn && drawerSignOutOption}
         </div>
