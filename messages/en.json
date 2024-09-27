@@ -201,7 +201,8 @@
         "Wishlist": "Wishlist",
         "Settings": "Settings",
         "Log out": "Log out",
-        "Profile": "Profile"
+        "Profile": "Profile",
+        "Cancel": "Cancel"
     },
     "components->search-modal": {
         "Find properties": "Find properties",

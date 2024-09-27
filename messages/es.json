@@ -207,6 +207,7 @@
         "Wishlist": "Favoritos",
         "Settings": "Configuraciones",
         "Log out": "Cerrar sesión",
+        "Cancel": "Cancelar",
         "Profile": "Perfil"
     },
     "components->theme-toggle": {
