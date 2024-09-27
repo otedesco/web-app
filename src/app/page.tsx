@@ -1,5 +1,6 @@
 import LandingView from "~/views/landing-view";
 import { featuredProperties, popularLocations, testimonials } from "./data";
+import PageContainer from "~/components/layout/page-container";
 
 // Generate metadata
 export async function generateMetadata() {
@@ -12,13 +13,13 @@ export async function generateMetadata() {
 // Landing page component
 const LandingPage = () => {
   return (
-    <main className="mb-8 md:mb-0">
+    <PageContainer>
       <LandingView
         featuredProperties={featuredProperties}
         popularLocations={popularLocations}
         testimonials={testimonials}
       />
-    </main>
+    </PageContainer>
   );
 };
 

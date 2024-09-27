@@ -1,7 +1,9 @@
+import PageContainer from "~/components/layout/page-container";
+
 export default function HelpCenterPage() {
   return (
-    <main className="flex-grow">
+    <PageContainer>
       <h1>Help Center</h1>
-    </main>
+    </PageContainer>
   );
 }

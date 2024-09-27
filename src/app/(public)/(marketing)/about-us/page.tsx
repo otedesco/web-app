@@ -1,7 +1,9 @@
+import PageContainer from "~/components/layout/page-container";
+
 export default function AboutUsPage() {
   return (
-    <main className="flex-grow">
+    <PageContainer>
       <h1>About Us</h1>
-    </main>
+    </PageContainer>
   );
 }

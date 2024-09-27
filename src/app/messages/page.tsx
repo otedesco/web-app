@@ -1,7 +1,9 @@
+import PageContainer from "~/components/layout/page-container";
+
 export default function MessagesPage() {
   return (
-    <main className="min-h-screen flex-grow">
+    <PageContainer>
       <h1>messages</h1>
-    </main>
+    </PageContainer>
   );
 }

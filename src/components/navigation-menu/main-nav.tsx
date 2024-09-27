@@ -37,7 +37,7 @@ export const MainNav = () => {
 
   return (
     <header className="pl-[calc(100vw - 100%)] sticky top-0 z-20 w-full border-b border-border bg-background/80 backdrop-blur-md">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">

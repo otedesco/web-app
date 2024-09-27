@@ -1,7 +1,9 @@
+import PageContainer from "~/components/layout/page-container";
+
 export default function ResourceCenterAgentLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <main className="flex-grow">{children}</main>;
+  return <PageContainer>{children}</PageContainer>;
 }

@@ -1,7 +1,9 @@
+import PageContainer from "~/components/layout/page-container";
+
 export default function DashboardPage() {
   return (
-    <main className="flex-grow">
+    <PageContainer className="flex-grow">
       <h1>Contact us</h1>
-    </main>
+    </PageContainer>
   );
 }

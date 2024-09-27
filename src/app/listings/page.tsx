@@ -7,6 +7,7 @@ import PropertyCardV2 from "~/components/property-card-v2";
 import { useMediaQuery } from "~/hooks/useMediaQuery";
 import properties from "./data";
 import GoogleMaps from "~/components/google-maps";
+import PageContainer from "~/components/layout/page-container";
 
 export default function ListingPage() {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -39,7 +40,7 @@ export default function ListingPage() {
 
   // TODO: Fix overflow issue on mobile
   return (
-    <main className="mb-14 flex md:mb-0">
+    <PageContainer fullwitdh>
       <div
         className={`transition-all duration-300 ease-in-out ${
           isExpanded ? "w-0 opacity-0" : "w-full opacity-100 md:w-1/2 xl:w-3/5"
@@ -53,6 +54,7 @@ export default function ListingPage() {
             onPageChange={setCurrentPage}
           />
         </div>
+        \
       </div>
       <div
         className={`transition-all duration-300 ease-in-out ${
@@ -65,6 +67,6 @@ export default function ListingPage() {
           isExpanded={isExpanded}
         />
       </div>
-    </main>
+    </PageContainer>
   );
 }

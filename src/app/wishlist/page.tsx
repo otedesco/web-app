@@ -1,7 +1,9 @@
+import PageContainer from "~/components/layout/page-container";
+
 export default function WishlistPage() {
   return (
-    <main className="min-h-screen flex-grow">
+    <PageContainer className="min-h-screen flex-grow">
       <h1>wishlist</h1>
-    </main>
+    </PageContainer>
   );
 }

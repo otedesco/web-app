@@ -1,7 +1,9 @@
+import PageContainer from "~/components/layout/page-container";
+
 export default function MarketingRentPage() {
   return (
-    <main className="flex-grow">
+    <PageContainer>
       <h1>Rent or Sell</h1>
-    </main>
+    </PageContainer>
   );
 }

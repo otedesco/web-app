@@ -1,7 +1,9 @@
+import PageContainer from "~/components/layout/page-container";
+
 export default function ContactUsPage() {
   return (
-    <main className="flex-grow">
+    <PageContainer>
       <h1>Contact us</h1>
-    </main>
+    </PageContainer>
   );
 }
