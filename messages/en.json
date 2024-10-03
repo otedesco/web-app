@@ -223,6 +223,15 @@
     },
     "components->breadcrumbs": {
         "settings": "Settings",
-        "profile": "Profile"
+        "profile": "Profile",
+        "notifications": "Notifications",
+        "payments": "Payments & payouts",
+        "taxes": "Taxes",
+        "preferences": "Global preferences",
+        "privacy": "Privacy & sharing",
+        "security": "Account security",
+        "tools": "Professional tools",
+        "referals": "Referrals & credits",
+        "personal-info": "Personal info"
     }
 }

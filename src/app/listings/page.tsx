@@ -54,7 +54,6 @@ export default function ListingPage() {
             onPageChange={setCurrentPage}
           />
         </div>
-        \
       </div>
       <div
         className={`transition-all duration-300 ease-in-out ${

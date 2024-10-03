@@ -29,10 +29,12 @@ import {
 } from "~/state/features/profile/selectors";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function AccountSettingsPage() {
   const fullname = useAppSelector(selectFullName);
   const avatarUrl = useAppSelector(selectProfileAvatar);
+  const router = useRouter();
   const t = useTranslations("pages->settings");
 
   return (
@@ -55,9 +57,11 @@ export default function AccountSettingsPage() {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {accountOptions.map((option, index) => (
+            // <Link href={option.href}>
             <Card
               key={index}
-              className="bg-muted transition-shadow hover:shadow-lg"
+              onClick={() => router.push(option.href)}
+              className="cursor-pointer bg-muted transition-shadow hover:shadow-lg"
             >
               <CardHeader>
                 <CardTitle className="flex items-center text-primary">
@@ -69,6 +73,7 @@ export default function AccountSettingsPage() {
                 <p className="text-muted-foreground">{t(option.description)}</p>
               </CardContent>
             </Card>
+            // </Link>
           ))}
         </div>
 
@@ -142,42 +147,55 @@ const accountOptions = [
     title: "options.0.title",
     description: "options.0.description",
     icon: User,
+    href: "/settings/personal-info",
   },
   {
     title: "options.1.title",
     description: "options.1.description",
     icon: Shield,
+    href: "/settings/security",
   },
   {
     title: "options.2.title",
     description: "options.2.description",
     icon: CreditCard,
+    href: "/settings/payments",
   },
   {
     title: "options.3.title",
     description: "options.3.description",
     icon: FileText,
+    href: "/settings/taxes",
   },
   {
     title: "options.4.title",
     description: "options.4.description",
     icon: Bell,
+    href: "/settings/notifications",
   },
-  { title: "options.5.title", description: "options.5.description", icon: Eye },
+  {
+    title: "options.5.title",
+    description: "options.5.description",
+    icon: Eye,
+    href: "/settings/privacy",
+  },
   {
     title: "options.6.title",
     description: "options.6.description",
     icon: Globe,
+    href: "/settings/preferences",
   },
   {
     title: "options.7.title",
     description: "options.7.description",
     icon: BarChart,
+    href: "/settings/tools",
   },
   {
     title: "options.8.title",
     description: "options.8.description",
     icon: Gift,
+    href: "/settings/referals",
   },
 ];
 
