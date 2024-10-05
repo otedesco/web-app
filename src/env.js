@@ -9,6 +9,7 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
     AUTH_SERVER_API: z.string().url(),
+    BLOB_READ_WRITE_TOKEN: z.string(),
   },
 
   /**
@@ -30,6 +31,7 @@ export const env = createEnv({
     AUTH_SERVER_API: process.env.AUTH_SERVER_API,
     NEXT_PUBLIC_GOOGLE_MAPS_API_KEY:
       process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

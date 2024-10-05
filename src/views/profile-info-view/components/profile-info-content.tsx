@@ -1,23 +1,31 @@
+"use client";
+
 import { CheckIcon, ChevronRightIcon, MapPinIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button, Card } from "~/components/ui";
+import { selectFirstName } from "~/state/features/profile/selectors";
+import { useAppSelector } from "~/state/hooks";
 
 const ProfileInfoContent = () => {
+  const t = useTranslations("views->profile-info-view");
+  const name = useAppSelector(selectFirstName);
+  const location = "Caracas, Venezuela";
   return (
     <div className="space-y-8 pb-20">
       <div className="flex flex-col items-start justify-between">
-        <h1 className="text-3xl font-bold">About Oswaldo</h1>
+        <h1 className="text-3xl font-bold">{t("about", { name })}</h1>
         <Button variant="outline" className="mt-4 hidden text-sm md:block">
-          Edit profile
+          {t("editProfile")}
         </Button>
       </div>
       <div className="flex items-center gap-2">
         <MapPinIcon className="h-5 w-5 text-gray-500" />
-        <p>Lives in Caracas, Venezuela</p>
+        <p>{t("location", { location })}</p>
       </div>
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-semibold">
-            What are saying about Oswaldo
+            {t("whatSayingAbout", { name })}
           </h3>
           <ChevronRightIcon className="h-5 w-5 text-gray-500" />
         </div>
@@ -49,26 +57,28 @@ const ProfileInfoContent = () => {
           ))}
         </div>
         <Button variant="link" className="text-sm">
-          Show all 4 reviews
+          {t("showAllReviews", { count: 4 })}
         </Button>
       </div>
 
       <div>
-        <h3 className="text-xl font-semibold">Reviews you&apos;ve written</h3>
+        <h3 className="text-xl font-semibold">{t("reviewsYouWritten")}</h3>
       </div>
       <div className="block md:hidden">
-        <h3 className="text-xl font-semibold">Oswaldo confirmed information</h3>
+        <h3 className="text-xl font-semibold">
+          {t("confirmedInformation", { name })}
+        </h3>
         <ul className="m-2 space-y-2">
-          {["Identity", "Email address", "Phone number"].map((item) => (
+          {["identity", "emailAddress", "phoneNumber"].map((item) => (
             <li key={item} className="flex items-center gap-2">
               <CheckIcon className="h-5 w-5 text-green-500" />
-              <span>{item}</span>
+              <span>{t(item)}</span>
             </li>
           ))}
         </ul>
-        <a href="#" className="text-sm text-gray-500 hover:underline">
-          Learn about identity verification
-        </a>
+        <Button variant="link" className="text-md">
+          {t("learnAboutIdentityVerification")}
+        </Button>
       </div>
     </div>
   );

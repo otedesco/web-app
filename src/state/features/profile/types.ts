@@ -35,4 +35,5 @@ export interface ProfileState {
 
 export enum ProfileActionTypes {
   FETCH_CURRENT_PROFILE = "profile/fetchCurrentProfile",
+  UPDATE_AVATAR = "profile/updateAvatar",
 }

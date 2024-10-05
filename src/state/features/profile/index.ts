@@ -35,6 +35,22 @@ export const fetchCurrentProfile = createAsyncThunk(
   },
 );
 
+export const updateAvatar = createAsyncThunk(
+  ProfileActionTypes.UPDATE_AVATAR,
+  async (payload: { file: string; profileId: string }) => {
+    const response = await fetch(`/api/profile/avatar`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update profile");
+    }
+
+    return response.json() as Promise<Profile>;
+  },
+);
+
 const userSlice = createSlice({
   name: "profile",
   initialState,
@@ -63,6 +79,16 @@ const userSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(fetchCurrentProfile.rejected, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(updateAvatar.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateAvatar.fulfilled, (state, { payload }) => {
+      state.currentProfile.avatarUrl = payload.avatarUrl;
+      state.isLoading = false;
+    });
+    builder.addCase(updateAvatar.rejected, (state) => {
       state.isLoading = false;
     });
   },

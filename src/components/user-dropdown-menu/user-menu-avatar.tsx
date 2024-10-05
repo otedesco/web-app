@@ -1,8 +1,11 @@
 import { memo } from "react";
 import { Menu, User2Icon } from "lucide-react";
-import { Avatar, AvatarFallback, Button, AvatarImage } from "../ui";
+import { Avatar, AvatarFallback, Button, AvatarImage, Skeleton } from "../ui";
 import { useAppSelector } from "~/state/hooks";
-import { selectCurrentProfile } from "~/state/features/profile/selectors";
+import {
+  selectCurrentProfile,
+  selectIsLoading,
+} from "~/state/features/profile/selectors";
 
 export type UserMenuAvatarProps = {
   avatarUrl?: string;
@@ -17,8 +20,11 @@ const FallbackAvatar = () => {
   );
 };
 
+const LoadingSkeleton = () => <Skeleton className="h-8 w-8 rounded-full" />;
+
 const UserMenuAvatar = () => {
   const { avatarUrl, name } = useAppSelector(selectCurrentProfile);
+  const isLoading = useAppSelector(selectIsLoading);
 
   return (
     <Button
@@ -26,13 +32,13 @@ const UserMenuAvatar = () => {
       className="relative flex items-center space-x-2 rounded-full p-2 hover:bg-accent"
     >
       <Menu className="h-5 w-5" />
-      <Avatar className="h-8 w-8">
-        {avatarUrl && name ? (
-          <AvatarImage src={avatarUrl} alt={name} />
-        ) : (
+      {isLoading && <LoadingSkeleton />}
+      {!isLoading && (
+        <Avatar className="h-8 w-8">
+          <AvatarImage src={avatarUrl!} alt={name!} />
           <FallbackAvatar />
-        )}
-      </Avatar>
+        </Avatar>
+      )}
     </Button>
   );
 };

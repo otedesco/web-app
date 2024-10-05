@@ -126,6 +126,34 @@
         "Sign up failed": "Sign up failed",
         "Verify OTP failed": "Verify OTP failed"
     },
+    "views->profile-info-view": {
+        "timeOnApart": "{unit} on Apart",
+        "reviews": "{count, plural, =0 {Reviews} =1 {Review} other {Reviews}}",
+        "confirmedInformation": "{name}&apos;s confirmed information",
+        "identity": "Identity",
+        "emailAddress": "Email address",
+        "phoneNumber": "Phone number",
+        "learnAboutIdentityVerification": "Learn more",
+        "about": "About {name}",
+        "editProfile": "Edit profile",
+        "edit": "Edit",
+        "saveChanges": "Save changes",
+        "location": "Lives in {location}",
+        "whatSayingAbout": "What are saying about {name}",
+        "showAllReviews": "Show all {count} reviews",
+        "reviewsYouWritten": "Reviews you&apos;ve written",
+        "profileType": {
+            "tenant": "Tenant",
+            "buyer": "Buyer",
+            "agent": "Agent"
+        },
+        "unit": {
+            "year": "{time, plural, =1 {Year} other {Years}}",
+            "month": "{time, plural, =1 {Month} other {Months}}",
+            "week": "{time, plural, =1 {Week} other {Weeks}}",
+            "day": "{time, plural, =1 {Day} other {Days}}"
+        }
+    },
     "components->main-footer": {
         "brand-catch-frase": "Find your perfect property with ease. Apart is your trusted partner in real estate.",
         "Facebook": "Facebook",

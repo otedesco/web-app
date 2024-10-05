@@ -8,5 +8,7 @@ export const getHeaders = () => {
     headers.append("Authorization", `Bearer ${accessToken}`);
   }
 
+  headers.append("Content-Type", "application/json");
+
   return headers;
 };

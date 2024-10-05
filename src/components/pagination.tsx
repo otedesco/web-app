@@ -6,7 +6,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "../ui/pagination";
+} from "./ui/pagination";
 
 export type PaginationProps = {
   currentPage: number;

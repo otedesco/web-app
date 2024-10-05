@@ -30,12 +30,22 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { useSignOut } from "~/lib/hooks/useLogOut";
 
 export default function AccountSettingsPage() {
   const fullname = useAppSelector(selectFullName);
   const avatarUrl = useAppSelector(selectProfileAvatar);
   const router = useRouter();
+  const { signOutAsync } = useSignOut({});
+
   const t = useTranslations("pages->settings");
+
+  const handleLogOut = useCallback(async () => {
+    await signOutAsync(undefined);
+
+    router.push("/auth/login");
+  }, [router, signOutAsync]);
 
   return (
     <div className="container mx-auto min-h-[calc(100vh-4rem)] px-4 py-8">
@@ -107,7 +117,6 @@ export default function AccountSettingsPage() {
             <ChevronRight className="ml-auto" />
           </div>
         </Link>
-
         <Card className="mb-6">
           <CardContent className="flex items-center p-4">
             <div className="flex-grow">
@@ -124,7 +133,6 @@ export default function AccountSettingsPage() {
             />
           </CardContent>
         </Card>
-
         {mobileMenuItems.map((item, index) => (
           <div key={index} className="mb-6">
             <h2 className="mb-2 text-lg font-semibold">{t(item.section)}</h2>
@@ -137,6 +145,13 @@ export default function AccountSettingsPage() {
             ))}
           </div>
         ))}
+        <Button
+          variant="default"
+          onClick={handleLogOut}
+          className="mt-4 w-full"
+        >
+          Log out
+        </Button>
       </div>
     </div>
   );

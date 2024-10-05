@@ -126,6 +126,34 @@
         "Sign up failed": "El registro ha fallado",
         "Verify OTP failed": "La verificación del OTP ha fallado"
     },
+    "views->profile-info-view": {
+        "timeOnApart": "{unit} en Apart",
+        "reviews": "{count, plural, =0 {Evaluaciones} =1 {Evaluacion} other {Evaluaciones}}",
+        "confirmedInformation": "Información confirmada de {name}",
+        "identity": "Identidad",
+        "emailAddress": "Correo electrónico",
+        "phoneNumber": "Numero de teléfono",
+        "learnAboutIdentityVerification": "Saber más",
+        "about": "Acerca de {name}",
+        "editProfile": "Editar perfil",
+        "edit": "Editar",
+        "saveChanges": "Guardar cambios",
+        "location": "Vive en {location}",
+        "whatSayingAbout": "Lo que dicen sobre {name}",
+        "showAllReviews": "Mostrar todas las {count} evaluaciones",
+        "reviewsYouWritten": "Evaluaciones que has escrito",
+        "profileType": {
+            "tenant": "Locatario",
+            "buyer": "Comprador",
+            "agent": "Agente"
+        },
+        "unit": {
+            "year": "{time, plural, =1 {Año} other {Años}}",
+            "month": "{time, plural, =1 {Mes} other {Meses}}",
+            "week": "{time, plural, =1 {Semana} other {Semanas}}",
+            "day": "{time, plural, =1 {Día} other {Días}}"
+        }
+    },
     "components->main-footer": {
         "brand-catch-frase": "Encuentra tu propiedad perfecta con facilidad. Apart es tu socio de confianza en bienes raíces.",
         "Facebook": "Facebook",
@@ -219,7 +247,7 @@
     "components->publish-link": {
         "Ready to become an Agent?": "¿Listo para ser agente?",
         "Become an Agent": "Become an Agent",
-        "Publish a Property": "Publish a Property"
+        "Publish a Property": "Publica una propiedad"
     },
     "components->breadcrumbs": {
         "settings": "Configuraciones",

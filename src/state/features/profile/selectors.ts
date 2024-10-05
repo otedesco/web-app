@@ -8,6 +8,11 @@ export const selectCurrentProfile = createSelector(
   (profileState) => profileState.currentProfile,
 );
 
+export const selectFirstName = createSelector(
+  selectCurrentProfile,
+  (profile) => profile.name?.split(" ")[0],
+);
+
 export const selectRoles = createSelector(
   selectProfileState,
   (profileState) => profileState.roles,

@@ -11,7 +11,6 @@ export const getCurrentProfile = async () => {
   const response = await fetch(`${BASE_PATH}/me`, {
     method: "GET",
     headers,
-    // credentials: "include",
   });
 
   if (response.ok) {
@@ -21,4 +20,22 @@ export const getCurrentProfile = async () => {
   console.log(error);
   // TODO: Handle error response and refresh token if needed
   throw new Error("Get current profile failed");
+};
+
+export const updateProfile = async (payload: Partial<Profile>) => {
+  const headers = getHeaders();
+
+  const response = await fetch(`${BASE_PATH}/me`, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    return (await response.json()) as CurrentProfileResponse;
+  }
+
+  const error = (await response.json()) as unknown;
+  console.log(error);
+  // TODO: Handle error response and refresh token if needed
+  throw new Error("Update profile failed");
 };

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "../ui";
+import { Button } from "./ui";
 import { useAppSelector } from "~/state/hooks";
 import { selectSelectedRole } from "~/state/features/profile/selectors";
 import { useTranslations } from "next-intl";
