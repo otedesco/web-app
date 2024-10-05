@@ -75,8 +75,8 @@ const ProfileInfoCardAvatar = () => {
     [],
   );
 
-  const handleAvatarSubmit = useCallback(() => {
-    setAvatarUrl(newAvatar);
+  const handleAvatarSubmit = useCallback(async () => {
+    await setAvatarUrl(newAvatar!);
     setNewAvatar(null);
     setIsOpen(false);
   }, [setAvatarUrl, newAvatar]);
