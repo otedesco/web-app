@@ -170,48 +170,48 @@ const accountOptions = [
     icon: Shield,
     href: "/settings/security",
   },
-  {
-    title: "options.2.title",
-    description: "options.2.description",
-    icon: CreditCard,
-    href: "/settings/payments",
-  },
-  {
-    title: "options.3.title",
-    description: "options.3.description",
-    icon: FileText,
-    href: "/settings/taxes",
-  },
-  {
-    title: "options.4.title",
-    description: "options.4.description",
-    icon: Bell,
-    href: "/settings/notifications",
-  },
-  {
-    title: "options.5.title",
-    description: "options.5.description",
-    icon: Eye,
-    href: "/settings/privacy",
-  },
-  {
-    title: "options.6.title",
-    description: "options.6.description",
-    icon: Globe,
-    href: "/settings/preferences",
-  },
-  {
-    title: "options.7.title",
-    description: "options.7.description",
-    icon: BarChart,
-    href: "/settings/tools",
-  },
-  {
-    title: "options.8.title",
-    description: "options.8.description",
-    icon: Gift,
-    href: "/settings/referals",
-  },
+  // {
+  //   title: "options.2.title",
+  //   description: "options.2.description",
+  //   icon: CreditCard,
+  //   href: "/settings/payments",
+  // },
+  // {
+  //   title: "options.3.title",
+  //   description: "options.3.description",
+  //   icon: FileText,
+  //   href: "/settings/taxes",
+  // },
+  // {
+  //   title: "options.4.title",
+  //   description: "options.4.description",
+  //   icon: Bell,
+  //   href: "/settings/notifications",
+  // },
+  // {
+  //   title: "options.5.title",
+  //   description: "options.5.description",
+  //   icon: Eye,
+  //   href: "/settings/privacy",
+  // },
+  // {
+  //   title: "options.6.title",
+  //   description: "options.6.description",
+  //   icon: Globe,
+  //   href: "/settings/preferences",
+  // },
+  // {
+  //   title: "options.7.title",
+  //   description: "options.7.description",
+  //   icon: BarChart,
+  //   href: "/settings/tools",
+  // },
+  // {
+  //   title: "options.8.title",
+  //   description: "options.8.description",
+  //   icon: Gift,
+  //   href: "/settings/referals",
+  // },
 ];
 
 const mobileMenuItems = [

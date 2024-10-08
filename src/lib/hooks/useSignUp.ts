@@ -22,11 +22,6 @@ const mutationFn = async (payload: SignUpRequest): Promise<Account> => {
   return response.json() as Promise<Account>;
 };
 
-// const mutationFn = async (payload: SignUpRequest) => {
-//   const { data } = await signUp(payload);
-//   return data;
-// };
-
 export const useSignUp = ({
   onError,
   onMutate,

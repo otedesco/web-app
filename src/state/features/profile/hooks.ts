@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useAppDispatch } from "~/state/store";
-import { fetchCurrentProfile, setSelectedRole, updateAvatar } from ".";
+import { fetchCurrentProfile, setSelectedRole } from ".";
 import { useAppSelector } from "~/state/hooks";
 import { selectCurrentProfile } from "./selectors";
 
@@ -20,16 +20,7 @@ export const useProfileActions = () => {
     [dispatch],
   );
 
-  const setAvatarUrl = useCallback(
-    async (file: string) => {
-      if (!currentProfile.id) return;
-      await dispatch(updateAvatar({ file, profileId: currentProfile.id }));
-    },
-    [dispatch, currentProfile],
-  );
-
   return {
     selectRole,
-    setAvatarUrl,
   };
 };

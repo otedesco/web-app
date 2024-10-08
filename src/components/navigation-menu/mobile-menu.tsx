@@ -30,6 +30,8 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
     ? mobileConfig?.loggedOptions
     : mobileConfig?.options;
 
+  if (!mobileConfig) return null;
+
   return (
     <div
       className={cn(

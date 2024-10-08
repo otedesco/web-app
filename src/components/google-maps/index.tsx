@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker, Autocomplete } from "@react-google-maps/api";
 import { useCallback, useRef } from "react";
 import { Button } from "../ui";
 import { ArrowLeft, ArrowRight } from "lucide-react";

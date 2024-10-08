@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ProfileActionTypes, ProfileState, Role } from "./types";
 import { Profile } from "~/lib/services/cerberus";
+import _ from "lodash";
 
 const initialState: ProfileState = Object.freeze({
   currentProfile: {
@@ -11,6 +12,7 @@ const initialState: ProfileState = Object.freeze({
     account: null,
     createdAt: null,
     updatedAt: null,
+    details: null,
   },
   roles: [],
   selectedRole: null,
@@ -35,22 +37,6 @@ export const fetchCurrentProfile = createAsyncThunk(
   },
 );
 
-export const updateAvatar = createAsyncThunk(
-  ProfileActionTypes.UPDATE_AVATAR,
-  async (payload: { file: string; profileId: string }) => {
-    const response = await fetch(`/api/profile/avatar`, {
-      method: "PUT",
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to update profile");
-    }
-
-    return response.json() as Promise<Profile>;
-  },
-);
-
 const userSlice = createSlice({
   name: "profile",
   initialState,
@@ -60,6 +46,12 @@ const userSlice = createSlice({
       action: PayloadAction<Role["id"] | Profile["id"]>,
     ) => {
       state.selectedRole = action.payload;
+    },
+    updateCurrentProfile: (state, action: PayloadAction<Profile>) => {
+      state.currentProfile = {
+        ...state.currentProfile,
+        ..._.pick(action.payload, ["avatarUrl", "name", "lastname", "account"]),
+      };
     },
     resetProfileState: (state) => {
       state.currentProfile = initialState.currentProfile;
@@ -81,19 +73,10 @@ const userSlice = createSlice({
     builder.addCase(fetchCurrentProfile.rejected, (state) => {
       state.isLoading = false;
     });
-    builder.addCase(updateAvatar.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(updateAvatar.fulfilled, (state, { payload }) => {
-      state.currentProfile.avatarUrl = payload.avatarUrl;
-      state.isLoading = false;
-    });
-    builder.addCase(updateAvatar.rejected, (state) => {
-      state.isLoading = false;
-    });
   },
 });
 
 export type * from "./types";
-export const { setSelectedRole, resetProfileState } = userSlice.actions;
+export const { setSelectedRole, resetProfileState, updateCurrentProfile } =
+  userSlice.actions;
 export default userSlice.reducer;

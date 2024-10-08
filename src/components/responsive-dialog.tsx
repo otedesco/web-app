@@ -19,7 +19,7 @@ export type ResponsiveDialogProps = {
   Trigger: React.ReactNode;
   Content?: React.ReactNode;
   Footer?: React.ReactNode;
-  title: string;
+  title?: string;
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
 };
@@ -43,9 +43,11 @@ const ResponsiveDialog: React.FC<ResponsiveDialogProps> = ({
     <Container open={isOpen} onOpenChange={onOpenChange}>
       <TriggerWrapper>{Trigger}</TriggerWrapper>
       <ContentWrapper>
-        <Header>
-          <Title className="text-center">{title}</Title>
-        </Header>
+        {title && (
+          <Header>
+            <Title className="text-center">{title}</Title>
+          </Header>
+        )}
         {Content && Content}
         <FooterWrapper>{Footer}</FooterWrapper>
       </ContentWrapper>

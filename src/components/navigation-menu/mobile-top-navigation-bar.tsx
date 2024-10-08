@@ -1,4 +1,3 @@
-
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui";
@@ -9,9 +8,11 @@ const MobileTopNavBar = () => {
       <Link href="/settings">
         <ChevronLeft className="h-6 w-6" />
       </Link>
-      <Button variant="link" className="text-md">
-        Edit
-      </Button>
+      <Link href="/settings/profile?edit=true">
+        <Button variant="link" className="text-md">
+          Edit
+        </Button>
+      </Link>
     </nav>
   );
 };

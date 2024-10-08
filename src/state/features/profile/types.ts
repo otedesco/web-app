@@ -16,6 +16,24 @@ export interface Role {
   updatedAt?: string | null;
 }
 
+export type ProfileDetails = {
+  id: string;
+  location?: string;
+  school?: string;
+  work?: string;
+  languages?: string[];
+  birthdate?: Date;
+  gender?: string;
+  maritalStatus?: string;
+  nationality?: string;
+  about?: string;
+
+  profileId: Profile["id"];
+
+  createdAt: Date;
+  updatedAt?: Date | null;
+};
+
 export interface Profile {
   id: string | null;
   name: string | null;
@@ -25,6 +43,20 @@ export interface Profile {
   createdAt: string | null;
   updatedAt?: string | null;
 }
+
+export type Account = {
+  id: string;
+  email: string;
+  password: string;
+  salt: string;
+  active: boolean;
+  detailsId?: string;
+  phoneNumber?: string;
+  profile?: Profile;
+
+  createdAt: string;
+  updatedAt?: string;
+};
 
 export interface ProfileState {
   currentProfile: Profile;
