@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Input } from "~/components/ui/input";
+import { Input, InputProps } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { cn } from "~/lib/utils";
 
@@ -9,18 +8,19 @@ const ControlledTextInput = ({
   id,
   label,
   className,
+  onChange,
+  value,
+  maxLength,
 }: {
   id?: string;
   label?: string;
-  className?: string;
-}) => {
-  const [text, setText] = useState("");
-  const maxLength = 100;
-
+  value?: string;
+  maxLength: number;
+} & InputProps) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     if (newText.length <= maxLength) {
-      setText(newText);
+      onChange?.(e);
     }
   };
 
@@ -31,12 +31,12 @@ const ControlledTextInput = ({
         <Input
           id="character-input"
           placeholder="Type here..."
-          value={text}
+          value={value}
           onChange={handleInputChange}
           maxLength={maxLength}
         />
         <div className="ml-2 content-center px-2 text-sm text-muted-foreground">
-          {text.length}/{maxLength}
+          {!value ? 0 : value.length}/{maxLength}
         </div>
       </div>
     </div>

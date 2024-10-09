@@ -1,152 +1,70 @@
 "use client";
 
-import {
-  Baby,
-  Briefcase,
-  CheckIcon,
-  ChevronRight,
-  ChevronRightIcon,
-  Clock,
-  Heart,
-  Languages,
-  MapPin,
-  MapPinIcon,
-  Music,
-  PawPrint,
-  Users,
-  Wand2,
-} from "lucide-react";
+import { CheckIcon, ChevronRight, ChevronRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useState } from "react";
-
+import { useCallback, useState } from "react";
 import ResponsiveDialog from "~/components/responsive-dialog";
 import { Button, Card } from "~/components/ui";
 import { selectFirstName } from "~/state/features/profile/selectors";
 import { useAppSelector } from "~/state/hooks";
-import BirthdateDialogContent from "./components/dialog-contents/birthdate";
-import LanguagesDialogContent from "./components/dialog-contents/languages";
-import LocationContent from "./components/dialog-contents/location";
-import SchoolDialogContent from "./components/dialog-contents/school";
-import WorkDialogContent from "./components/dialog-contents/work";
-import GenderDialogContent from "./components/dialog-contents/gender";
-import MaritalStatusDialogContent from "./components/dialog-contents/marital-status";
-import MusicDialogContent from "./components/dialog-contents/music";
+import { ProfileDetailsRequest } from "../../page";
+import { ProfileItem } from "./components/dialog-contents/types";
+import { aboutItem, profileItems } from "./config";
+import { ProfileDetails } from "~/lib/services/cerberus";
+import { cn } from "~/lib/utils";
 
-const profileItems = [
-  {
-    id: "birthdate",
-    icon: Baby,
-    label: "Decade I was born",
-    value: "90s",
-    description:
-      "Don’t worry, other people won’t be able to see your exact birthday.",
-    title: "Decade you were born",
-    Content: BirthdateDialogContent,
-  },
-  {
-    id: "school",
-    icon: MapPin,
-    label: "Where I went to school",
-    value: "Caracas",
-    description:
-      "Whether it’s home school, high school, or trade school, name the school that made you who you are.",
-    title: "Where did you go to school?",
-    Content: SchoolDialogContent,
-  },
-  {
-    id: "work",
-    icon: Briefcase,
-    label: "My work",
-    value: "Desarrollador",
-    description:
-      "Tell us what your profession is. If you don’t have a traditional job, tell us your life’s calling. Example: Nurse, parent to four kids, or retired surfer.",
-    title: "What do you do for work?",
-    Content: WorkDialogContent,
-  },
-  {
-    id: "languages",
-    icon: Languages,
-    label: "Languages I speak",
-    value: "English, Spanish, and Portuguese",
-    description: "",
-    title: "Languages you speak",
-    Content: LanguagesDialogContent,
-  },
-  {
-    id: "location",
-    icon: MapPin,
-    label: "Where I live",
-    value: "Buenos Aires, Argentina",
-    description: "",
-    title: "Where you live",
-    Content: LocationContent,
-  },
-  {
-    id: "gender",
-    icon: Users,
-    label: "I identify myself as",
-    value: "",
-    // options: [
-    //   { label: "Female", value: "female" },
-    //   { label: "Male", value: "male" },
-    //   { label: "Non-binary", value: "non-binary" },
-    //   { label: "Genderqueer", value: "genderqueer" },
-    //   { label: "Genderfluid", value: "genderfluid" },
-    //   { label: "Agender", value: "agender" },
-    //   { label: "Two-Spirit", value: "two-spirit" },
-    //   { label: "Prefer not to say", value: "prefer-not-to-say" },
-    //   { label: "Other", value: "other" },
-    // ],
-    description: "Please share how do you identify yourself.",
-    title: "Your Gender Identity",
-    Content: GenderDialogContent,
-  },
-  {
-    id: "maritalStatus",
-    icon: Heart, // You can replace `MaritalStatusIcon` with an actual icon
-    label: "My marital status",
-    value: "", // Initial value can be an empty string until the user selects
-    // options: [
-    //   { label: "Single", value: "single" },
-    //   { label: "Married", value: "married" },
-    //   { label: "In a relationship", value: "in-relationship" },
-    //   { label: "Engaged", value: "engaged" },
-    //   { label: "Divorced", value: "divorced" },
-    //   { label: "Widowed", value: "widowed" },
-    //   { label: "It's complicated", value: "complicated" },
-    //   { label: "Prefer not to say", value: "prefer-not-to-say" },
-    // ],
-    description: "Please select your relationship status",
-    title: "Relationship Status",
-    Content: MaritalStatusDialogContent,
-  },
-  {
-    icon: Music,
-    label: "My favorite song in high school",
-    value: "Nothing else matters",
-    description:
-      "However embarrassing, share the tune you listened to on repeat as a teenager.",
-    title: "What was your favorite song in high school?",
-    Content: MusicDialogContent,
-  },
-];
+export type ItemDialogProps = {
+  value?: ProfileDetails[keyof ProfileDetails];
+  onChange: (
+    key: keyof ProfileDetailsRequest,
+    value: ProfileDetailsRequest[keyof ProfileDetailsRequest],
+  ) => void;
+  item: ProfileItem;
+  Trigger?: React.ReactNode;
+};
 
-const ItemDialog = ({ item }: { item: (typeof profileItems)[number] }) => {
+const ItemDialog = ({ item, onChange, value, Trigger }: ItemDialogProps) => {
   const [isOpen, setOpenModal] = useState<boolean>(false);
-  const [value, setValue] = useState(item.value);
+  const [profileDetailValue, setProfileDetailValue] =
+    useState<ProfileDetailsRequest[keyof ProfileDetailsRequest]>(value);
 
-  const Trigger = (
+  const t = useTranslations("views->profile-info-view");
+
+  const handleSubmit = useCallback(() => {
+    onChange(item.id, profileDetailValue);
+    setOpenModal(false);
+  }, [profileDetailValue, onChange]);
+
+  const parseValue = (id: string, value?: string | string[] | Date | null) => {
+    if (value === null || value === undefined) return "";
+    if (Array.isArray(value)) {
+      return value.map((v) => t(v)).join(", ");
+    }
+    if (value instanceof Date || id === "birthdate") {
+      const year = new Date(value).getFullYear();
+      return `${Math.floor(year / 10) * 10}'s`;
+    }
+    if (["gender", "maritalStatus"].includes(id)) {
+      return t(value);
+    }
+
+    return value;
+  };
+
+  const DefaultTrigger = (
     <Button
       variant="outline"
       className="text-md min-h-5 w-full justify-between border-none py-8 text-left font-normal"
     >
       <div className="flex items-center space-x-3">
-        <item.icon className="h-5 w-5" />
+        {item.icon && <item.icon className="h-5 w-5" />}
         <div>
           <div className="font-medium">{item.label}</div>
-          {item.value && (
-            <div className="text-sm text-muted-foreground">{item.value}</div>
+          {value && (
+            <div className="text-sm text-muted-foreground">
+              {parseValue(item.id, value)}
+            </div>
           )}
         </div>
       </div>
@@ -156,11 +74,19 @@ const ItemDialog = ({ item }: { item: (typeof profileItems)[number] }) => {
 
   return (
     <ResponsiveDialog
-      Trigger={Trigger}
-      Content={item.Content && <item.Content item={item} />}
+      Trigger={Trigger ?? DefaultTrigger}
+      Content={
+        item.Content && (
+          <item.Content
+            item={item}
+            value={profileDetailValue}
+            onChange={setProfileDetailValue}
+          />
+        )
+      }
       isOpen={isOpen}
       Footer={
-        <Button className="mt-4" onClick={() => setOpenModal(false)}>
+        <Button className="mt-4" onClick={handleSubmit}>
           Save
         </Button>
       }
@@ -169,9 +95,17 @@ const ItemDialog = ({ item }: { item: (typeof profileItems)[number] }) => {
   );
 };
 
-const InfoContentEditMode = () => {
+export type InfoContentEditModeProps = {
+  onProfileDetailsChange: (
+    key: keyof ProfileDetailsRequest,
+    value: ProfileDetailsRequest[keyof ProfileDetailsRequest],
+  ) => void;
+  profileDetails: Partial<ProfileDetailsRequest>;
+};
+
+const InfoContentEditMode = (props: InfoContentEditModeProps) => {
   return (
-    <div className="mb-20 min-h-[calc(100vh-7rem)] flex-grow md:mb-0">
+    <div className="mx-auto mb-20 min-h-[calc(100vh-7rem)] max-w-2xl flex-grow md:mb-0">
       <h2 className="mb-4 text-3xl font-bold">Your profile</h2>
       <p className="text-md text-muted-foreground">
         The information you share will be used across Apart to help other users
@@ -187,37 +121,68 @@ const InfoContentEditMode = () => {
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
         {profileItems.map((item) => (
-          <ItemDialog key={item.label} item={item} />
-
-          // <DialogContent>
-          //   <DialogHeader>
-          //     <DialogTitle>{item.label}</DialogTitle>
-          //   </DialogHeader>
-          //   <Input defaultValue={item.value} className="mt-4" />
-          //   <Button className="mt-4">Save</Button>
-          // </DialogContent>
+          <ItemDialog
+            key={item.label}
+            onChange={props.onProfileDetailsChange}
+            item={item}
+            value={props.profileDetails[item.id]}
+          />
         ))}
       </div>
 
       <h2 className="mb-4 mt-8 text-2xl font-bold">About you</h2>
-      <div className="min-w-full rounded-lg border border-dashed p-4">
+      <div
+        className={cn(
+          !props.profileDetails.about && "border border-dashed",
+          "min-w-full rounded-lg p-4",
+        )}
+      >
         <p className="text-md px-4 text-muted-foreground">
-          Write something fun and punchy.
+          {props.profileDetails[aboutItem.id]
+            ? (props.profileDetails[aboutItem.id] as string)
+            : "Write something fun and punchy."}
         </p>
-        <Button variant="link" className="text-md">
-          Add intro
-        </Button>
+        <ItemDialog
+          item={aboutItem}
+          onChange={props.onProfileDetailsChange}
+          value={props.profileDetails[aboutItem.id]}
+          Trigger={
+            <Button variant="link" className="text-md">
+              Add intro
+            </Button>
+          }
+        />
       </div>
     </div>
   );
 };
 
-const InfoContentViewMode = () => {
+const InfoContentViewMode = ({
+  profileDetails,
+}: {
+  profileDetails: Partial<ProfileDetails>;
+}) => {
   const t = useTranslations("views->profile-info-view");
   const name = useAppSelector(selectFirstName);
-  const location = "Caracas, Venezuela";
+
+  const parseValue = (id: string, value?: string | Date | string[] | null) => {
+    if (value === null || value === undefined) return "";
+    if (Array.isArray(value)) {
+      return value.map((v) => t(v)).join(", ");
+    }
+    if (value instanceof Date || id === "birthdate") {
+      const year = new Date(value).getFullYear();
+      return `${Math.floor(year / 10) * 10}'s`;
+    }
+    if (["gender", "maritalStatus"].includes(id)) {
+      return t(value);
+    }
+
+    return value;
+  };
+
   return (
-    <div className="min-h-[calc(100vh-7rem)] flex-grow">
+    <div className="mx-auto min-h-[calc(100vh-7rem)] max-w-2xl flex-grow">
       <div className="space-y-8 pb-20">
         <div className="flex flex-col items-start justify-between">
           <h1 className="text-3xl font-bold">{t("about", { name })}</h1>
@@ -227,10 +192,29 @@ const InfoContentViewMode = () => {
             </Button>
           </Link>
         </div>
-        <div className="flex items-center gap-2">
-          <MapPinIcon className="h-5 w-5 text-gray-500" />
-          <p>{t("location", { location })}</p>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-1 lg:grid-cols-2">
+          {profileItems.map((item) => {
+            if (!profileDetails[item.id]) return null;
+            return (
+              <div key={item.id} className="flex items-center gap-2">
+                {item.icon && (
+                  <item.icon className="h-5 w-5 text-muted-foreground" />
+                )}
+                <p className="text-sm">
+                  {t(item.id, {
+                    [item.id]: parseValue(item.id, profileDetails[item.id]),
+                  })}
+                </p>
+              </div>
+            );
+          })}
         </div>
+        {profileDetails.about && (
+          <div className="space-y-4">
+            <p>{profileDetails.about}</p>
+          </div>
+        )}
+
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-semibold">
@@ -294,10 +278,19 @@ const InfoContentViewMode = () => {
   );
 };
 
-export default function InfoContent({ isEditMode }: { isEditMode: boolean }) {
+export default function InfoContent({
+  isEditMode,
+  onProfileDetailsChange,
+  profileDetails,
+}: { isEditMode: boolean } & InfoContentEditModeProps) {
   if (isEditMode) {
-    return <InfoContentEditMode />;
+    return (
+      <InfoContentEditMode
+        onProfileDetailsChange={onProfileDetailsChange}
+        profileDetails={profileDetails}
+      />
+    );
   }
 
-  return <InfoContentViewMode />;
+  return <InfoContentViewMode profileDetails={profileDetails} />;
 }

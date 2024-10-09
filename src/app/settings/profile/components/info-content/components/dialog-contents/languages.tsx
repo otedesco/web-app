@@ -2,6 +2,7 @@ import { Search, X } from "lucide-react";
 import { useState } from "react";
 import { Input, ScrollArea } from "~/components/ui";
 import { Checkbox } from "~/components/ui/checkbox";
+import { DialogContentProps } from "./types";
 
 const languages = [
   "English",
@@ -79,23 +80,22 @@ const languages = [
 
 const LanguagesDialogContent = ({
   item,
-}: {
-  item: { title: string; description: string; value: string };
-}) => {
+  value = [],
+  onChange,
+}: DialogContentProps) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([
-    "English",
-  ]);
 
   const filteredLanguages = languages.filter((lang) =>
     lang.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   const toggleLanguage = (language: string) => {
-    setSelectedLanguages((prev) =>
-      prev.includes(language)
-        ? prev.filter((lang) => lang !== language)
-        : [...prev, language],
+    const typedValue = value as string[];
+
+    onChange(
+      typedValue.includes(language)
+        ? typedValue.filter((lang) => lang !== language)
+        : [...typedValue, language],
     );
   };
 
@@ -132,7 +132,7 @@ const LanguagesDialogContent = ({
             <Checkbox
               id={language}
               className="size-6"
-              checked={selectedLanguages.includes(language)}
+              checked={(value as string[]).includes(language)}
               onCheckedChange={() => toggleLanguage(language)}
             />
           </div>

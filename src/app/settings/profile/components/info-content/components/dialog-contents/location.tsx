@@ -7,17 +7,18 @@ import { ScrollArea } from "~/components/ui/scroll-area";
 import { useDebounce } from "use-debounce";
 import { useSearchPlaces } from "~/lib/hooks/useSearchPlaces";
 import { cn } from "~/lib/utils";
+import { DialogContentProps } from "./types";
 
 interface Place {
   place_id: string;
   description: string;
+  terms: { offset: number; value: string }[];
 }
 
 export default function LocationSelector({
   item,
-}: {
-  item: { title: string; description: string };
-}) {
+  onChange,
+}: DialogContentProps) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
@@ -26,7 +27,9 @@ export default function LocationSelector({
 
   const handleSelectPlace = (place: Place) => {
     setSelectedPlace(place);
-    setSearchTerm(place.description);
+    const value = place.terms.slice(-2).map((term) => term.value);
+
+    onChange(value.join(", "));
   };
 
   return (

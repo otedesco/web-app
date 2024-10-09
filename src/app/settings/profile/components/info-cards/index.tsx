@@ -5,10 +5,21 @@ import AvatarCard from "./components/avatar-card";
 import AvatarEdit from "./components/avatar-card/avatar-edit";
 import ConfirmedInfoCard from "./components/confirmed-info-card";
 import { useUpdateProfile } from "~/lib/hooks/useUpdateProfile";
+import { ProfileDetailsRequest } from "../../page";
 
-export default function InfoCards({ isEditMode }: { isEditMode: boolean }) {
+export default function InfoCards({
+  isEditMode,
+  profileDetailsAvatar,
+  onProfileDetailsChange,
+}: {
+  isEditMode: boolean;
+  profileDetailsAvatar?: string | null;
+  onProfileDetailsChange: (
+    key: keyof ProfileDetailsRequest,
+    value: ProfileDetailsRequest[keyof ProfileDetailsRequest],
+  ) => void;
+}) {
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
-
   const { updateProfile, isPending } = useUpdateProfile({});
 
   const handleAvatarChange = useCallback(
@@ -17,6 +28,9 @@ export default function InfoCards({ isEditMode }: { isEditMode: boolean }) {
       if (file) {
         const reader = new FileReader();
         reader.onloadend = () => {
+          if (isEditMode) {
+            onProfileDetailsChange("avatarUrl", reader.result as string);
+          }
           setSelectedAvatar(reader.result as string);
         };
         reader.readAsDataURL(file);
@@ -34,7 +48,7 @@ export default function InfoCards({ isEditMode }: { isEditMode: boolean }) {
       <div className="sticky top-32 w-full space-y-4 md:w-72">
         {isEditMode && (
           <AvatarEdit
-            selectedAvatar={selectedAvatar}
+            selectedAvatar={profileDetailsAvatar ?? null}
             onChange={handleAvatarChange}
             isEditMode={isEditMode}
           />

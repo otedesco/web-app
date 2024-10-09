@@ -7,7 +7,11 @@ interface Place {
 }
 
 interface SearchPlacesResponse {
-  predictions: Array<{ place_id: string; description: string }>;
+  predictions: Array<{
+    place_id: string;
+    description: string;
+    terms: { offset: number; value: string }[];
+  }>;
 }
 
 const fetchPlaces = async (input: string): Promise<Place[]> => {
@@ -21,11 +25,11 @@ const fetchPlaces = async (input: string): Promise<Place[]> => {
     throw new Error("Failed to fetch places");
   }
 
-  const data: SearchPlacesResponse = await response.json();
-
+  const data = (await response.json()) as SearchPlacesResponse;
   return data.predictions.map((prediction) => ({
     place_id: prediction.place_id,
     description: prediction.description,
+    terms: prediction.terms,
   }));
 };
 

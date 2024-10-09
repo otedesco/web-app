@@ -1,6 +1,6 @@
 import { AUTH_SERVER_API } from "~/config/constants";
 import { getHeaders } from "./utils";
-import { ApiReponse, Profile } from "./types";
+import { ApiReponse, Profile, ProfileDetails } from "./types";
 
 export type CurrentProfileResponse = ApiReponse<Profile>;
 
@@ -38,4 +38,40 @@ export const updateProfile = async (payload: Partial<Profile>) => {
   console.log(error);
   // TODO: Handle error response and refresh token if needed
   throw new Error("Update profile failed");
+};
+
+export const updateProfileDetails = async (
+  payload: Partial<ProfileDetails>,
+) => {
+  const headers = getHeaders();
+
+  const response = await fetch(`${BASE_PATH}/me/details`, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    return (await response.json()) as CurrentProfileResponse;
+  }
+
+  const error = (await response.json()) as unknown;
+  console.log(error);
+  // TODO: Handle error response and refresh token if needed
+  throw new Error("Update profile details failed");
+};
+
+export const getProfileDetails = async () => {
+  const headers = getHeaders();
+  const response = await fetch(`${BASE_PATH}/me/details`, {
+    method: "GET",
+    headers,
+  });
+  if (response.ok) {
+    return (await response.json()) as CurrentProfileResponse;
+  }
+
+  const error = (await response.json()) as unknown;
+  console.log(error);
+  // TODO: Handle error response and refresh token if needed
+  throw new Error("Get profile details failed");
 };

@@ -2,7 +2,7 @@ import { ControlledTextInput } from "~/components/inputs";
 import { DialogContentProps } from "./types";
 import { useCallback } from "react";
 
-const SchoolDialogContent = (props: DialogContentProps) => {
+const NationalityDialogContent = (props: DialogContentProps) => {
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
@@ -14,7 +14,7 @@ const SchoolDialogContent = (props: DialogContentProps) => {
       <h2 className="mb-4 text-3xl font-semibold">{props.item.title}</h2>
       <p className="text-md text-muted-foreground">{props.item.description}</p>
       <ControlledTextInput
-        maxLength={100}
+        maxLength={40}
         value={props.value as string}
         className="mt-8"
         onChange={handleChange}
@@ -23,4 +23,4 @@ const SchoolDialogContent = (props: DialogContentProps) => {
   );
 };
 
-export default SchoolDialogContent;
+export default NationalityDialogContent;

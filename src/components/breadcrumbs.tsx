@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { cn } from "~/lib/utils";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 interface BreadcrumbItem {
@@ -23,6 +23,7 @@ export default function Breadcrumb({
   showInBasePath = true,
 }: BreadcrumbProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const t = useTranslations("components->breadcrumbs");
 
   // Break the pathname into segments
@@ -45,14 +46,17 @@ export default function Breadcrumb({
   if (pathSegments.length == 1 && !showInBasePath) return null;
 
   return (
-    <nav aria-label="Breadcrumb" className={cn("content-center", className)}>
-      <ol className="text-md flex items-center space-x-2 text-gray-500">
+    <nav
+      aria-label="Breadcrumb"
+      className={cn("w-full content-center", className)}
+    >
+      <ol className="text-md mx-auto flex max-w-screen-xl items-center space-x-2 text-gray-500">
         {items.map((item, index) => (
           <li key={item.href} className="flex items-center">
             {index !== 0 && (
               <ChevronRight className="mx-2 h-4 w-4 text-gray-400" />
             )}
-            {index === items.length - 1 ? (
+            {index === items.length - 1 && !searchParams ? (
               <span className="font-medium text-muted-foreground">
                 {item.label}
               </span>

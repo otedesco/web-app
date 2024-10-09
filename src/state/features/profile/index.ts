@@ -47,7 +47,7 @@ const userSlice = createSlice({
     ) => {
       state.selectedRole = action.payload;
     },
-    updateCurrentProfile: (state, action: PayloadAction<Profile>) => {
+    updateCurrentProfile: (state, action: PayloadAction<Partial<Profile>>) => {
       state.currentProfile = {
         ...state.currentProfile,
         ..._.pick(action.payload, ["avatarUrl", "name", "lastname", "account"]),

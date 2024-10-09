@@ -3,7 +3,7 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import { Calendar } from "~/components/ui/calendar";
+import { Calendar, CalendarProps } from "~/components/ui/calendar";
 import {
   Select,
   SelectContent,
@@ -13,8 +13,13 @@ import {
 } from "~/components/ui/select";
 import { ScrollArea } from "~/components/ui/scroll-area";
 
-const CustomCalendar = () => {
-  const [date, setDate] = React.useState<Date>(new Date());
+export type CustomCalendarProps = {
+  value: Date;
+  onSelect: (newDate: Date) => void;
+} & CalendarProps;
+
+const CustomCalendar = ({ value, onSelect, ...props }: CustomCalendarProps) => {
+  const [date, setDate] = React.useState<Date>(value);
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 101 }, (_, i) => currentYear - 100 + i);
@@ -114,19 +119,17 @@ const CustomCalendar = () => {
         </div>
       </div>
       <Calendar
+        {...props}
         mode="single"
         showOutsideDays={false}
         classNames={{
           caption: "hidden",
           caption_label: "hidden",
-
-          //   caption_end: "hidden",
-          //   caption_start: "hidden",
           nav: "hidden",
         }}
         hideHead
-        selected={date}
-        onSelect={(newDate) => newDate && setDate(newDate)}
+        selected={value}
+        onSelect={(newDate) => newDate && onSelect(newDate)}
         month={date}
         onMonthChange={setDate}
         className="!mt-0 border-none p-0"
