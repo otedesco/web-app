@@ -37,26 +37,29 @@ export const MainNav = () => {
 
   return (
     <header className="pl-[calc(100vw - 100%)] sticky top-0 z-20 w-full border-b border-border bg-background/80 backdrop-blur-md">
-      <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center">
-              <BrandLogo logoType={headerConfig?.logoType} />
+      <div className="mx-auto h-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16">
+          <div className="flex items-center lg:flex-shrink-0 lg:flex-grow lg:basis-14">
+            <Link href="/">
+              <BrandLogo className="h-full" logoType={headerConfig?.logoType} />
             </Link>
           </div>
           {headerConfig.hasSearchBox && (
-            <div className="mx-4 max-w-2xl flex-1">
+            <div className="ml-2 flex h-auto w-full items-center md:w-auto lg:flex-shrink lg:flex-grow-0 lg:basis-auto">
               <SearchModal />
             </div>
           )}
           <div
             className={cn(
-              "hidden items-center space-x-4 md:flex",
+              "hidden w-full flex-shrink-0 flex-grow basis-28 items-center space-x-4 md:flex",
               headerConfig.showRightSideOnMobile ? "flex" : "hidden md:flex",
             )}
           >
-            {headerConfig.extraComponent && headerConfig.extraComponent}
-            {headerConfig.hasThemeToggle && <ThemeToggle />}
+            <div className="flex w-full items-center justify-end md:ml-auto md:max-w-max">
+              {headerConfig.extraComponent && headerConfig.extraComponent}
+              {headerConfig.hasThemeToggle && <ThemeToggle />}
+            </div>
+
             {headerConfig.hasUserMenu && headerConfig.userMenuOptions && (
               <UserDropdownMenu {...headerConfig.userMenuOptions} />
             )}

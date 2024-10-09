@@ -36,7 +36,7 @@ const DefaultTrigger: React.FC<DefaultTriggerProps> = ({
   return (
     <Button
       variant="outline"
-      className="w-full justify-between bg-background text-left font-normal shadow-sm transition-colors hover:bg-accent/50"
+      className="min-w-full justify-between bg-background text-left font-normal shadow-sm transition-all duration-200 hover:bg-accent/50 hover:shadow-lg lg:min-w-96"
       {...rest}
     >
       <div className="flex items-center space-x-4">

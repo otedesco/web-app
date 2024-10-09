@@ -14,12 +14,12 @@ const BrandLogo = (props: BrandLogoProps) => {
   const { logoType = "auto" } = props;
 
   if (logoType === "minimal") {
-    return <Logo />;
+    return <Logo {...props} />;
   }
   if (logoType === "full") {
-    return <LogoWithText />;
+    return <LogoWithText {...props} />;
   }
-  return <AutoBrandLogo />;
+  return <AutoBrandLogo {...props} />;
 };
 
 export default memo(BrandLogo);

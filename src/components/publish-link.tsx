@@ -17,9 +17,7 @@ const PublishLink = ({ asText = false }: { asText?: boolean }) => {
   }
   return (
     <Link href="/publish">
-      <Button variant="ghost" className="text-sm font-medium">
-        <span className="mr-4 hidden sm:inline">{label}</span>
-      </Button>
+      <span className="mr-2 hidden sm:inline">{label}</span>
     </Link>
   );
 };

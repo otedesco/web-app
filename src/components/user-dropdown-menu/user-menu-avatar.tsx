@@ -29,7 +29,7 @@ const UserMenuAvatar = () => {
   return (
     <Button
       variant="ghost"
-      className="relative flex items-center space-x-2 rounded-full p-2 hover:bg-accent"
+      className="relative flex items-center space-x-1 rounded-full p-2"
     >
       <Menu className="h-5 w-5" />
       {isLoading && <LoadingSkeleton />}

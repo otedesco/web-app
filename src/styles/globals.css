@@ -27,7 +27,16 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    --radius: 0.5rem;
+    --drop-shadow-color-sm: rgb(0 0 0 / 0.06);
+    --drop-shadow-color: rgb(0 0 0 / 0.1);
+    --drop-shadow-color-md: rgb(0 0 0 / 0.08);
+    --drop-shadow-color-lg: rgb(0 0 0 / 0.04);
+    --drop-shadow-color-xl: rgb(0 0 0 / 0.03);
+    --drop-shadow-color-2xl: rgb(0 0 0 / 0.15);
+    --box-shadow-color-sm: rgb(0 0 0 / 0.06);
+    --box-shadow-color: rgb(0 0 0 / 0.1);
+    --box-shadow-color-2xl: rgb(0 0 0 / 0.25);
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -53,7 +62,16 @@
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
+    --chart-5: 340 75% 55%;
+    --drop-shadow-color-sm: rgb(255 255 255 / 0.06);
+    --drop-shadow-color: rgb(255 255 255 / 0.1);
+    --drop-shadow-color-md: rgb(255 255 255 / 0.08);
+    --drop-shadow-color-lg: rgb(255 255 255 / 0.04);
+    --drop-shadow-color-xl: rgb(255 255 255 / 0.03);
+    --drop-shadow-color-2xl: rgb(255 255 255 / 0.15);
+    --box-shadow-color-sm: rgb(255 255 255 / 0.06);
+    --box-shadow-color: rgb(255 255 255 / 0.1);
+    --box-shadow-color-2xl: rgb(255 255 255 / 0.25);
   }
 }
 @layer base {
