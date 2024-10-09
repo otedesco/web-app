@@ -3,7 +3,7 @@
 import { CheckIcon, ChevronRight, ChevronRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import ResponsiveDialog from "~/components/responsive-dialog";
 import { Button, Card } from "~/components/ui";
 import { selectFirstName } from "~/state/features/profile/selectors";
@@ -104,6 +104,15 @@ export type InfoContentEditModeProps = {
 };
 
 const InfoContentEditMode = (props: InfoContentEditModeProps) => {
+  const formatText = (text: string) => {
+    return text.split("\n").map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        {index !== text.split("\n").length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
+
   return (
     <div className="mx-auto mb-20 min-h-[calc(100vh-7rem)] max-w-2xl flex-grow md:mb-0">
       <h2 className="mb-4 text-3xl font-bold">Your profile</h2>
@@ -139,7 +148,7 @@ const InfoContentEditMode = (props: InfoContentEditModeProps) => {
       >
         <p className="text-md px-4 text-muted-foreground">
           {props.profileDetails[aboutItem.id]
-            ? (props.profileDetails[aboutItem.id] as string)
+            ? formatText(props.profileDetails[aboutItem.id] as string)
             : "Write something fun and punchy."}
         </p>
         <ItemDialog
@@ -181,6 +190,15 @@ const InfoContentViewMode = ({
     return value;
   };
 
+  const formatText = (text: string) => {
+    return text.split("\n").map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        {index !== text.split("\n").length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
+
   return (
     <div className="mx-auto min-h-[calc(100vh-7rem)] max-w-2xl flex-grow">
       <div className="space-y-8 pb-20">
@@ -210,8 +228,8 @@ const InfoContentViewMode = ({
           })}
         </div>
         {profileDetails.about && (
-          <div className="space-y-4">
-            <p>{profileDetails.about}</p>
+          <div className="prose prose-sm max-w-none">
+            {formatText(profileDetails.about)}
           </div>
         )}
 

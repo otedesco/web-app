@@ -43,7 +43,9 @@ export default function ListingPage() {
     <PageContainer fullwitdh>
       <div
         className={`transition-all duration-300 ease-in-out ${
-          isExpanded ? "w-0 opacity-0" : "w-full opacity-100 md:w-1/2 xl:w-3/5"
+          isExpanded
+            ? "w-0 opacity-0"
+            : "w-full max-w-6xl opacity-100 md:w-1/2 xl:w-3/5 2xl:min-w-max"
         } `}
       >
         <div className="flex-grow p-4">
@@ -57,7 +59,7 @@ export default function ListingPage() {
       </div>
       <div
         className={`transition-all duration-300 ease-in-out ${
-          isExpanded ? "w-full" : "hidden md:block md:w-1/2 xl:w-2/5"
+          isExpanded ? "w-full" : "hidden md:block md:w-1/2 xl:w-2/5 2xl:w-full"
         } sticky top-16 h-[calc(100vh-4rem)]`}
       >
         <GoogleMaps

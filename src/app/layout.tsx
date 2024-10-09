@@ -1,5 +1,6 @@
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+import { Viewport } from "next";
 import { getLocale } from "next-intl/server";
 import { MainFooter } from "~/components/footer";
 
@@ -12,6 +13,13 @@ import { cn } from "~/lib/utils";
 import Providers from "~/providers";
 
 import "~/styles/globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const locale = await getLocale();

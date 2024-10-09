@@ -30,7 +30,6 @@ const ControlledTextInput = ({
       <div className="flex min-w-full flex-row">
         <Input
           id="character-input"
-          placeholder="Type here..."
           value={value}
           onChange={handleInputChange}
           maxLength={maxLength}

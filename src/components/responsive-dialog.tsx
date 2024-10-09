@@ -40,9 +40,9 @@ const ResponsiveDialog: React.FC<ResponsiveDialogProps> = ({
   const Header = isMobile ? DrawerHeader : DialogHeader;
   const Title = isMobile ? DrawerTitle : DialogTitle;
   return (
-    <Container open={isOpen} onOpenChange={onOpenChange}>
+    <Container handleOnly open={isOpen} onOpenChange={onOpenChange}>
       <TriggerWrapper>{Trigger}</TriggerWrapper>
-      <ContentWrapper className="z-50">
+      <ContentWrapper>
         {title && (
           <Header>
             <Title className="text-center">{title}</Title>
