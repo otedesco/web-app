@@ -6,6 +6,7 @@ import Link from "next/link";
 import React, { useCallback, useState } from "react";
 import ResponsiveDialog from "~/components/responsive-dialog";
 import { Button, Card } from "~/components/ui";
+import Skeleton from "~/components/skeleton-wrapper";
 import { selectFirstName } from "~/state/features/profile/selectors";
 import { useAppSelector } from "~/state/hooks";
 import { ProfileDetailsRequest } from "../../page";
@@ -101,6 +102,7 @@ export type InfoContentEditModeProps = {
     value: ProfileDetailsRequest[keyof ProfileDetailsRequest],
   ) => void;
   profileDetails: Partial<ProfileDetailsRequest>;
+  isLoading: boolean;
 };
 
 const InfoContentEditMode = (props: InfoContentEditModeProps) => {
@@ -168,8 +170,10 @@ const InfoContentEditMode = (props: InfoContentEditModeProps) => {
 
 const InfoContentViewMode = ({
   profileDetails,
+  isLoading,
 }: {
   profileDetails: Partial<ProfileDetails>;
+  isLoading: boolean;
 }) => {
   const t = useTranslations("views->profile-info-view");
   const name = useAppSelector(selectFirstName);
@@ -212,26 +216,44 @@ const InfoContentViewMode = ({
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-1 lg:grid-cols-2">
           {profileItems.map((item) => {
-            if (!profileDetails[item.id]) return null;
             return (
-              <div key={item.id} className="flex items-center gap-2">
+              <div className="flex items-center gap-2" key={item.id}>
                 {item.icon && (
-                  <item.icon className="h-5 w-5 text-muted-foreground" />
+                  <Skeleton
+                    key={item.id}
+                    isDataReady={!isLoading}
+                    className="h-5 w-5"
+                  >
+                    {!profileDetails[item.id] ? null : (
+                      <item.icon className="h-5 w-5 text-muted-foreground" />
+                    )}
+                  </Skeleton>
                 )}
-                <p className="text-sm">
-                  {t(item.id, {
-                    [item.id]: parseValue(item.id, profileDetails[item.id]),
-                  })}
-                </p>
+                <Skeleton
+                  key={item.id}
+                  isDataReady={!isLoading}
+                  className="h-5 w-48"
+                >
+                  {!profileDetails[item.id] ? null : (
+                    <p className="text-sm">
+                      {t(item.id, {
+                        [item.id]: parseValue(item.id, profileDetails[item.id]),
+                      })}
+                    </p>
+                  )}
+                </Skeleton>
               </div>
             );
           })}
         </div>
-        {profileDetails.about && (
-          <div className="prose prose-sm max-w-none">
-            {formatText(profileDetails.about)}
-          </div>
-        )}
+
+        <Skeleton isDataReady={!isLoading} className="h-5 w-48">
+          {profileDetails.about && (
+            <div className="prose prose-sm max-w-none">
+              {formatText(profileDetails.about)}
+            </div>
+          )}
+        </Skeleton>
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
@@ -300,15 +322,22 @@ export default function InfoContent({
   isEditMode,
   onProfileDetailsChange,
   profileDetails,
+  isLoading,
 }: { isEditMode: boolean } & InfoContentEditModeProps) {
   if (isEditMode) {
     return (
       <InfoContentEditMode
         onProfileDetailsChange={onProfileDetailsChange}
         profileDetails={profileDetails}
+        isLoading={isLoading}
       />
     );
   }
 
-  return <InfoContentViewMode profileDetails={profileDetails} />;
+  return (
+    <InfoContentViewMode
+      profileDetails={profileDetails}
+      isLoading={isLoading}
+    />
+  );
 }

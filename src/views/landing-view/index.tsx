@@ -65,9 +65,7 @@ const LandingView = ({
     <>
       <div className="mx-auto max-w-7xl space-y-12 px-4 py-12 sm:px-6 lg:px-8">
         <section className="py-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold">
-            {t("Find Your Dream Property")}
-          </h1>
+          <h1 className="mb-4 text-4xl">{t("Find Your Dream Property")}</h1>
           <p className="mb-8 text-xl text-muted-foreground">
             {t("Discover the perfect space in your ideal location")}
           </p>

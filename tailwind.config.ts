@@ -7,7 +7,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        sans: [
+          "var(--font-untitledsans-regular)",
+          "var(--font-untitledsans-medium)",
+          "var(--soehne-mono)",
+          ...fontFamily.sans,
+        ],
+        mono: ["var(--soehne-mono)", ...fontFamily.mono],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -67,10 +73,20 @@ export default {
           "50%": { transform: "translate(0, 20px)" },
           "75%": { transform: "translate(-10px, 10px)" },
         },
+        appear: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        disappear: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
       },
       animation: {
         "subtle-drift": "subtle-drift 30s linear infinite",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
+        appear: "appear 0.3s ease-in-out forwards",
+        disappear: "disappear 0.3s ease-in-out forwards",
       },
     },
   },

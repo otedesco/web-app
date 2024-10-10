@@ -11,8 +11,22 @@ import { GOOGLE_MAPS_API_KEY } from "~/config/constants";
 
 import { cn } from "~/lib/utils";
 import Providers from "~/providers";
+import localFont from "next/font/local";
 
 import "~/styles/globals.css";
+
+const soehneMono = localFont({
+  src: "../../public/fonts/soehne-mono-web-buch.woff",
+  variable: "--soehne-mono",
+});
+const untitledSansMedium = localFont({
+  src: "../../public/fonts/UntitledSansWeb-Medium.woff",
+  variable: "--font-untitledsans-medium",
+});
+const untitledsSansRegular = localFont({
+  src: "../../public/fonts/UntitledSansWeb-Regular.woff",
+  variable: "--font-untitledsans-regular",
+});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -36,8 +50,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <body
         className={cn(
           "min-h-screen bg-background font-sans text-foreground antialiased",
-          GeistSans.variable,
-          GeistMono.variable,
+          soehneMono.variable,
+          untitledSansMedium.variable,
+          untitledsSansRegular.variable,
         )}
       >
         <Providers locale={locale}>

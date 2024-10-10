@@ -103,8 +103,14 @@ export type ProfileDetailsRequest = Partial<ProfileDetails> & {
 
 const ProfilePage = ({ searchParams }: { searchParams: { edit: boolean } }) => {
   const router = useRouter();
-  const { updateProfileDetailsAsync, isPending, isError, isSuccess, data } =
-    useProfileDetails({});
+  const {
+    updateProfileDetailsAsync,
+    isPending,
+    isError,
+    isSuccess,
+    data,
+    isLoading,
+  } = useProfileDetails({});
 
   const [profileDetails, setProfileDetails] = useState<
     Partial<ProfileDetailsRequest>
@@ -150,6 +156,7 @@ const ProfilePage = ({ searchParams }: { searchParams: { edit: boolean } }) => {
             />
             <InfoContent
               isEditMode={searchParams.edit}
+              isLoading={isLoading}
               onProfileDetailsChange={handleProfileDetailsChange}
               profileDetails={{ ...data, ...profileDetails }}
             />
