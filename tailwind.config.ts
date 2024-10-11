@@ -68,6 +68,9 @@ export default {
           contrast: "hsl(var(--brand-contrast))",
         },
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(circle, var(--brand-primary))",
+      },
       keyframes: {
         "caret-blink": {
           "0%,70%,100%": { opacity: "1" },
@@ -87,36 +90,22 @@ export default {
           "0%": { opacity: "1" },
           "100%": { opacity: "0" },
         },
-        "gradient-move": {
+
+        "gradient-rotate": {
           "0%": {
-            x1: "17.7549",
-            y1: "17",
-            x2: "39.2549",
-            y2: "36.5",
+            "background-position": "0% 50%",
           },
           "25%": {
-            x1: "20",
-            y1: "40",
-            x2: "60",
-            y2: "20",
+            "background-position": "50% 100%",
           },
           "50%": {
-            x1: "50",
-            y1: "10",
-            x2: "30",
-            y2: "60",
+            "background-position": "100% 50%",
           },
           "75%": {
-            x1: "10",
-            y1: "50",
-            x2: "60",
-            y2: "10",
+            "background-position": "50% 0%",
           },
           "100%": {
-            x1: "100",
-            y1: "100",
-            x2: "100",
-            y2: "100",
+            "background-position": "0% 50%",
           },
         },
       },
@@ -125,7 +114,6 @@ export default {
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         appear: "appear 0.3s ease-in-out forwards",
         disappear: "disappear 0.3s ease-in-out forwards",
-        "gradient-move": "gradient-move 0.2s linear infinite",
       },
     },
   },
