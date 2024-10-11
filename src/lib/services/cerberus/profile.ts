@@ -71,7 +71,7 @@ export const getProfileDetails = async () => {
   }
 
   const error = (await response.json()) as unknown;
-  console.log(error);
+  console.error(error);
   // TODO: Handle error response and refresh token if needed
   throw new Error("Get profile details failed");
 };

@@ -10,6 +10,16 @@ export enum RoleType {
   READ_ONLY = "read_only",
 }
 
+export const VerificationStatusEnum = {
+  VERIFICATION_PENDING: "verification_pending",
+  VERIFICATION_REQUESTED: "verification_requested",
+  VERIFICATION_FAILED: "verification_failed",
+  VERIFIED: "verified",
+} as const;
+
+export type VerificationStatusType =
+  (typeof VerificationStatusEnum)[keyof typeof VerificationStatusEnum];
+
 export type ApiReponse<T> = {
   data: T;
 };
@@ -26,6 +36,26 @@ export type Account = {
   status: AccountStatus;
   token?: string;
   profiles?: Profile[];
+};
+
+export type AccountDetails = {
+  id: string;
+  emailVerificationStatus: VerificationStatusType;
+  phoneVerificationStatus: VerificationStatusType;
+  identityVerificationStatus: VerificationStatusType;
+  legalFirstname?: string;
+  legalLastname?: string;
+  govermentId?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zipcode?: string;
+  country?: string;
+
+  accountId: Account["id"];
+
+  createdAt: Date;
+  updatedAt?: Date | null;
 };
 
 export interface Organization {

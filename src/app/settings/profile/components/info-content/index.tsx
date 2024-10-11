@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon, ChevronRight, ChevronRightIcon } from "lucide-react";
+import { Check, ChevronRight, ChevronRightIcon, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
@@ -12,8 +12,14 @@ import { useAppSelector } from "~/state/hooks";
 import { ProfileDetailsRequest } from "../../page";
 import { ProfileItem } from "./components/dialog-contents/types";
 import { aboutItem, profileItems } from "./config";
-import { ProfileDetails } from "~/lib/services/cerberus";
+import {
+  AccountDetails,
+  ProfileDetails,
+  VerificationStatusEnum,
+} from "~/lib/services/cerberus/types";
 import { cn } from "~/lib/utils";
+import SkeletonWrapper from "~/components/skeleton-wrapper";
+import { useAccountDetails } from "~/lib/hooks/useAccountDetails";
 
 export type ItemDialogProps = {
   value?: ProfileDetails[keyof ProfileDetails];
@@ -177,6 +183,7 @@ const InfoContentViewMode = ({
 }) => {
   const t = useTranslations("views->profile-info-view");
   const name = useAppSelector(selectFirstName);
+  const { data, isLoading: isAccountLoading } = useAccountDetails({});
 
   const parseValue = (id: string, value?: string | Date | string[] | null) => {
     if (value === null || value === undefined) return "";
@@ -302,10 +309,29 @@ const InfoContentViewMode = ({
             {t("confirmedInformation", { name })}
           </h3>
           <ul className="m-2 space-y-2">
-            {["identity", "emailAddress", "phoneNumber"].map((item) => (
+            {[
+              "identityVerificationStatus",
+              "emailVerificationStatus",
+              "phoneVerificationStatus",
+            ].map((item) => (
               <li key={item} className="flex items-center gap-2">
-                <CheckIcon className="h-5 w-5 text-green-500" />
-                <span>{t(item)}</span>
+                <SkeletonWrapper
+                  isDataReady={!isAccountLoading}
+                  className="h-5 w-5 rounded-full"
+                >
+                  {data?.[item as keyof AccountDetails] ===
+                  VerificationStatusEnum.VERIFIED ? (
+                    <Check className="h-5 w-5 text-green-500" />
+                  ) : (
+                    <X className="h-5 w-5 text-red-500" />
+                  )}
+                </SkeletonWrapper>
+                <SkeletonWrapper
+                  isDataReady={!isAccountLoading}
+                  className="h-5 w-40"
+                >
+                  <span>{t(item)}</span>
+                </SkeletonWrapper>
               </li>
             ))}
           </ul>

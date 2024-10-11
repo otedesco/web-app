@@ -1,4 +1,6 @@
 import { AUTH_SERVER_API } from "~/config/constants";
+import { getHeaders } from "./utils";
+import { AccountDetails, ApiReponse } from "./types";
 
 export interface VerifyAccountRequest {
   token: string;
@@ -22,4 +24,21 @@ export const verifyAccount = async (
   if (!response.ok) {
     throw new Error("Email verification failed");
   }
+};
+
+export const getAccountDetailsDetails = async (): Promise<
+  ApiReponse<AccountDetails>
+> => {
+  const response = await fetch(`${BASE_PATH}/details`, {
+    method: "GET",
+    headers: getHeaders(),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to get account details");
+  }
+
+  const data = await response.json();
+
+  return data as ApiReponse<AccountDetails>;
 };

@@ -61,7 +61,7 @@ export default function InfoCards({
               selectedAvatar={selectedAvatar}
               isUpdatingAvatar={isPending}
             />
-            <ConfirmedInfoCard isLoading={false} />
+            <ConfirmedInfoCard />
           </>
         )}
       </div>
