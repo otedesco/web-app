@@ -61,6 +61,12 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+
+        /* Apart defined custom colors and styles */
+        brand: {
+          primary: "hsl(var(--brand-primary))",
+          contrast: "hsl(var(--brand-contrast))",
+        },
       },
       keyframes: {
         "caret-blink": {
@@ -81,12 +87,45 @@ export default {
           "0%": { opacity: "1" },
           "100%": { opacity: "0" },
         },
+        "gradient-move": {
+          "0%": {
+            x1: "17.7549",
+            y1: "17",
+            x2: "39.2549",
+            y2: "36.5",
+          },
+          "25%": {
+            x1: "20",
+            y1: "40",
+            x2: "60",
+            y2: "20",
+          },
+          "50%": {
+            x1: "50",
+            y1: "10",
+            x2: "30",
+            y2: "60",
+          },
+          "75%": {
+            x1: "10",
+            y1: "50",
+            x2: "60",
+            y2: "10",
+          },
+          "100%": {
+            x1: "100",
+            y1: "100",
+            x2: "100",
+            y2: "100",
+          },
+        },
       },
       animation: {
         "subtle-drift": "subtle-drift 30s linear infinite",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         appear: "appear 0.3s ease-in-out forwards",
         disappear: "disappear 0.3s ease-in-out forwards",
+        "gradient-move": "gradient-move 0.2s linear infinite",
       },
     },
   },

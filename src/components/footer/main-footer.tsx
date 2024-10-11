@@ -34,7 +34,7 @@ export default function MainFooter({ className }: MainFooterProps) {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-4">
-            <BrandLogo logoType="full" />
+            <BrandLogo variant="full" />
             <p className="text-sm text-muted-foreground">
               {t("brand-catch-frase")}
             </p>

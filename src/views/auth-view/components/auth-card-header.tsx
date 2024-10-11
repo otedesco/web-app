@@ -44,7 +44,7 @@ const AuthCardHeader: React.FC<AuthCardHeaderProps> = ({ onStepChange }) => {
         >
           <ArrowLeft className="h-4 w-4" />
         </Button>
-        <BrandLogo logoType="minimal" />
+        <BrandLogo variant="minimal" dynamic gradient />
         <div className="w-8" /> {/* Spacer for centering */}
       </div>
       <CardHeader className="space-y-1 p-4 sm:p-6">

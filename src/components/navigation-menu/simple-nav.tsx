@@ -29,7 +29,7 @@ export default function SimpleNav({
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <BrandLogo logoType={logoType} />
+              <BrandLogo variant={logoType} gradient dynamic resize />
               {title && (
                 <span className="ml-2 font-sans text-xl font-normal tracking-tight">
                   {t(title)}

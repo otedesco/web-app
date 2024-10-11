@@ -7,16 +7,17 @@ import Link from "next/link";
 import UserDropdownMenu, { UserDropdownMenuProps } from "../user-dropdown-menu";
 import { useLayoutConfig } from "~/hooks/useLayoutConfig";
 import SimpleNav from "./simple-nav";
-import BrandLogo, { LogoType } from "../brand-logo";
+
 import { cn } from "~/lib/utils";
 import { useMediaQuery } from "~/hooks/useMediaQuery";
+import BrandLogo, { LogoProps } from "~/components/brand-logo";
 
 export type HeaderConfig = {
   type: "minimal" | "default";
   hasUserMenu: boolean;
   showOnMobile?: boolean;
   hasSearchBox: boolean;
-  logoType: LogoType;
+  logoType: LogoProps["variant"];
   userMenuOptions?: UserDropdownMenuProps;
   hasThemeToggle?: boolean;
   showRightSideOnMobile?: boolean;
@@ -41,7 +42,13 @@ export const MainNav = () => {
         <div className="flex h-16">
           <div className="flex items-center lg:flex-shrink-0 lg:flex-grow lg:basis-14">
             <Link href="/">
-              <BrandLogo className="h-full" logoType={headerConfig?.logoType} />
+              <BrandLogo
+                className="h-full"
+                variant="full"
+                resize
+                gradient
+                dynamic
+              />
             </Link>
           </div>
           {headerConfig.hasSearchBox && (
