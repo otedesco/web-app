@@ -9,12 +9,12 @@ interface GlowEffectProps {
 }
 
 const GlowEffect: React.FC<GlowEffectProps> = ({ className }) => {
-  const [direction, setDirection] = useState(0);
+  const [direction, setDirection] = useState(315);
 
   useEffect(() => {
-    const controls = animate(0, 360, {
+    const controls = animate(direction, 0, {
       ease: "linear",
-      duration: 5,
+      duration: 7,
       repeat: Infinity,
       onUpdate: (latest) => {
         setDirection(latest);
@@ -24,7 +24,7 @@ const GlowEffect: React.FC<GlowEffectProps> = ({ className }) => {
     return () => controls.stop();
   }, []);
 
-  const backgroundImage = `linear-gradient(${direction}deg, hsl(var(--brand-primary)), hsl(var(--brand-contrast)))`;
+  const backgroundImage = `linear-gradient(${direction}deg, hsl(var(--brand-contrast)), hsl(var(--brand-primary)) )`;
 
   return (
     <div
