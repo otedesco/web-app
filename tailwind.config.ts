@@ -70,6 +70,7 @@ export default {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(circle, var(--brand-primary))",
+        "noise-bg": "url(../../public/noise-texture.svg)",
       },
       keyframes: {
         "caret-blink": {
