@@ -17,7 +17,7 @@ const MobileTopNavBar = ({
   }, [router]);
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-10 flex items-center justify-between bg-background p-2 shadow-md md:hidden">
+    <nav className="fixed left-0 right-0 top-0 z-30 flex items-center justify-between bg-background p-2 shadow-md md:hidden">
       <Button variant="ghost" onClick={handleBack}>
         <ChevronLeft className="h-6 w-6" />
       </Button>

@@ -3,7 +3,6 @@ import {
   AnimatePresenceProps,
   LazyMotion,
   LazyProps,
-  Variants,
 } from "framer-motion";
 import { FC } from "react";
 

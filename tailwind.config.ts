@@ -7,12 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          "var(--font-untitledsans-regular)",
-          "var(--font-untitledsans-medium)",
-          "var(--soehne-mono)",
-          ...fontFamily.sans,
-        ],
+        sans: ["var(--font-untitledsans)", ...fontFamily.sans],
+        serif: ["var(--font-untitledserif)", ...fontFamily.serif],
         mono: ["var(--soehne-mono)", ...fontFamily.mono],
       },
       borderRadius: {

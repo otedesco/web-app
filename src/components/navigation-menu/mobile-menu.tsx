@@ -35,7 +35,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
   return (
     <div
       className={cn(
-        "fixed bottom-0 left-0 right-0 border-t border-border bg-background/80 backdrop-blur-md md:hidden",
+        "fixed bottom-0 left-0 right-0 z-30 border-t border-border bg-background/80 backdrop-blur-md md:hidden",
         className,
       )}
     >

@@ -37,7 +37,7 @@ export const MainNav = () => {
   if (!headerConfig.showOnMobile && !isDesktop) return null;
 
   return (
-    <header className="pl-[calc(100vw - 100%)] sticky top-0 z-20 w-full border-b border-border bg-background/80 backdrop-blur-md">
+    <header className="pl-[calc(100vw - 100%)] sticky top-0 z-30 w-full border-b border-border bg-background/80 backdrop-blur-md">
       <div className="mx-auto h-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16">
           <div className="flex items-center lg:flex-shrink-0 lg:flex-grow lg:basis-14">

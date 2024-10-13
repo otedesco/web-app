@@ -8,7 +8,8 @@ const AnimationWrapper: React.FC<HTMLMotionProps<"div">> = ({
   ...props
 }) => (
   <m.div
-    className="animate-appear relative opacity-0 will-change-[opacity]"
+    layout="preserve-aspect"
+    className="relative animate-appear opacity-0 will-change-[opacity]"
     {...props}
   >
     {children}

@@ -24,9 +24,9 @@ export default function SimpleNav({
 
   if (!showOnMobile && !isDesktop) return null;
   return (
-    <nav className="sticky top-0 z-20 bg-background backdrop-blur-md">
+    <nav className="sticky top-0 z-30 bg-background">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-[64px] items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <BrandLogo variant={logoType} gradient dynamic resize />
