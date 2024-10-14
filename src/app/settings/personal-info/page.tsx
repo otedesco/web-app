@@ -4,10 +4,21 @@ import { domAnimation, m, motion } from "framer-motion";
 import { Lock, ShieldCheck, View } from "lucide-react";
 import { PropsWithChildren, useState } from "react";
 import { ControlledTextInput } from "~/components/inputs";
-import { LazyAnimatePresence } from "~/components/motion";
+import {
+  LazyAnimatePresence,
+  LazyAnimatePresenceWithMotion,
+} from "~/components/motion";
 import MobileTopNavBar from "~/components/navigation-menu/mobile-top-navigation-bar";
 import { Button, Card } from "~/components/ui";
 import { Separator } from "~/components/ui/separator";
+import { useAccountDetails } from "~/lib/hooks/useAccountDetails";
+import { AccountDetails } from "~/lib/services/cerberus";
+import * as LegalName from "./components/LegalName";
+import * as PreferedName from "./components/PreferedName";
+import * as EmailAddress from "./components/EmailAddress";
+import * as PhoneNumber from "./components/PhoneNumber";
+import * as Address from "./components/Address";
+import * as EmergencyContact from "./components/EmergencyContact";
 import { cn } from "~/lib/utils";
 
 const Container: React.FC<PropsWithChildren> = ({ children }) => {
@@ -27,25 +38,115 @@ const Heading: React.FC = () => {
 };
 
 const AccountPersonalInfo: React.FC = () => {
+  const { data, isLoading } = useAccountDetails({});
+
   const [isItemExpanded, setIsItemExpanded] = useState<number | null>(null);
   const items = [
-    { id: 1, label: "Legal name", value: "Oswaldo Tedesco" },
-    { id: 2, label: "Prefered name", value: "Not provided" },
-    { id: 3, label: "Email Address", value: "o***1@live.com" },
-    { id: 4, label: "Phone Number", value: "+54 * ** ****-5451" },
-    { id: 5, label: "Address", value: "Not provided" },
-    { id: 6, label: "Emergency Contact", value: "Not provided" },
+    {
+      id: 1,
+      label: "Legal name",
+      value: "Oswaldo Tedesco",
+      ValueComponent: LegalName.Value,
+      Component: LegalName.Component,
+      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
+        <Button
+          variant="link"
+          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
+          className="ml-auto items-start p-0 font-medium"
+        >
+          Edit
+        </Button>
+      ),
+    },
+    {
+      id: 2,
+      label: "Prefered name",
+      value: "Not provided",
+      ValueComponent: PreferedName.Value,
+      Component: PreferedName.Component,
+      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
+        <Button
+          variant="link"
+          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
+          className="ml-auto items-start p-0 font-medium"
+        >
+          Edit
+        </Button>
+      ),
+    },
+    {
+      id: 3,
+      label: "Email Address",
+      value: "o***1@live.com",
+      ValueComponent: EmailAddress.Value,
+      Component: EmailAddress.Component,
+      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
+        <Button
+          variant="link"
+          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
+          className="ml-auto items-start p-0 font-medium"
+        >
+          Edit
+        </Button>
+      ),
+    },
+    {
+      id: 4,
+      label: "Phone Number",
+      value: "+54 * ** ****-5451",
+      ValueComponent: PhoneNumber.Value,
+      Component: PhoneNumber.Component,
+      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
+        <Button
+          variant="link"
+          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
+          className="ml-auto items-start p-0 font-medium"
+        >
+          Edit
+        </Button>
+      ),
+    },
+    {
+      id: 5,
+      label: "Address",
+      value: "Not provided",
+      ValueComponent: Address.Value,
+      Component: Address.Component,
+      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
+        <Button
+          variant="link"
+          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
+          className="ml-auto items-start p-0 font-medium"
+        >
+          Edit
+        </Button>
+      ),
+    },
+    {
+      id: 6,
+      label: "Emergency Contact",
+      value: "Not provided",
+      ValueComponent: EmergencyContact.Value,
+      Component: EmergencyContact.Component,
+      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
+        <Button
+          variant="link"
+          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
+          className="ml-auto items-start p-0 font-medium"
+        >
+          Edit
+        </Button>
+      ),
+    },
   ];
 
   const RenderItem = ({
     id,
     label,
-    value,
-  }: {
-    id: number;
-    label: string;
-    value: string;
-  }) => {
+    Trigger,
+    ValueComponent,
+    Component,
+  }: (typeof items)[number]) => {
     return (
       <motion.div
         layout="preserve-aspect"
@@ -59,61 +160,17 @@ const AccountPersonalInfo: React.FC = () => {
         <div className="flex flex-col">
           <h3 className="font-medium">{label}</h3>
           {isItemExpanded !== id && (
-            <LazyAnimatePresence features={domAnimation}>
-              <m.span
-                animate={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                exit={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="text-muted-foreground"
-              >
-                {value}
-              </m.span>
-            </LazyAnimatePresence>
-            // <span className="text-muted-foreground">{value}</span>
+            <LazyAnimatePresenceWithMotion features={domAnimation}>
+              <ValueComponent data={data} isLoading={isLoading} />
+            </LazyAnimatePresenceWithMotion>
           )}
           {isItemExpanded === id && (
-            <LazyAnimatePresence features={domAnimation}>
-              <m.div
-                className="flex flex-col"
-                animate={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                exit={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <span className="text-muted-foreground">
-                  We’ll need to verify your new legal name before you can book
-                  your next trip.
-                </span>
-                <ControlledTextInput
-                  className="mt-4"
-                  maxLength={400}
-                  value={value}
-                />
-                <Button className="mr-auto mt-4">Save And Continue</Button>
-              </m.div>
-            </LazyAnimatePresence>
-            // <div className="flex flex-col">
-            //   <span className="text-muted-foreground">
-            //     We’ll need to verify your new legal name before you can book
-            //     your next trip.
-            //   </span>
-            //   <ControlledTextInput
-            //     className="mt-4"
-            //     maxLength={400}
-            //     value={value}
-            //   />
-            //   <Button className="mr-auto mt-4">Save And Continue</Button>
-            // </div>
+            <LazyAnimatePresenceWithMotion features={domAnimation}>
+              <Component data={data} isLoading={isLoading} />
+            </LazyAnimatePresenceWithMotion>
           )}
         </div>
-        <Button
-          variant="link"
-          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
-          className="ml-auto items-start p-0 font-medium"
-        >
-          Edit
-        </Button>
+        <Trigger id={id} data={data} />
       </motion.div>
     );
   };

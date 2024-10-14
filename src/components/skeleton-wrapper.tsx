@@ -1,14 +1,12 @@
-import { domAnimation, HTMLMotionProps, m } from "framer-motion";
-import { animationHandler, LazyAnimatePresence } from "./motion";
+import { domAnimation, domMax, HTMLMotionProps, m } from "framer-motion";
+import { LazyAnimatePresence } from "./motion";
 import { Skeleton } from "./ui";
-import { useRef } from "react";
 
 const AnimationWrapper: React.FC<HTMLMotionProps<"div">> = ({
   children,
   ...props
 }) => (
   <m.div
-    layout="preserve-aspect"
     className="relative animate-appear opacity-0 will-change-[opacity]"
     {...props}
   >
@@ -17,24 +15,21 @@ const AnimationWrapper: React.FC<HTMLMotionProps<"div">> = ({
 );
 
 const SkeletonWrapper = ({ isDataReady, children, ...props }: any) => {
-  const animationRef = useRef<HTMLDivElement>(null);
   return (
     <LazyAnimatePresence features={domAnimation}>
       {isDataReady && (
         <AnimationWrapper
-          onAnimationStart={() => animationHandler(animationRef.current)}
-          transition={{ duration: 10 }}
+          transition={{ duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 1 }}
           key="content"
         >
           {children}
         </AnimationWrapper>
       )}
       {!isDataReady && (
-        <AnimationWrapper
-          key="skeleton"
-          onAnimationStart={() => animationHandler(animationRef.current)}
-          transition={{ duration: 10 }}
-        >
+        <AnimationWrapper key="skeleton">
           <Skeleton {...props} />
         </AnimationWrapper>
       )}

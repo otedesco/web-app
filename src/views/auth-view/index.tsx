@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
@@ -10,6 +10,8 @@ import AuthCardBody from "./components/auth-card-body";
 
 import { type TabsEnum, type StepType, StepsByTab } from "./types";
 import { AuthContext } from "./context";
+import { selectSelectedRole } from "~/state/features/profile/selectors";
+import { useAppSelector } from "~/state/hooks";
 
 export type AuthPageProps = { tab: TabsEnum };
 
@@ -17,6 +19,8 @@ const AuthView = ({ tab = "login" }: AuthPageProps) => {
   const [selectedTab, setSelectedTab] = useState<TabsEnum>(tab);
   const [step, setStep] = useState<StepType>(StepsByTab[tab][0]);
   const [formState, setFormState] = useState<Record<string, any>>({});
+
+  const selectedRole = useAppSelector(selectSelectedRole);
 
   const router = useRouter();
 
@@ -51,6 +55,16 @@ const AuthView = ({ tab = "login" }: AuthPageProps) => {
     () => ({ selectedTab, step, formState }),
     [selectedTab, step, formState],
   );
+
+  useEffect(() => {
+    if (!!selectedRole) {
+      router.push("/");
+    }
+    return () => {
+      setStep(0);
+      setFormState({});
+    };
+  }, [step, selectedRole, router]);
 
   return (
     <AuthContext.Provider value={providerValue}>

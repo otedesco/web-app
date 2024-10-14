@@ -41,10 +41,7 @@ const userSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    setSelectedRole: (
-      state,
-      action: PayloadAction<Role["id"] | Profile["id"]>,
-    ) => {
+    setSelectedRole: (state, action: PayloadAction<Role["id"]>) => {
       state.selectedRole = action.payload;
     },
     updateCurrentProfile: (state, action: PayloadAction<Partial<Profile>>) => {
@@ -69,6 +66,9 @@ const userSlice = createSlice({
       state.currentProfile = profile;
       state.roles = roles;
       state.isLoading = false;
+      if (roles.length === 1 && roles[0]?.role) {
+        state.selectedRole = roles[0].id;
+      }
     });
     builder.addCase(fetchCurrentProfile.rejected, (state) => {
       state.isLoading = false;

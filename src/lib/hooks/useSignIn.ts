@@ -3,7 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 import { MutationConfig } from "~/lib/types/react-query";
 import { Authentication, SignInRequest } from "~/lib/services/cerberus";
 import { useAppDispatch } from "~/state/store";
-import { fetchCurrentProfile } from "~/state/features/profile";
+import { fetchCurrentProfile, setSelectedRole } from "~/state/features/profile";
+import { selectRoles } from "~/state/features/profile/selectors";
+import { useAppSelector } from "~/state/hooks";
+import { useRouter } from "next/navigation";
 
 const mutationFn = async (payload: SignInRequest): Promise<Authentication> => {
   const response = await fetch("/api/sign-in", {
@@ -27,6 +30,7 @@ export const useSignIn = ({
   onSuccess: _onSuccess,
 }: MutationConfig<Authentication, unknown, SignInRequest>) => {
   const dispatch = useAppDispatch();
+  const roles = useAppSelector(selectRoles);
 
   const onSuccess = useCallback(
     async (data: Authentication, variables: SignInRequest, ctx: unknown) => {
@@ -36,9 +40,10 @@ export const useSignIn = ({
       localStorage.setItem("isLoggedIn", "true");
 
       await dispatch(fetchCurrentProfile());
+
       return _onSuccess?.(data, variables, ctx);
     },
-    [_onSuccess, dispatch],
+    [_onSuccess, dispatch, roles],
   );
 
   const { mutate, mutateAsync, ...mutation } = useMutation({

@@ -1,5 +1,22 @@
-import { useQuery } from "@tanstack/react-query";
-import { AccountDetails, ProfileDetails } from "../services/cerberus";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { AccountDetails } from "../services/cerberus";
+import { MutationConfig } from "../types/react-query";
+import { useCallback } from "react";
+
+const mutationFn = async (
+  payload: Partial<AccountDetails>,
+): Promise<AccountDetails> => {
+  const response = await fetch(`/api/account/details`, {
+    method: "PATCH",
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update profile details");
+  }
+
+  return response.json() as Promise<AccountDetails>;
+};
 
 const queryFn = async (): Promise<AccountDetails> => {
   const response = await fetch(`/api/account/details`, {
@@ -13,7 +30,11 @@ const queryFn = async (): Promise<AccountDetails> => {
   return response.json() as Promise<AccountDetails>;
 };
 
-export const useAccountDetails = ({}) => {
+export const useAccountDetails = ({
+  onError,
+  onMutate,
+  onSuccess,
+}: MutationConfig<AccountDetails, void, Partial<AccountDetails>>) => {
   const { data, isLoading } = useQuery({
     queryKey: ["accountDetails"],
     queryFn: queryFn,
@@ -21,8 +42,27 @@ export const useAccountDetails = ({}) => {
     refetchOnWindowFocus: true,
   });
 
+  const { mutate, mutateAsync, ...mutation } = useMutation({
+    mutationFn,
+    onError,
+    onMutate,
+    onSuccess,
+  });
+
+  const updateAccountDetailsAsync = useCallback(
+    (variables: Partial<AccountDetails>) => mutateAsync(variables),
+    [mutateAsync],
+  );
+  const updateAccountDetails = useCallback(
+    (variables: Partial<AccountDetails>) => mutate(variables),
+    [mutate],
+  );
+
   return {
+    ...mutation,
     data,
     isLoading,
+    updateAccountDetails,
+    updateAccountDetailsAsync,
   };
 };

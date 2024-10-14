@@ -64,26 +64,19 @@ const defaultValues = {
 };
 
 const LogInFormStep: React.FC<SignInStepProps> = (props) => {
-  const { signIn, isPending, isSuccess, isError } = useSignIn({});
+  const t = useTranslations("views->auth-view");
+  const { signIn, isPending } = useSignIn({
+    onSuccess: () => props.onSubmit({}),
+    onError: () => toast.error(t("Sign in failed")),
+  });
   const form = useForm<SignInStepForm>({
     resolver: zodResolver(signInStepValidator),
     defaultValues,
   });
 
-  const t = useTranslations("views->auth-view");
-
   const handleSubmit = (values: SignInStepForm) => {
     signIn({ email: values.email, password: values.password });
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      props.onSubmit({});
-    }
-    if (isError) {
-      toast.error(t("Sign in failed"));
-    }
-  }, [isSuccess, isError, props, t]);
 
   return (
     <Form {...form}>

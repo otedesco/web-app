@@ -8,7 +8,7 @@ export const RoleTypeEnum = {
 };
 
 export interface Role {
-  id: number;
+  id: string;
   role: RoleType;
   organizationId: string;
   organization?: Organization;
@@ -61,7 +61,7 @@ export type Account = {
 export interface ProfileState {
   currentProfile: Profile;
   roles: Role[] | [];
-  selectedRole: Role["id"] | Profile["id"] | null;
+  selectedRole: Role["id"] | null;
   isLoading: boolean;
 }
 

@@ -52,7 +52,7 @@ const AuthCardBody: React.FC<AuthCardBodyProps> = ({
     Component = <OTPStep onSubmit={onSubmit} />;
   }
 
-  return <CardContent className="p-4 sm:p-6">{Component}</CardContent>;
+  return <CardContent className="my-auto p-4 sm:p-6">{Component}</CardContent>;
 };
 
 export default AuthCardBody;

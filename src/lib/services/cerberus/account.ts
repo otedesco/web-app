@@ -38,7 +38,26 @@ export const getAccountDetailsDetails = async (): Promise<
     throw new Error("Failed to get account details");
   }
 
-  const data = await response.json();
+  const data = (await response.json()) as ApiReponse<AccountDetails>;
 
-  return data as ApiReponse<AccountDetails>;
+  return data;
+};
+
+export const updateAccountDetails = async (
+  payload: Partial<AccountDetails>,
+): Promise<ApiReponse<AccountDetails>> => {
+  const response = await fetch(`${BASE_PATH}/details`, {
+    method: "PATCH",
+    headers: getHeaders(),
+    body: JSON.stringify(payload),
+  });
+
+  if (response.ok) {
+    return (await response.json()) as ApiReponse<AccountDetails>;
+  }
+
+  const error = (await response.json()) as unknown;
+  console.log(error);
+  // TODO: Handle error response and refresh token if needed
+  throw new Error("Update profile details failed");
 };

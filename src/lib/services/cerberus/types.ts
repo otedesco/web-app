@@ -70,7 +70,7 @@ export interface Organization {
 }
 
 export type Role = {
-  id: number;
+  id: string;
   role: RoleType;
   profileId: Profile["id"];
   organizationId: Organization["id"];

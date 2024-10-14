@@ -48,9 +48,9 @@ export default function Breadcrumb({
   return (
     <nav
       aria-label="Breadcrumb"
-      className={cn("w-full content-center bg-background", className)}
+      className={cn("w-full content-center bg-background/90", className)}
     >
-      <ol className="text-md mx-auto flex max-w-screen-xl items-center space-x-2 text-gray-500">
+      <ol className="text-md mx-auto flex max-w-screen-xl items-center space-x-2 px-4 text-gray-500">
         {items.map((item, index) => (
           <li key={item.href} className="flex items-center">
             {index !== 0 && (

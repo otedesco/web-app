@@ -13,11 +13,11 @@ import {
 
 const ProfileCard: React.FC<{
   avatarUrl?: string | null;
-  id: string | number;
+  id: string;
   name: string;
   organizationName?: string;
   role?: string | null;
-  onClick: (key: string | number) => void;
+  onClick: (key: string) => void;
 }> = ({ id, avatarUrl, name, organizationName, role, onClick }) => {
   const handleClick = useCallback(() => {
     onClick(id);
@@ -71,7 +71,7 @@ const ProfileStep = ({ onSubmit }: ProfileStepProps) => {
   const isLoading = useAppSelector(selectIsLoading);
 
   const handleProfileClick = useCallback(
-    (key: string | number) => {
+    (key: string) => {
       selectRole(key);
       onSubmit({});
     },

@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { type MutationConfig } from "~/lib/types/react-query";
 import { useAppDispatch } from "~/state/hooks";
 import { resetProfileState } from "~/state/features/profile";
+import { store } from "~/state/store";
 
 const mutationFn = async (): Promise<void> => {
   const response = await fetch("/api/sign-out", {
@@ -26,11 +27,12 @@ export const useSignOut = ({
   const dispatch = useAppDispatch();
 
   const onSuccess = useCallback(
-    (data: void, variables: undefined, ctx: unknown) => {
+    async (data: void, variables: undefined, ctx: unknown) => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("isLoggedIn");
       dispatch(resetProfileState());
+      await store.__persistor?.purge();
 
       return _onSuccess?.(data, variables, ctx);
     },

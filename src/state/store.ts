@@ -51,26 +51,30 @@ export function makeStore(preloadedState?: RootState) {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
       }),
-    devTools: process.env.NODE_ENV === "development",
+    devTools: process.env.NODE_ENV !== "production",
     preloadedState,
   });
 }
 export type AppStoreWithPersistor = AppStore & { __persistor?: Persistor };
+
+let _store: AppStoreWithPersistor | undefined;
 
 export const initializeStore = (): AppStoreWithPersistor => {
   const isServer = typeof window === "undefined";
   if (isServer) return makeStore();
 
   const persistedReducer = persistReducer(persistConfig, rootReducer);
-  const store: AppStore & { __persistor?: Persistor } = configureStore({
+  _store = configureStore({
     reducer: persistedReducer,
   });
 
-  store.__persistor = persistStore(store, null, () => {
-    store.dispatch(updateVersion());
+  _store.__persistor = persistStore(_store, null, () => {
+    _store!.dispatch(updateVersion());
   });
 
-  return store;
+  return _store;
 };
+
+export const store = _store ?? initializeStore();
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();

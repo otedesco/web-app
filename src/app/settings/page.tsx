@@ -71,11 +71,14 @@ export default function AccountSettingsPage() {
             <Card
               key={index}
               onClick={() => router.push(option.href)}
-              className="cursor-pointer bg-muted transition-shadow hover:shadow-lg"
+              className="group cursor-pointer bg-muted transition-shadow hover:shadow-lg"
             >
               <CardHeader>
                 <CardTitle className="flex items-center text-primary">
-                  <option.icon className="mr-2 h-6 w-6" />
+                  <option.icon
+                    size={40}
+                    className="mr-2 group-hover:text-brand-primary"
+                  />
                   {t(option.title)}
                 </CardTitle>
               </CardHeader>
@@ -137,7 +140,13 @@ export default function AccountSettingsPage() {
           <div key={index} className="mb-6">
             <h2 className="mb-2 text-lg font-semibold">{t(item.section)}</h2>
             {item.items.map((subItem, subIndex) => (
-              <div key={subIndex} className="flex items-center py-2">
+              <div
+                key={subIndex}
+                onClick={() =>
+                  subItem.href ? router.push(subItem.href) : null
+                }
+                className="flex cursor-pointer items-center py-2"
+              >
                 <subItem.icon className="mr-4 h-6 w-6" />
                 <span>{t(subItem.title)}</span>
                 <ChevronRight className="ml-auto" />
@@ -218,27 +227,31 @@ const mobileMenuItems = [
   {
     section: "mobileOptions.sections.0.title",
     items: [
-      { title: "mobileOptions.sections.0.items.0.title", icon: User },
+      {
+        title: "mobileOptions.sections.0.items.0.title",
+        icon: User,
+        href: "/settings/personal-info",
+      },
       { title: "mobileOptions.sections.0.items.1.title", icon: Settings },
     ],
   },
-  {
-    section: "mobileOptions.sections.1.title",
-    items: [
-      { title: "mobileOptions.sections.1.items.0.title", icon: Home },
-      { title: "mobileOptions.sections.1.items.1.title", icon: Building },
-    ],
-  },
-  {
-    section: "mobileOptions.sections.2.title",
-    items: [{ title: "mobileOptions.sections.2.items.0.title", icon: Gift }],
-  },
-  {
-    section: "mobileOptions.sections.3.title",
-    items: [
-      { title: "mobileOptions.sections.3.items.0.title", icon: HelpCircle },
-      { title: "mobileOptions.sections.3.items.1.title", icon: MessageCircle },
-      { title: "mobileOptions.sections.3.items.2.title", icon: MessageCircle },
-    ],
-  },
+  // {
+  //   section: "mobileOptions.sections.1.title",
+  //   items: [
+  //     { title: "mobileOptions.sections.1.items.0.title", icon: Home },
+  //     { title: "mobileOptions.sections.1.items.1.title", icon: Building },
+  //   ],
+  // },
+  // {
+  //   section: "mobileOptions.sections.2.title",
+  //   items: [{ title: "mobileOptions.sections.2.items.0.title", icon: Gift }],
+  // },
+  // {
+  //   section: "mobileOptions.sections.3.title",
+  //   items: [
+  //     { title: "mobileOptions.sections.3.items.0.title", icon: HelpCircle },
+  //     { title: "mobileOptions.sections.3.items.1.title", icon: MessageCircle },
+  //     { title: "mobileOptions.sections.3.items.2.title", icon: MessageCircle },
+  //   ],
+  // },
 ];
