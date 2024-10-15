@@ -9,7 +9,6 @@ import { signIn, SignInRequest } from "~/lib/services/cerberus";
 export async function POST(request: Request) {
   const body = (await request.json()) as SignInRequest;
   const { data } = await signIn(body);
-
   cookies().set("accessToken", data.accessToken, ACCESS_TOKEN_COOKIE_OPTIONS);
 
   cookies().set(

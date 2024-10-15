@@ -8,7 +8,7 @@ import { CardFooter } from "~/components/ui/card";
 import AuthCardHeader from "./components/auth-card-header";
 import AuthCardBody from "./components/auth-card-body";
 
-import { type TabsEnum, type StepType, StepsByTab } from "./types";
+import { type TabsEnum, type StepType, StepsByTab, Tabs } from "./types";
 import { AuthContext } from "./context";
 import { selectSelectedRole } from "~/state/features/profile/selectors";
 import { useAppSelector } from "~/state/hooks";
@@ -57,14 +57,10 @@ const AuthView = ({ tab = "login" }: AuthPageProps) => {
   );
 
   useEffect(() => {
-    if (!!selectedRole) {
+    if (selectedTab === Tabs.LOGIN && !!selectedRole) {
       router.push("/");
     }
-    return () => {
-      setStep(0);
-      setFormState({});
-    };
-  }, [step, selectedRole, router]);
+  }, [step, selectedRole, router, selectedTab]);
 
   return (
     <AuthContext.Provider value={providerValue}>

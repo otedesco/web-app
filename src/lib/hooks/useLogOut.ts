@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { type MutationConfig } from "~/lib/types/react-query";
 import { useAppDispatch } from "~/state/hooks";
@@ -15,7 +15,7 @@ const mutationFn = async (): Promise<void> => {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to sign up");
+    throw new Error("Failed to sign out");
   }
 };
 
@@ -25,6 +25,7 @@ export const useSignOut = ({
   onSuccess: _onSuccess,
 }: MutationConfig<void, unknown>) => {
   const dispatch = useAppDispatch();
+  const queryClient = useQueryClient();
 
   const onSuccess = useCallback(
     async (data: void, variables: undefined, ctx: unknown) => {
@@ -33,10 +34,10 @@ export const useSignOut = ({
       localStorage.removeItem("isLoggedIn");
       dispatch(resetProfileState());
       await store.__persistor?.purge();
-
+      queryClient.removeQueries();
       return _onSuccess?.(data, variables, ctx);
     },
-    [_onSuccess, dispatch],
+    [_onSuccess, dispatch, queryClient],
   );
 
   const { mutate, mutateAsync, ...mutation } = useMutation({

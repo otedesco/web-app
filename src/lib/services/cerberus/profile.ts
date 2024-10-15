@@ -7,10 +7,9 @@ export type CurrentProfileResponse = ApiReponse<Profile>;
 const BASE_PATH = `${AUTH_SERVER_API}/profiles`;
 
 export const getCurrentProfile = async () => {
-  const headers = getHeaders();
   const response = await fetch(`${BASE_PATH}/me`, {
     method: "GET",
-    headers,
+    headers: getHeaders(),
   });
 
   if (response.ok) {
@@ -43,11 +42,9 @@ export const updateProfile = async (payload: Partial<Profile>) => {
 export const updateProfileDetails = async (
   payload: Partial<ProfileDetails>,
 ) => {
-  const headers = getHeaders();
-
   const response = await fetch(`${BASE_PATH}/me/details`, {
     method: "PATCH",
-    headers,
+    headers: getHeaders(),
     body: JSON.stringify(payload),
   });
   if (response.ok) {
@@ -61,10 +58,9 @@ export const updateProfileDetails = async (
 };
 
 export const getProfileDetails = async () => {
-  const headers = getHeaders();
   const response = await fetch(`${BASE_PATH}/me/details`, {
     method: "GET",
-    headers,
+    headers: getHeaders(),
   });
   if (response.ok) {
     return (await response.json()) as CurrentProfileResponse;

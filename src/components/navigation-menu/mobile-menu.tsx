@@ -4,6 +4,8 @@ import Link from "next/link";
 import React from "react";
 import { useLayoutConfig } from "~/hooks/useLayoutConfig";
 import { cn } from "~/lib/utils";
+import { selectCurrentProfile } from "~/state/features/profile/selectors";
+import { useAppSelector } from "~/state/hooks";
 
 // Type definition for a single menu option
 export type MenuOption = {
@@ -23,10 +25,10 @@ export type MobileMenuProps = {
 
 export const MobileMenu = ({ className }: MobileMenuProps) => {
   const t = useTranslations("components->main-nav");
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const currentProfile = useAppSelector(selectCurrentProfile);
   const { mobileConfig } = useLayoutConfig();
 
-  const menuOptions = isLoggedIn
+  const menuOptions = currentProfile.id
     ? mobileConfig?.loggedOptions
     : mobileConfig?.options;
 

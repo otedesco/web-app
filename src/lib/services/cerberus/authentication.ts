@@ -58,15 +58,14 @@ export const signIn = async (
   throw new Error("Sign in failed");
 };
 
-export const signOut = async (): Promise<void> => {
-  const headers = getHeaders();
+export const signOut = async (): Promise<any> => {
   const response = await fetch(`${BASE_PATH}/sign-out`, {
     method: "POST",
-    headers,
+    headers: getHeaders(),
   });
 
   if (response.ok) {
-    return;
+    return response.headers as any;
   }
 
   throw new Error("Sign out failed");
