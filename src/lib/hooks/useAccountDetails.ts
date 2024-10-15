@@ -35,11 +35,12 @@ export const useAccountDetails = ({
   onMutate,
   onSuccess,
 }: MutationConfig<AccountDetails, void, Partial<AccountDetails>>) => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, ...query } = useQuery({
     queryKey: ["accountDetails"],
     queryFn: queryFn,
-    enabled: true,
     refetchOnWindowFocus: true,
+    retry: false,
+    notifyOnChangeProps: ["data"],
   });
 
   const { mutate, mutateAsync, ...mutation } = useMutation({
@@ -60,6 +61,7 @@ export const useAccountDetails = ({
 
   return {
     ...mutation,
+    ...query,
     data,
     isLoading,
     updateAccountDetails,

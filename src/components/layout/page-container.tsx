@@ -13,7 +13,7 @@ const PageContainer = ({
     className={cn(
       fullwitdh
         ? "mb-14 flex md:mb-0"
-        : "mx-auto min-h-[calc(100vh-4rem)] max-w-screen-xl px-4 sm:px-6 lg:px-8",
+        : "mx-auto min-h-[calc(100vh-4rem)] max-w-screen-xl bg-background px-4 sm:px-6 lg:px-8",
       className,
     )}
   >

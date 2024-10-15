@@ -238,6 +238,28 @@
         "Zulu": "Zulu",
         "मराठी": "Marathi"
     },
+    "views->personal-info-view": {
+        "items": {
+            "legalName": {
+                "label": "Legal name"
+            },
+            "govermentId": {
+                "label": "Government ID"
+            },
+            "emailAddress": {
+                "label": "Email address"
+            },
+            "phoneNumber": {
+                "label": "Phone number"
+            },
+            "address": {
+                "label": "Address"
+            },
+            "emergencyContact": {
+                "label": "Emergency contact"
+            }
+        }
+    },
     "components->main-footer": {
         "brand-catch-frase": "Find your perfect property with ease. Apart is your trusted partner in real estate.",
         "Facebook": "Facebook",

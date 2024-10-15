@@ -238,6 +238,28 @@
         "Zulu": "Zulú",
         "मराठी": "Maratí"
     },
+    "views->personal-info-view": {
+        "items": {
+            "legalName": {
+                "label": "Nombre legal"
+            },
+            "govermentId": {
+                "label": "Documento de identidad"
+            },
+            "emailAddress": {
+                "label": "Correo electrónico"
+            },
+            "phoneNumber": {
+                "label": "Número de teléfono"
+            },
+            "address": {
+                "label": "Dirección"
+            },
+            "emergencyContact": {
+                "label": "Contacto de emergencia"
+            }
+        }
+    },
     "components->main-footer": {
         "brand-catch-frase": "Encuentra tu propiedad perfecta con facilidad. Apart es tu socio de confianza en bienes raíces.",
         "Facebook": "Facebook",

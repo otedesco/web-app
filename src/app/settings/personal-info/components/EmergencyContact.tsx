@@ -1,5 +1,5 @@
 import SkeletonWrapper from "~/components/skeleton-wrapper";
-import { FieldFormProps, FieldValueProps } from "../types";
+import { FieldFormProps, Fields, FieldValueProps } from "../types";
 import {
   Button,
   Form,
@@ -9,19 +9,13 @@ import {
   FormLabel,
   FormMessage,
   Input,
-  Label,
 } from "~/components/ui";
-import { useState } from "react";
 import { z } from "zod";
-import {
-  Control,
-  FieldValues,
-  FormState,
-  useForm,
-  UseFormReturn,
-} from "react-hook-form";
+import { FieldValues, FormState, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "~/lib/utils";
+
+export const key = Fields.emergencyContact;
 
 export const Value: React.FC<FieldValueProps> = ({ isLoading, data }) => {
   // const defaultValue = "Not provided";

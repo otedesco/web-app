@@ -26,6 +26,15 @@ export const verifyAccount = async (
   }
 };
 
+export const resendVerificationEmail = async (): Promise<[number, unknown]> => {
+  const response = await fetch(`${BASE_PATH}/resend-verification-code`, {
+    method: "POST",
+    headers: getHeaders(),
+  });
+
+  return [response.status, await response.json()];
+};
+
 export const getAccountDetailsDetails = async (): Promise<
   ApiReponse<AccountDetails>
 > => {

@@ -1,5 +1,5 @@
 import SkeletonWrapper from "~/components/skeleton-wrapper";
-import { FieldFormProps, FieldValueProps } from "../types";
+import { FieldFormProps, Fields, FieldValueProps } from "../types";
 import {
   Button,
   Form,
@@ -22,6 +22,8 @@ import {
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "~/lib/utils";
+
+export const key = Fields.phoneNumber;
 
 export const Value: React.FC<FieldValueProps> = ({ isLoading, data }) => {
   // const defaultValue = "Not provided";

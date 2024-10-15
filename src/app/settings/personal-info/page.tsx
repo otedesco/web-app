@@ -2,24 +2,24 @@
 
 import { domAnimation, m, motion } from "framer-motion";
 import { Lock, ShieldCheck, View } from "lucide-react";
-import { PropsWithChildren, useState } from "react";
-import { ControlledTextInput } from "~/components/inputs";
+import { PropsWithChildren, useCallback, useMemo, useState } from "react";
 import {
   LazyAnimatePresence,
   LazyAnimatePresenceWithMotion,
 } from "~/components/motion";
 import MobileTopNavBar from "~/components/navigation-menu/mobile-top-navigation-bar";
-import { Button, Card } from "~/components/ui";
+import { Card } from "~/components/ui";
 import { Separator } from "~/components/ui/separator";
 import { useAccountDetails } from "~/lib/hooks/useAccountDetails";
-import { AccountDetails } from "~/lib/services/cerberus";
 import * as LegalName from "./components/LegalName";
-import * as PreferedName from "./components/PreferedName";
+import * as GovermentId from "./components/GovermentId";
 import * as EmailAddress from "./components/EmailAddress";
 import * as PhoneNumber from "./components/PhoneNumber";
 import * as Address from "./components/Address";
 import * as EmergencyContact from "./components/EmergencyContact";
 import { cn } from "~/lib/utils";
+import { Fields } from "./types";
+import { useTranslations } from "next-intl";
 
 const Container: React.FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -37,140 +37,67 @@ const Heading: React.FC = () => {
   );
 };
 
-const AccountPersonalInfo: React.FC = () => {
-  const { data, isLoading } = useAccountDetails({});
+const Items = [
+  LegalName,
+  GovermentId,
+  EmailAddress,
+  PhoneNumber,
+  Address,
+  EmergencyContact,
+];
 
-  const [isItemExpanded, setIsItemExpanded] = useState<number | null>(null);
-  const items = [
-    {
-      id: 1,
-      label: "Legal name",
-      value: "Oswaldo Tedesco",
-      ValueComponent: LegalName.Value,
-      Component: LegalName.Component,
-      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
-        <Button
-          variant="link"
-          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
-          className="ml-auto items-start p-0 font-medium"
-        >
-          Edit
-        </Button>
-      ),
-    },
-    {
-      id: 2,
-      label: "Prefered name",
-      value: "Not provided",
-      ValueComponent: PreferedName.Value,
-      Component: PreferedName.Component,
-      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
-        <Button
-          variant="link"
-          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
-          className="ml-auto items-start p-0 font-medium"
-        >
-          Edit
-        </Button>
-      ),
-    },
-    {
-      id: 3,
-      label: "Email Address",
-      value: "o***1@live.com",
-      ValueComponent: EmailAddress.Value,
-      Component: EmailAddress.Component,
-      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
-        <Button
-          variant="link"
-          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
-          className="ml-auto items-start p-0 font-medium"
-        >
-          Edit
-        </Button>
-      ),
-    },
-    {
-      id: 4,
-      label: "Phone Number",
-      value: "+54 * ** ****-5451",
-      ValueComponent: PhoneNumber.Value,
-      Component: PhoneNumber.Component,
-      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
-        <Button
-          variant="link"
-          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
-          className="ml-auto items-start p-0 font-medium"
-        >
-          Edit
-        </Button>
-      ),
-    },
-    {
-      id: 5,
-      label: "Address",
-      value: "Not provided",
-      ValueComponent: Address.Value,
-      Component: Address.Component,
-      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
-        <Button
-          variant="link"
-          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
-          className="ml-auto items-start p-0 font-medium"
-        >
-          Edit
-        </Button>
-      ),
-    },
-    {
-      id: 6,
-      label: "Emergency Contact",
-      value: "Not provided",
-      ValueComponent: EmergencyContact.Value,
-      Component: EmergencyContact.Component,
-      Trigger: ({ id }: { id: number; data?: AccountDetails }) => (
-        <Button
-          variant="link"
-          onClick={() => setIsItemExpanded(isItemExpanded === id ? null : id)}
-          className="ml-auto items-start p-0 font-medium"
-        >
-          Edit
-        </Button>
-      ),
-    },
-  ];
+const AccountPersonalInfo: React.FC = () => {
+  const { data, isLoading, refetch } = useAccountDetails({});
+
+  const handleSubmit = useCallback(() => {
+    setIsItemExpanded(null);
+
+    return refetch();
+  }, [refetch]);
+
+  const [isItemExpanded, setIsItemExpanded] = useState<Fields | null>(null);
 
   const RenderItem = ({
-    id,
-    label,
     Trigger,
-    ValueComponent,
+    Value,
     Component,
-  }: (typeof items)[number]) => {
+    key,
+  }: (typeof Items)[number]) => {
+    const t = useTranslations("views->personal-info-view");
+
     return (
       <motion.div
         layout="preserve-aspect"
-        transition={{ ease: "easeInOut" }}
-        key={label}
+        transition={{ type: "tween", ease: "easeInOut" }}
+        key={key}
         className={cn(
           "flex items-start border-b py-6 last:border-b-0",
-          isItemExpanded !== null && isItemExpanded === id && "z-20",
+          isItemExpanded !== null && isItemExpanded === key && "z-20",
         )}
       >
         <div className="flex flex-col">
-          <h3 className="font-medium">{label}</h3>
-          {isItemExpanded !== id && (
+          <h3 className="font-medium">{t(`items.${key}.label`)}</h3>
+          {isItemExpanded !== key && (
             <LazyAnimatePresenceWithMotion features={domAnimation}>
-              <ValueComponent data={data} isLoading={isLoading} />
+              <Value data={data} isLoading={isLoading} />
             </LazyAnimatePresenceWithMotion>
           )}
-          {isItemExpanded === id && (
+          {isItemExpanded === key && (
             <LazyAnimatePresenceWithMotion features={domAnimation}>
-              <Component data={data} isLoading={isLoading} />
+              <Component
+                data={data}
+                isLoading={isLoading}
+                onSubmit={handleSubmit}
+              />
             </LazyAnimatePresenceWithMotion>
           )}
         </div>
-        <Trigger id={id} data={data} />
+        <Trigger
+          data={data}
+          onClick={setIsItemExpanded}
+          onSubmit={handleSubmit}
+          isOpen={isItemExpanded === key}
+        />
       </motion.div>
     );
   };
@@ -192,14 +119,14 @@ const AccountPersonalInfo: React.FC = () => {
         )}
       </LazyAnimatePresence>
 
-      {items.map(RenderItem)}
+      {Items.map(RenderItem)}
     </div>
   );
 };
 
 const NoticeCard: React.FC = () => {
   return (
-    <Card className="ml-20 hidden w-6/12 flex-col p-6 md:flex">
+    <Card className="ml-20 hidden max-h-max w-6/12 flex-col p-6 md:flex">
       <ShieldCheck className="text-brand-primary" size={48} />
       <h3 className="mt-4 text-xl font-semibold">
         Why isn’t my info shown here?

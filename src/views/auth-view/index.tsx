@@ -8,7 +8,13 @@ import { CardFooter } from "~/components/ui/card";
 import AuthCardHeader from "./components/auth-card-header";
 import AuthCardBody from "./components/auth-card-body";
 
-import { type TabsEnum, type StepType, StepsByTab, Tabs } from "./types";
+import {
+  type TabsEnum,
+  type StepType,
+  StepsByTab,
+  Tabs,
+  LoginSteps,
+} from "./types";
 import { AuthContext } from "./context";
 import { selectSelectedRole } from "~/state/features/profile/selectors";
 import { useAppSelector } from "~/state/hooks";
@@ -57,7 +63,11 @@ const AuthView = ({ tab = "login" }: AuthPageProps) => {
   );
 
   useEffect(() => {
-    if (selectedTab === Tabs.LOGIN && !!selectedRole) {
+    if (
+      selectedTab === Tabs.LOGIN &&
+      step === LoginSteps.SELECT_PROFILE &&
+      !!selectedRole
+    ) {
       router.push("/");
     }
   }, [step, selectedRole, router, selectedTab]);

@@ -19,7 +19,8 @@ export type ResponsiveDialogProps = {
   Trigger: React.ReactNode;
   Content?: React.ReactNode;
   Footer?: React.ReactNode;
-  title?: string;
+  title?: string | React.ReactNode;
+  asChild?: boolean;
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
 };
@@ -31,6 +32,7 @@ const ResponsiveDialog: React.FC<ResponsiveDialogProps> = ({
   title,
   isOpen,
   onOpenChange,
+  asChild = false,
 }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const Container = isMobile ? Drawer : Dialog;
@@ -41,12 +43,14 @@ const ResponsiveDialog: React.FC<ResponsiveDialogProps> = ({
   const Title = isMobile ? DrawerTitle : DialogTitle;
   return (
     <Container handleOnly open={isOpen} onOpenChange={onOpenChange}>
-      <TriggerWrapper>{Trigger}</TriggerWrapper>
+      <TriggerWrapper asChild={asChild}>{Trigger}</TriggerWrapper>
       <ContentWrapper>
-        {title && (
+        {typeof title === "string" ? (
           <Header>
             <Title className="text-center">{title}</Title>
           </Header>
+        ) : (
+          <Header>{title}</Header>
         )}
         {Content && Content}
         <FooterWrapper>{Footer}</FooterWrapper>

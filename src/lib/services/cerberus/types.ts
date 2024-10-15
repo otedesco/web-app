@@ -45,7 +45,7 @@ export type AccountDetails = {
   identityVerificationStatus: VerificationStatusType;
   legalFirstname?: string;
   legalLastname?: string;
-  govermentId?: string;
+  govermentId?: string | null;
   address?: string;
   city?: string;
   state?: string;

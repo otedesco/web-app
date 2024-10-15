@@ -15,33 +15,41 @@ import {
   FormMessage,
   Input,
 } from "~/components/ui";
-import { useCallback } from "react";
+
 import { z } from "zod";
 import { FieldValues, FormState, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "~/lib/utils";
 import { useAccountDetails } from "~/lib/hooks/useAccountDetails";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "~/components/ui/alert-dialog";
+import { useCallback } from "react";
 
-export const key = Fields.legalName;
+export const key = Fields.govermentId;
 
 export const Value: React.FC<FieldValueProps> = ({ isLoading, data }) => {
   const defaultValue = "Not provided";
 
-  const getValue = () =>
-    data?.legalFirstname && data?.legalLastname
-      ? `${data.legalFirstname} ${data.legalLastname}`
-      : defaultValue;
-
   return (
     <SkeletonWrapper className="mt-2 h-5 w-36" isDataReady={!isLoading}>
-      <span className="text-muted-foreground">{getValue()}</span>
+      <span className="text-muted-foreground">
+        {data?.govermentId ? "Provided" : defaultValue}
+      </span>
     </SkeletonWrapper>
   );
 };
 
 const validator = z.object({
-  legalFirstname: z.string({ required_error: "First name is required" }).min(3),
-  legalLastname: z.string({ required_error: "Last name is required" }).min(3),
+  govermentId: z.string({ required_error: "Goverment ID is required" }).min(3),
 });
 
 interface FieldProps {
@@ -99,6 +107,7 @@ export const Component: React.FC<FieldFormProps> = ({
   onSubmit,
 }) => {
   const { updateAccountDetailsAsync, isPending } = useAccountDetails({});
+
   const form = useForm<z.infer<typeof validator>>({
     resolver: zodResolver(validator),
   });
@@ -116,54 +125,71 @@ export const Component: React.FC<FieldFormProps> = ({
         className="flex flex-col"
       >
         <span className="text-muted-foreground">
-          We’ll need to verify your new legal name before you can publish new
-          properties.
+          We’ll need to verify your ID before you can publish new properties.
         </span>
-        <div className="mt-4 grid grid-cols-2 gap-4">
+        <div className="mt-4 md:w-2/3">
           <Field
-            name="legalFirstname"
-            label="First name on ID"
-            placeholder={data?.legalFirstname ?? ""}
-            disabled={isLoading || isPending}
-            state={form.formState}
-          />
-          <Field
-            name="legalLastname"
-            placeholder={data?.legalLastname ?? ""}
-            label="Last name on ID"
-            disabled={isLoading || isPending}
+            name="govermentId"
+            label="Your passport or ID number"
+            placeholder={data?.govermentId ?? ""}
+            disabled={isLoading}
             state={form.formState}
           />
         </div>
 
-        <Button className="mr-auto mt-4 min-w-40" disabled={isPending}>
-          Save And Continue
-        </Button>
+        <Button className="mr-auto mt-4">Save And Continue</Button>
       </form>
     </Form>
   );
 };
 
 export const Trigger: React.FC<FieldTriggerProps> = (props) => {
-  let Label = "Add";
-  if (props.data?.legalFirstname || props.data?.legalLastname) {
-    Label = "Edit";
-  }
-  if (props.isOpen) {
-    Label = "Cancel";
-  }
+  const { updateAccountDetailsAsync } = useAccountDetails({});
 
-  const handleClick = useCallback(() => {
-    props.onClick(props.isOpen ? null : key);
-  }, [props]);
+  const handleRemove = useCallback(async () => {
+    await updateAccountDetailsAsync({ govermentId: null });
+    return props.onSubmit();
+  }, []);
 
-  return (
+  let Component = (
     <Button
       variant="link"
-      onClick={handleClick}
+      onClick={() => props.onClick(props.isOpen ? null : key)}
       className="ml-auto items-start p-0 font-medium"
     >
-      {Label}
+      {props.isOpen ? "Cancel" : "Add"}
     </Button>
   );
+
+  if (props.data?.govermentId) {
+    Component = (
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <Button
+            className="ml-auto items-start p-0 font-medium"
+            variant="link"
+          >
+            Remove
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action will remove your goverment ID, and will not be able to
+              publish new properties.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleRemove}>
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    );
+  }
+
+  return Component;
 };
