@@ -41,7 +41,7 @@ const ItemDialog = ({ item, onChange, value, Trigger }: ItemDialogProps) => {
   const handleSubmit = useCallback(() => {
     onChange(item.id, profileDetailValue);
     setOpenModal(false);
-  }, [profileDetailValue, onChange]);
+  }, [onChange, item.id, profileDetailValue]);
 
   const parseValue = (id: string, value?: string | string[] | Date | null) => {
     if (value === null || value === undefined) return "";
@@ -186,7 +186,7 @@ const InfoContentViewMode = ({
   const { data, isLoading: isAccountLoading } = useAccountDetails({});
 
   const parseValue = (id: string, value?: string | Date | string[] | null) => {
-    if (value === null || value === undefined) return "";
+    if (value === null || value === undefined) return null;
     if (Array.isArray(value)) {
       return value.map((v) => t(v)).join(", ");
     }
@@ -241,7 +241,8 @@ const InfoContentViewMode = ({
                   isDataReady={!isLoading}
                   className="h-5 w-48"
                 >
-                  {!profileDetails[item.id] ? null : (
+                  {!profileDetails[item.id] ||
+                  !parseValue(item.id, profileDetails[item.id]) ? null : (
                     <p className="text-sm">
                       {t(item.id, {
                         [item.id]: parseValue(item.id, profileDetails[item.id]),

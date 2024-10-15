@@ -4,6 +4,9 @@ import { useMediaQuery } from "~/hooks/useMediaQuery";
 import { useSignOut } from "~/lib/hooks/useLogOut";
 import DesktopUserDropdownMenu from "./desktop-menu";
 import MobileUserDropdownMenu from "./mobile-menu";
+import { useAppSelector } from "~/state/hooks";
+import { selectCurrentProfile } from "~/state/features/profile/selectors";
+import { useProfileActions } from "~/state/features/profile/hooks";
 
 export type LinkProps = {
   target?: string;
@@ -29,7 +32,8 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
   showOnMobile,
   ...rest
 }) => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  useProfileActions();
+  const currentProfile = useAppSelector(selectCurrentProfile);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const { signOutAsync } = useSignOut({});
   const router = useRouter();
@@ -45,7 +49,7 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
   if (isDesktop) {
     return (
       <DesktopUserDropdownMenu
-        isLoggedIn={isLoggedIn}
+        isLoggedIn={currentProfile.id !== null}
         onLogout={handleLogOut}
         {...rest}
       />
@@ -54,7 +58,7 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
 
   return (
     <MobileUserDropdownMenu
-      isLoggedIn={isLoggedIn}
+      isLoggedIn={currentProfile.id !== null}
       onLogout={handleLogOut}
       {...rest}
     />

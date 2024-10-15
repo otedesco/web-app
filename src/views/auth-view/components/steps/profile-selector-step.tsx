@@ -86,28 +86,19 @@ const ProfileStep = ({ onSubmit }: ProfileStepProps) => {
           <LoadingProfileCard />
         </>
       )}
-      {currentProfile.id && !isLoading && (
-        <>
+      {currentProfile.id &&
+        !isLoading &&
+        roles.map((role) => (
           <ProfileCard
-            key={currentProfile.id}
-            id={currentProfile.id}
-            avatarUrl={currentProfile.avatarUrl}
-            name={`${currentProfile.name} ${currentProfile.lastname}`}
+            key={role.id}
+            id={role.id}
+            avatarUrl={role.organization?.logoUrl}
+            name={currentProfile.name!}
+            organizationName={role.organization?.name}
+            role={role.role}
             onClick={handleProfileClick}
           />
-          {roles.map((role) => (
-            <ProfileCard
-              key={role.id}
-              id={role.id}
-              avatarUrl={role.organization?.logoUrl}
-              name={currentProfile.name!}
-              organizationName={role.organization?.name}
-              role={role.role}
-              onClick={handleProfileClick}
-            />
-          ))}
-        </>
-      )}
+        ))}
     </AnimatedStepContainer>
   );
 };
