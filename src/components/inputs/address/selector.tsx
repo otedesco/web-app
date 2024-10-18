@@ -11,9 +11,14 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Drawer,
+  DrawerContent,
+  DrawerTrigger,
+  ScrollArea,
 } from "~/components/ui";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "~/lib/utils";
+import { useMediaQuery } from "~/hooks/useMediaQuery";
 
 export const Select = <T extends object>({
   items,
@@ -28,6 +33,7 @@ export const Select = <T extends object>({
 }: SelectProps<T>) => {
   const [isOpen, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const handleInputChange = (value: string) => setSearchTerm(value);
 
@@ -45,62 +51,74 @@ export const Select = <T extends object>({
     [onSelect],
   );
 
+  const Wrapper = isMobile ? Drawer : Popover;
+  const Trigger = isMobile ? DrawerTrigger : PopoverTrigger;
+  const Content = isMobile ? DrawerContent : PopoverContent;
+
   return (
-    <Popover open={isOpen} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+    <Wrapper open={isOpen} onOpenChange={setOpen} handleOnly>
+      <Trigger asChild>
         <Button
           variant="outline"
           role="combobox"
           aria-expanded={isOpen}
-          className={cn("justify-between", className)}
+          className={cn("w-full justify-between", className)}
           disabled={disabled}
         >
-          <span>
-            {value ? (
-              <div className="flex items-end gap-2">
-                {renderItemDetails
-                  ? renderItemDetails(value)
-                  : getItemLabel(value)}
-              </div>
-            ) : (
-              <span className="text-muted-foreground">{placeholder}</span>
-            )}
-          </span>
+          {value ? (
+            <div className="flex items-end gap-2">
+              {renderItemDetails
+                ? renderItemDetails(value)
+                : getItemLabel(value)}
+            </div>
+          ) : (
+            <span className="text-muted-foreground">{placeholder}</span>
+          )}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
-      </PopoverTrigger>
+      </Trigger>
 
-      <PopoverContent className={`rounded-[6px] p-0`}>
+      <Content className="p-0" align="start">
         <Command>
           <CommandInput
-            placeholder={`Search...`}
+            placeholder="Search..."
             onValueChange={handleInputChange}
             value={searchTerm}
           />
           <CommandList>
             <CommandEmpty>No data found.</CommandEmpty>
-            <CommandGroup>
-              {filteredItems.map((item) => (
-                <CommandItem
-                  key={getItemKey(item)}
-                  value={getItemLabel(item)}
-                  onSelect={() => handleSelect(item)}
-                  className="flex cursor-pointer items-center justify-between text-sm"
-                >
-                  <div className="flex items-center gap-2">
-                    {renderItemDetails
-                      ? renderItemDetails(item)
-                      : getItemLabel(item)}
-                  </div>
-                  <Check
-                    className={`mr-2 h-4 w-4 ${value && getItemKey(value) === getItemKey(item) ? "opacity-100" : "opacity-0"}`}
-                  />
-                </CommandItem>
-              ))}
-            </CommandGroup>
+            <ScrollArea className="[&>[data-radix-scroll-area-viewport]]:max-h-[300px]">
+              <CommandGroup>
+                {filteredItems.map((item) => (
+                  <CommandItem
+                    key={getItemKey(item)}
+                    value={getItemLabel(item)}
+                    onSelect={() => handleSelect(item)}
+                    className={cn(
+                      "flex cursor-pointer items-center justify-between",
+                      isMobile ? "text-md" : "text-sm",
+                    )}
+                  >
+                    <div className="flex items-center gap-2">
+                      {renderItemDetails
+                        ? renderItemDetails(item)
+                        : getItemLabel(item)}
+                    </div>
+                    <Check
+                      className={cn(
+                        "mr-2 h-4 w-4",
+                        value && getItemKey(value) === getItemKey(item)
+                          ? "opacity-100"
+                          : "opacity-0",
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </ScrollArea>
           </CommandList>
         </Command>
-      </PopoverContent>
-    </Popover>
+      </Content>
+    </Wrapper>
   );
 };
