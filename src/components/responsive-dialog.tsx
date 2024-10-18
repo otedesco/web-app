@@ -22,7 +22,7 @@ export type ResponsiveDialogProps = {
   title?: string | React.ReactNode;
   asChild?: boolean;
   isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
+  onOpenChange?: (open: boolean) => void;
 };
 
 const ResponsiveDialog: React.FC<ResponsiveDialogProps> = ({

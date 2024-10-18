@@ -1,6 +1,6 @@
 import { AUTH_SERVER_API } from "~/config/constants";
 import { getHeaders } from "./utils";
-import { AccountDetails, ApiReponse } from "./types";
+import { Account, AccountDetails, ApiReponse } from "./types";
 
 export interface VerifyAccountRequest {
   token: string;
@@ -26,13 +26,35 @@ export const verifyAccount = async (
   }
 };
 
-export const resendVerificationEmail = async (): Promise<[number, unknown]> => {
-  const response = await fetch(`${BASE_PATH}/resend-verification-code`, {
-    method: "POST",
-    headers: getHeaders(),
-  });
+export const resendVerificationCode = async ({
+  method,
+}: {
+  method: "email" | "phone";
+}): Promise<[number, unknown]> => {
+  const response = await fetch(
+    `${BASE_PATH}/resend-verification-code?method=${method === "email" ? "email" : "sms"}`,
+    {
+      method: "POST",
+      headers: getHeaders(),
+    },
+  );
 
   return [response.status, await response.json()];
+};
+
+export const updateAccount = async (
+  payload: Partial<Account>,
+): Promise<[number, unknown]> => {
+  const response = await fetch(`${BASE_PATH}`, {
+    method: "PATCH",
+    headers: getHeaders(),
+    body: JSON.stringify(payload),
+  });
+
+  return [
+    response.status,
+    response.status > 400 ? await response.json() : undefined,
+  ];
 };
 
 export const getAccountDetailsDetails = async (): Promise<

@@ -36,6 +36,7 @@ export type Account = {
   status: AccountStatus;
   token?: string;
   profiles?: Profile[];
+  phoneNumber?: string;
 };
 
 export type AccountDetails = {

@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { memo } from "react";
 import { ChevronRightIcon, Loader2 } from "lucide-react";
 import { Button, Input } from "~/components/ui";
 import { useTranslations } from "next-intl";

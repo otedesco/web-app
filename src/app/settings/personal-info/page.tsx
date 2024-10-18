@@ -2,7 +2,7 @@
 
 import { domAnimation, m, motion } from "framer-motion";
 import { Lock, ShieldCheck, View } from "lucide-react";
-import { PropsWithChildren, useCallback, useMemo, useState } from "react";
+import { PropsWithChildren, useCallback, useState } from "react";
 import {
   LazyAnimatePresence,
   LazyAnimatePresenceWithMotion,
