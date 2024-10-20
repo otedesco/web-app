@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ProfileActionTypes, ProfileState, Role } from "./types";
-import { Profile } from "~/lib/services/cerberus";
+
 import _ from "lodash";
+import { getCurrentProfileAction } from "~/lib/cerberus/actions";
+import { Profile } from "~/lib/cerberus/types";
 
 const initialState: ProfileState = Object.freeze({
   currentProfile: {
@@ -21,20 +23,7 @@ const initialState: ProfileState = Object.freeze({
 
 export const fetchCurrentProfile = createAsyncThunk(
   ProfileActionTypes.FETCH_CURRENT_PROFILE,
-  async () => {
-    const response = await fetch("/api/profile", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to get in");
-    }
-
-    return response.json() as Promise<Profile>;
-  },
+  () => getCurrentProfileAction(),
 );
 
 const userSlice = createSlice({
@@ -47,7 +36,7 @@ const userSlice = createSlice({
     updateCurrentProfile: (state, action: PayloadAction<Partial<Profile>>) => {
       state.currentProfile = {
         ...state.currentProfile,
-        ..._.pick(action.payload, ["avatarUrl", "name", "lastname", "account"]),
+        ..._.pick(action.payload, ["avatarUrl", "name", "lastname"]),
       };
     },
     resetProfileState: (state) => {

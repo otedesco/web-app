@@ -16,12 +16,11 @@ import {
   FormItem,
   FormLabel,
 } from "~/components/ui/form";
-import { useSignUp } from "~/lib/hooks/useSignUp";
-// import { type Account, type SignUpRequest } from "~/lib/api/auth/types";
+import { useSignUp } from "~/lib/cerberus/hooks";
 import { AuthContext } from "../../context";
 import { toast } from "sonner";
 import _ from "lodash";
-import { Account, SignUpRequest } from "~/lib/services/cerberus";
+import { Account, SignUpRequest } from "~/lib/cerberus/types";
 
 const signUpKeys = [
   "email",
@@ -98,7 +97,7 @@ const PersonalInfoStep = ({ onSubmit }: PersonalInfoStepProps) => {
     toast.error(t("Sign up failed"));
   }, [t]);
 
-  const { signUp, isPending } = useSignUp({ onSuccess, onError });
+  const { mutate: signUp, isPending } = useSignUp({ onSuccess, onError });
 
   const handleSubmit = useCallback(
     (values: PersonalInfoStepForm) => {

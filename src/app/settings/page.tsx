@@ -5,19 +5,9 @@ import { Button } from "~/components/ui/button";
 import {
   User,
   Shield,
-  CreditCard,
-  FileText,
   Bell,
-  Eye,
-  Globe,
-  BarChart,
-  Gift,
   ChevronRight,
   Settings,
-  Home,
-  HelpCircle,
-  MessageCircle,
-  Building,
   User2Icon,
 } from "lucide-react";
 import Image from "next/image";
@@ -31,21 +21,21 @@ import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
-import { useSignOut } from "~/lib/hooks/useLogOut";
+import { useSignOut } from "~/lib/cerberus/hooks";
 
 export default function AccountSettingsPage() {
   const fullname = useAppSelector(selectFullName);
   const avatarUrl = useAppSelector(selectProfileAvatar);
   const router = useRouter();
-  const { signOutAsync } = useSignOut({});
+  const { mutateAsync } = useSignOut({});
 
   const t = useTranslations("pages->settings");
 
   const handleLogOut = useCallback(async () => {
-    await signOutAsync(undefined);
+    await mutateAsync(undefined);
 
     router.push("/auth/login");
-  }, [router, signOutAsync]);
+  }, [router, mutateAsync]);
 
   return (
     <div className="container mx-auto min-h-[calc(100vh-4rem)] px-4 py-8">

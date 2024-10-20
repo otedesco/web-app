@@ -20,7 +20,7 @@ import { z } from "zod";
 import { FieldValues, FormState, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "~/lib/utils";
-import { useAccountDetails } from "~/lib/hooks/useAccountDetails";
+import { useAccountDetails } from "~/lib/cerberus/hooks";
 
 export const key = Fields.legalName;
 
@@ -98,13 +98,13 @@ export const Component: React.FC<FieldFormProps> = ({
   isLoading,
   onSubmit,
 }) => {
-  const { updateAccountDetailsAsync, isPending } = useAccountDetails({});
+  const { mutateAsync, isPending } = useAccountDetails({});
   const form = useForm<z.infer<typeof validator>>({
     resolver: zodResolver(validator),
   });
 
   const handleSubmit = async (values: z.infer<typeof validator>) => {
-    await updateAccountDetailsAsync(values);
+    await mutateAsync(values);
 
     return onSubmit();
   };

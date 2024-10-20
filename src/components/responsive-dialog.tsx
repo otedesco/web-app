@@ -16,13 +16,14 @@ import {
 } from "./ui";
 
 export type ResponsiveDialogProps = {
-  Trigger: React.ReactNode;
+  Trigger?: React.ReactNode;
   Content?: React.ReactNode;
   Footer?: React.ReactNode;
   title?: string | React.ReactNode;
   asChild?: boolean;
   isOpen: boolean;
   onOpenChange?: (open: boolean) => void;
+  className?: string;
 };
 
 const ResponsiveDialog: React.FC<ResponsiveDialogProps> = ({
@@ -33,6 +34,7 @@ const ResponsiveDialog: React.FC<ResponsiveDialogProps> = ({
   isOpen,
   onOpenChange,
   asChild = false,
+  className,
 }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const Container = isMobile ? Drawer : Dialog;
@@ -43,17 +45,19 @@ const ResponsiveDialog: React.FC<ResponsiveDialogProps> = ({
   const Title = isMobile ? DrawerTitle : DialogTitle;
   return (
     <Container handleOnly open={isOpen} onOpenChange={onOpenChange}>
-      <TriggerWrapper asChild={asChild}>{Trigger}</TriggerWrapper>
-      <ContentWrapper>
-        {typeof title === "string" ? (
-          <Header>
-            <Title className="text-center">{title}</Title>
-          </Header>
-        ) : (
-          <Header>{title}</Header>
-        )}
+      {Trigger && <TriggerWrapper asChild={asChild}>{Trigger}</TriggerWrapper>}
+      <ContentWrapper className={className}>
+        {title ? (
+          typeof title === "string" ? (
+            <Header>
+              <Title className="text-center">{title}</Title>
+            </Header>
+          ) : (
+            <Header>{title}</Header>
+          )
+        ) : null}
         {Content && Content}
-        <FooterWrapper>{Footer}</FooterWrapper>
+        {Footer && <FooterWrapper>{Footer}</FooterWrapper>}
       </ContentWrapper>
     </Container>
   );

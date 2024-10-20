@@ -2,7 +2,7 @@ import { ThemeProvider } from "~/components/theme-provider";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import StoreProvider from "~/state/store-provider";
-import QueryClientProvider from "./lib/query-client-provider";
+import QueryClientProvider from "~/lib/react-query";
 
 const Providers: React.FC<
   React.PropsWithChildren<{

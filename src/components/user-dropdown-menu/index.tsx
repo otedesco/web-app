@@ -1,7 +1,7 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useMediaQuery } from "~/hooks/useMediaQuery";
-import { useSignOut } from "~/lib/hooks/useLogOut";
+import { useSignOut } from "~/lib/cerberus/hooks";
 import DesktopUserDropdownMenu from "./desktop-menu";
 import MobileUserDropdownMenu from "./mobile-menu";
 import { useAppSelector } from "~/state/hooks";
@@ -32,36 +32,31 @@ const UserDropdownMenu: React.FC<UserDropdownMenuProps> = ({
   showOnMobile,
   ...rest
 }) => {
+  // TODO: Remove this
   useProfileActions();
   const currentProfile = useAppSelector(selectCurrentProfile);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-  const { signOutAsync } = useSignOut({});
+  const { mutateAsync } = useSignOut({});
   const router = useRouter();
 
   const handleLogOut = useCallback(async () => {
-    await signOutAsync(undefined);
-
+    await mutateAsync(undefined);
     router.push("/auth/login");
-  }, [router, signOutAsync]);
+  }, [router, mutateAsync]);
+
+  const isLoggedIn = useMemo(
+    () => currentProfile.id !== null,
+    [currentProfile.id],
+  );
 
   if (!isDesktop && !showOnMobile) return null;
 
-  if (isDesktop) {
-    return (
-      <DesktopUserDropdownMenu
-        isLoggedIn={currentProfile.id !== null}
-        onLogout={handleLogOut}
-        {...rest}
-      />
-    );
-  }
+  const MenuComponent = isDesktop
+    ? DesktopUserDropdownMenu
+    : MobileUserDropdownMenu;
 
   return (
-    <MobileUserDropdownMenu
-      isLoggedIn={currentProfile.id !== null}
-      onLogout={handleLogOut}
-      {...rest}
-    />
+    <MenuComponent isLoggedIn={isLoggedIn} onLogout={handleLogOut} {...rest} />
   );
 };
 

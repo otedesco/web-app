@@ -16,7 +16,7 @@ import {
   verifyAccountStepValidator,
 } from "../../validators";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useVerifyAccount } from "~/lib/hooks/useVerifyAccount";
+import { useVerifyAccount } from "~/lib/cerberus/hooks";
 import { AuthContext } from "../../context";
 import { toast } from "sonner";
 
@@ -42,7 +42,12 @@ export interface OTPStepProps {
 // TODO: Implement resend otp
 
 const OTPStep = (props: OTPStepProps) => {
-  const { verifyAccount, isPending, isSuccess, isError } = useVerifyAccount({});
+  const {
+    mutate: verifyAccount,
+    isPending,
+    isSuccess,
+    isError,
+  } = useVerifyAccount({});
   const { formState } = useContext(AuthContext);
   const form = useForm<VerifyAccountStepForm>({
     resolver: zodResolver(verifyAccountStepValidator),

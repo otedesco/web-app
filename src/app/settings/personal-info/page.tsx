@@ -10,7 +10,7 @@ import {
 import MobileTopNavBar from "~/components/navigation-menu/mobile-top-navigation-bar";
 import { Card } from "~/components/ui";
 import { Separator } from "~/components/ui/separator";
-import { useAccountDetails } from "~/lib/hooks/useAccountDetails";
+import { useAccountDetails } from "~/lib/cerberus/hooks";
 import * as LegalName from "./components/LegalName";
 import * as GovermentId from "./components/GovermentId";
 import * as EmailAddress from "./components/EmailAddress";
@@ -48,7 +48,6 @@ const Items = [
 
 const AccountPersonalInfo: React.FC = () => {
   const { data, isLoading, refetch } = useAccountDetails({});
-
   const handleSubmit = useCallback(() => {
     setIsItemExpanded(null);
 

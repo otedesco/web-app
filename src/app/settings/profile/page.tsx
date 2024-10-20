@@ -91,11 +91,12 @@ import InfoCards from "./components/info-cards";
 import InfoContent from "./components/info-content";
 import { Button } from "~/components/ui";
 import { useCallback, useEffect, useState } from "react";
-import { ProfileDetails } from "~/lib/services/cerberus";
-import { useProfileDetails } from "~/lib/hooks/useProfileDetails";
+
+import { useProfileDetails } from "~/lib/cerberus/hooks";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { ProfileDetails } from "~/lib/cerberus/types";
 
 export type ProfileDetailsRequest = Partial<ProfileDetails> & {
   avatarUrl: string;
@@ -104,14 +105,13 @@ export type ProfileDetailsRequest = Partial<ProfileDetails> & {
 const ProfilePage = ({ searchParams }: { searchParams: { edit: boolean } }) => {
   const router = useRouter();
   const {
-    updateProfileDetailsAsync,
+    mutateAsync: updateProfileDetailsAsync,
     isPending,
     isError,
     isSuccess,
     data,
     isLoading,
   } = useProfileDetails({});
-
   const [profileDetails, setProfileDetails] = useState<
     Partial<ProfileDetailsRequest>
   >({});

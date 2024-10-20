@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import AvatarCard from "./components/avatar-card";
 import AvatarEdit from "./components/avatar-card/avatar-edit";
 import ConfirmedInfoCard from "./components/confirmed-info-card";
-import { useUpdateProfile } from "~/lib/hooks/useUpdateProfile";
+import { useUpdateProfile } from "~/lib/cerberus/hooks";
 import { ProfileDetailsRequest } from "../../page";
 
 export default function InfoCards({
@@ -20,7 +20,7 @@ export default function InfoCards({
   ) => void;
 }) {
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
-  const { updateProfile, isPending } = useUpdateProfile({});
+  const { mutate: updateProfile, isPending } = useUpdateProfile({});
 
   const handleAvatarChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +36,7 @@ export default function InfoCards({
         reader.readAsDataURL(file);
       }
     },
-    [],
+    [isEditMode, onProfileDetailsChange],
   );
 
   const handleAvatarSubmit = useCallback(async () => {

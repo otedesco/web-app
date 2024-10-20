@@ -12,7 +12,7 @@ import {
   FormItem,
   FormLabel,
 } from "~/components/ui/form";
-import { useSignIn } from "~/lib/hooks/useSignIn";
+import { useSignIn } from "~/lib/cerberus/hooks";
 import { toast } from "sonner";
 
 interface FormFieldProps {
@@ -65,7 +65,7 @@ const defaultValues = {
 
 const LogInFormStep: React.FC<SignInStepProps> = (props) => {
   const t = useTranslations("views->auth-view");
-  const { signIn, isPending } = useSignIn({
+  const { mutate: signIn, isPending } = useSignIn({
     onSuccess: () => props.onSubmit({}),
     onError: () => toast.error(t("Sign in failed")),
   });

@@ -12,14 +12,15 @@ import { useAppSelector } from "~/state/hooks";
 import { ProfileDetailsRequest } from "../../page";
 import { ProfileItem } from "./components/dialog-contents/types";
 import { aboutItem, profileItems } from "./config";
+
+import { cn } from "~/lib/utils";
+import SkeletonWrapper from "~/components/skeleton-wrapper";
+import { useAccountDetails } from "~/lib/cerberus/hooks";
 import {
   AccountDetails,
   ProfileDetails,
   VerificationStatusEnum,
-} from "~/lib/services/cerberus/types";
-import { cn } from "~/lib/utils";
-import SkeletonWrapper from "~/components/skeleton-wrapper";
-import { useAccountDetails } from "~/lib/hooks/useAccountDetails";
+} from "~/lib/cerberus/types";
 
 export type ItemDialogProps = {
   value?: ProfileDetails[keyof ProfileDetails];
@@ -310,18 +311,19 @@ const InfoContentViewMode = ({
             {t("confirmedInformation", { name })}
           </h3>
           <ul className="m-2 space-y-2">
-            {[
-              "identityVerificationStatus",
-              "emailVerificationStatus",
-              "phoneVerificationStatus",
-            ].map((item) => (
+            {(
+              [
+                "identityVerificationStatus",
+                "emailVerificationStatus",
+                "phoneVerificationStatus",
+              ] as (keyof AccountDetails)[]
+            ).map((item) => (
               <li key={item} className="flex items-center gap-2">
                 <SkeletonWrapper
                   isDataReady={!isAccountLoading}
                   className="h-5 w-5 rounded-full"
                 >
-                  {data?.[item as keyof AccountDetails] ===
-                  VerificationStatusEnum.VERIFIED ? (
+                  {data?.[item] === VerificationStatusEnum.VERIFIED ? (
                     <Check className="h-5 w-5 text-green-500" />
                   ) : (
                     <X className="h-5 w-5 text-red-500" />

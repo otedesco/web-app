@@ -17,7 +17,7 @@ import {
 } from "~/components/inputs/address";
 
 import { LocationProvider } from "~/components/inputs/address/context";
-import { useAccountDetails } from "~/lib/hooks/useAccountDetails";
+import { useAccountDetails } from "~/lib/cerberus/hooks";
 
 export const key = Fields.address;
 
@@ -48,14 +48,14 @@ export const Component: React.FC<FieldFormProps> = ({
   isLoading,
   onSubmit,
 }) => {
-  const { updateAccountDetailsAsync, isPending } = useAccountDetails({});
+  const { mutateAsync, isPending } = useAccountDetails({});
 
   const form = useForm<z.infer<typeof validator>>({
     resolver: zodResolver(validator),
   });
 
   const handleSubmit = async (values: z.infer<typeof validator>) => {
-    await updateAccountDetailsAsync(values);
+    await mutateAsync(values);
 
     return onSubmit();
   };

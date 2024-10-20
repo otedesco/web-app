@@ -20,7 +20,7 @@ import { z } from "zod";
 import { FieldValues, FormState, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "~/lib/utils";
-import { useAccountDetails } from "~/lib/hooks/useAccountDetails";
+import { useAccountDetails } from "~/lib/cerberus/hooks";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -106,14 +106,14 @@ export const Component: React.FC<FieldFormProps> = ({
   isLoading,
   onSubmit,
 }) => {
-  const { updateAccountDetailsAsync, isPending } = useAccountDetails({});
+  const { mutateAsync } = useAccountDetails({});
 
   const form = useForm<z.infer<typeof validator>>({
     resolver: zodResolver(validator),
   });
 
   const handleSubmit = async (values: z.infer<typeof validator>) => {
-    await updateAccountDetailsAsync(values);
+    await mutateAsync(values);
 
     return onSubmit();
   };
@@ -144,12 +144,12 @@ export const Component: React.FC<FieldFormProps> = ({
 };
 
 export const Trigger: React.FC<FieldTriggerProps> = (props) => {
-  const { updateAccountDetailsAsync } = useAccountDetails({});
+  const { mutateAsync } = useAccountDetails({});
 
   const handleRemove = useCallback(async () => {
-    await updateAccountDetailsAsync({ govermentId: null });
+    await mutateAsync({ govermentId: null });
     return props.onSubmit();
-  }, []);
+  }, [mutateAsync, props]);
 
   let Component = (
     <Button

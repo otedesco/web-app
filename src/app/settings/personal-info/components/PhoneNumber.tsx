@@ -13,22 +13,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
 } from "~/components/ui";
 import { useCallback, useState } from "react";
 import { z } from "zod";
-import { FieldValues, FormState, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { cn } from "~/lib/utils";
 import { PhoneInput } from "~/components/inputs/phone";
-import ResponsiveDialog from "~/components/responsive-dialog";
-import { useMutation } from "@tanstack/react-query";
-import { MutationConfig } from "~/lib/types/react-query";
-import { useUpdateAccount } from "../hooks/useUpdateAccount";
+import { useAccount } from "~/lib/cerberus/hooks";
 import { Loader2 } from "lucide-react";
 import { VerificationCodeDialog } from "~/components/dialogs";
 import _ from "lodash";
-import { VerificationStatusEnum } from "~/lib/services/cerberus/types";
+
+import {
+  VerificationMethod,
+  VerificationStatusEnum,
+} from "~/lib/cerberus/types";
 
 export const key = Fields.phoneNumber;
 
@@ -60,7 +59,7 @@ export const Component: React.FC<FieldFormProps> = ({
   });
 
   const { mutateAsync: updateAccount, isPending: isUpdateAccountPending } =
-    useUpdateAccount({});
+    useAccount({});
 
   const handleSubmit = async (values: z.infer<typeof validator>) => {
     await updateAccount(values);
@@ -103,7 +102,7 @@ export const Component: React.FC<FieldFormProps> = ({
           />
         </div>
         <VerificationCodeDialog
-          verificationMethod="phone"
+          verificationMethod={VerificationMethod.PHONE}
           isOpen={isOpen}
           setOpen={setOpenModal}
           Trigger={

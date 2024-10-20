@@ -1,4 +1,4 @@
-import { AccountDetails } from "~/lib/services/cerberus";
+import { AccountDetails } from "~/lib/cerberus/types";
 
 export interface FieldValueProps {
   data?: AccountDetails;

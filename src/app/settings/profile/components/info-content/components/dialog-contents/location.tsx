@@ -5,7 +5,7 @@ import { Search, X, Check, Loader2 } from "lucide-react";
 import { Input } from "~/components/ui/input";
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { useDebounce } from "use-debounce";
-import { useSearchPlaces } from "~/lib/hooks/useSearchPlaces";
+import { useSearchPlaces } from "~/lib/google/hooks";
 import { cn } from "~/lib/utils";
 import { DialogContentProps } from "./types";
 
@@ -23,7 +23,11 @@ export default function LocationSelector({
   const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
 
-  const { places, isLoading, error } = useSearchPlaces(debouncedSearchTerm);
+  const {
+    data: places,
+    isLoading,
+    error,
+  } = useSearchPlaces(debouncedSearchTerm);
 
   const handleSelectPlace = (place: Place) => {
     setSelectedPlace(place);
@@ -64,7 +68,7 @@ export default function LocationSelector({
           <div className="flex h-full items-center justify-center text-center">
             Error fetching places
           </div>
-        ) : places.length > 0 ? (
+        ) : places?.length ? (
           (places as Place[]).map((place) => (
             <div
               key={place.place_id}

@@ -1,5 +1,5 @@
-import { ProfileDetails } from "~/lib/services/cerberus";
 import { ProfileDetailsRequest } from "~/app/settings/profile/page";
+import { ProfileDetails } from "~/lib/cerberus/types";
 
 export type ProfileItem = {
   id: keyof ProfileDetailsRequest;

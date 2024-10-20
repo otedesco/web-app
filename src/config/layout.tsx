@@ -10,6 +10,7 @@ import { headerConfig as newsHeaderConfig } from "~/app/(public)/(marketing)/new
 import { headerConfig as aboutUsHeaderConfig } from "~/app/(public)/(marketing)/about-us/_config";
 import { headerConfig as contactUsHeaderConfig } from "~/app/(public)/contact-us/_config";
 import { headerConfig as settingsHeaderConfig } from "~/app/settings/_config";
+import { headerConfig as onboardingHeaderConfig } from "~/app/onboarding/_config";
 import { HeaderConfig } from "~/components/navigation-menu/main-nav";
 import { FooterConfig } from "~/components/footer/main-footer";
 import { MobileConfig } from "~/components/navigation-menu/mobile-menu";
@@ -36,6 +37,8 @@ export enum Paths {
 
   WISHLIST = "/wishlist",
   MESSAGES = "/messages",
+
+  ONBOARDING = "/onboarding",
 
   RESOURSES = "/resources",
   RESOURCES_ALL_TOPICS = "/resources/all-topics",
@@ -71,6 +74,7 @@ export const headerConfig: Record<Paths, HeaderConfig | null> = {
   [Paths.SETTINGS_PERSONAL_INFO]: settingsHeaderConfig,
   [Paths.WISHLIST]: settingsHeaderConfig,
   [Paths.MESSAGES]: settingsHeaderConfig,
+  [Paths.ONBOARDING]: onboardingHeaderConfig,
   [Paths.RESOURSES]: resourcesHeaderConfig,
   [Paths.RESOURCES_ALL_TOPICS]: resourcesHeaderConfig,
   [Paths.RESOURCES_LEARNING]: resourcesHeaderConfig,
@@ -107,6 +111,7 @@ export const footerConfig: Record<Paths, FooterConfig | null> = {
   [Paths.SETTINGS_PERSONAL_INFO]: baseFooterConfig,
   [Paths.WISHLIST]: baseFooterConfig,
   [Paths.MESSAGES]: baseFooterConfig,
+  [Paths.ONBOARDING]: baseFooterConfig,
   [Paths.RESOURSES]: publicPagesFooterConfig,
   [Paths.RESOURCES_ALL_TOPICS]: publicPagesFooterConfig,
   [Paths.RESOURCES_LEARNING]: publicPagesFooterConfig,
@@ -138,6 +143,7 @@ export const mobileConfig: Record<Paths, MobileConfig | null> = {
   [Paths.SETTINGS_PERSONAL_INFO]: baseMobileConfig,
   [Paths.WISHLIST]: baseMobileConfig,
   [Paths.MESSAGES]: baseMobileConfig,
+  [Paths.ONBOARDING]: baseMobileConfig,
   [Paths.RESOURSES]: null,
   [Paths.RESOURCES_ALL_TOPICS]: null,
   [Paths.RESOURCES_LEARNING]: null,

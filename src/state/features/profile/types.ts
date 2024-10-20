@@ -1,4 +1,4 @@
-import { Organization, RoleType } from "~/lib/services/cerberus";
+import { Organization, RoleType } from "~/lib/cerberus/types";
 
 export const RoleTypeEnum = {
   OWNER: "owner",

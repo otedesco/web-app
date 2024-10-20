@@ -15,9 +15,10 @@ import {
 } from "../ui/form";
 import { Button, InputOTP, InputOTPGroup, InputOTPSlot, Label } from "../ui";
 import { cn } from "~/lib/utils";
-import { useResendVerificationCode } from "./hooks/useResendVerificationCode";
-import { useEffect } from "react";
-import { useVerifyAccount } from "~/lib/hooks/useVerifyAccount";
+import { useResendVerificationCode } from "~/lib/cerberus/hooks";
+import { useEffect, useLayoutEffect } from "react";
+import { useVerifyAccount } from "~/lib/cerberus/hooks";
+import { VerificationMethod } from "~/lib/cerberus/types";
 
 const OTPInput: React.FC<
   {
@@ -49,13 +50,13 @@ const VerificationCodeDialog = ({
   isOpen: boolean;
   onFinish: () => void;
   Trigger: React.ReactNode;
-  verificationMethod: "email" | "phone";
+  verificationMethod: VerificationMethod;
   setOpen: (open: boolean) => void;
 }) => {
   const { mutate: resendVerificationCode, data: resendVerificationData } =
     useResendVerificationCode({});
 
-  const { verifyAccountAsync } = useVerifyAccount({});
+  const { mutateAsync: verifyAccountAsync } = useVerifyAccount({});
   const form = useForm<z.infer<typeof validator>>({
     resolver: zodResolver(validator),
     defaultValues: {
@@ -63,11 +64,11 @@ const VerificationCodeDialog = ({
     },
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isOpen) {
-      resendVerificationCode(verificationMethod);
+      return resendVerificationCode({ method: verificationMethod });
     }
-  }, [isOpen, resendVerificationCode, verificationMethod]);
+  }, [isOpen]);
 
   const handleSubmit = async (values: z.infer<typeof validator>) => {
     if (resendVerificationData?.token) {
@@ -133,6 +134,8 @@ const VerificationCodeDialog = ({
       </form>
     </Form>
   );
+
+  // TODO: Refactor to use VerifyAccountForm
   return (
     <ResponsiveDialog
       asChild
