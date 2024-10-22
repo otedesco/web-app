@@ -5,8 +5,9 @@ import PageContainer from "~/components/layout/page-container";
 import { AuthenticationDialog } from "~/components/dialogs";
 import { useAppSelector } from "~/state/hooks";
 import { selectCurrentProfile } from "~/state/features/profile/selectors";
+import RolesCards from "./components/roles-cards";
 
-export default function MarketingRentPage() {
+export default function PublishOnboardingPage() {
   const [isOpen, setIsOpen] = useState(false);
   const currentProfile = useAppSelector(selectCurrentProfile);
 
@@ -23,8 +24,8 @@ export default function MarketingRentPage() {
 
   return (
     <PageContainer>
-      <h1>onboarding</h1>
       <AuthenticationDialog isOpen={isOpen} onFinish={handleFinish} />
+      <RolesCards />
     </PageContainer>
   );
 }

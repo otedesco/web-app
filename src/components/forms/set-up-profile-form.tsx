@@ -32,7 +32,7 @@ export function SetUpProfileForm({
   onSuccess,
   className,
 }: {
-  onSuccess: () => void;
+  onSuccess?: () => void;
   className: string;
 }) {
   const { isPending, mutateAsync } = useUpdateProfile({});
@@ -42,7 +42,7 @@ export function SetUpProfileForm({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     await mutateAsync(values);
-    onSuccess();
+    onSuccess?.();
   };
 
   return (
