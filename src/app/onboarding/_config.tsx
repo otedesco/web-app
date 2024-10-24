@@ -1,6 +1,4 @@
 import { HeaderConfig } from "~/components/navigation-menu/main-nav";
-import PublishLink from "~/components/publish-link";
-import { Button } from "~/components/ui";
 
 // const extraComponent = (
 //   <div className="flex items-center">
@@ -13,7 +11,7 @@ import { Button } from "~/components/ui";
 
 export const headerConfig: HeaderConfig = {
   type: "minimal",
-  hasUserMenu: true,
+  hasUserMenu: false,
   hasThemeToggle: false,
   hasSearchBox: false,
   logoType: "auto",

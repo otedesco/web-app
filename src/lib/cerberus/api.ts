@@ -12,6 +12,7 @@ import {
   ProfileDetails,
   ResendVerificationCodeRequest,
   ResendVerificationCodeResponse,
+  Role,
   SignInRequest,
   SignUpRequest,
   VerificationMethod,
@@ -97,3 +98,7 @@ export const updateProfileDetails = (payload: Partial<ProfileDetails>) =>
 
 export const getProfileDetails = () =>
   cerberusAPI.get<ProfileDetails>(`/profiles/me/details`);
+
+// Role functions
+export const createRole = (payload: Partial<Role>) =>
+  cerberusAPI.post<Role>(`/role`, payload);

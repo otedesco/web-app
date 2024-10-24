@@ -9,6 +9,8 @@ import {
   ChevronRight,
   Settings,
   User2Icon,
+  Home,
+  Building,
 } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -225,13 +227,17 @@ const mobileMenuItems = [
       { title: "mobileOptions.sections.0.items.1.title", icon: Settings },
     ],
   },
-  // {
-  //   section: "mobileOptions.sections.1.title",
-  //   items: [
-  //     { title: "mobileOptions.sections.1.items.0.title", icon: Home },
-  //     { title: "mobileOptions.sections.1.items.1.title", icon: Building },
-  //   ],
-  // },
+  {
+    section: "mobileOptions.sections.1.title",
+    items: [
+      {
+        title: "mobileOptions.sections.1.items.0.title",
+        icon: Home,
+        href: "/publish",
+      },
+      // { title: "mobileOptions.sections.1.items.1.title", icon: Building },
+    ],
+  },
   // {
   //   section: "mobileOptions.sections.2.title",
   //   items: [{ title: "mobileOptions.sections.2.items.0.title", icon: Gift }],

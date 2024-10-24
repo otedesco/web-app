@@ -39,6 +39,9 @@ const userSlice = createSlice({
         ..._.pick(action.payload, ["avatarUrl", "name", "lastname"]),
       };
     },
+    updateRoles: (state, action: PayloadAction<Role>) => {
+      state.roles = [...state.roles, action.payload];
+    },
     resetProfileState: (state) => {
       state.currentProfile = initialState.currentProfile;
       state.roles = initialState.roles;
@@ -66,6 +69,10 @@ const userSlice = createSlice({
 });
 
 export type * from "./types";
-export const { setSelectedRole, resetProfileState, updateCurrentProfile } =
-  userSlice.actions;
+export const {
+  setSelectedRole,
+  resetProfileState,
+  updateCurrentProfile,
+  updateRoles,
+} = userSlice.actions;
 export default userSlice.reducer;

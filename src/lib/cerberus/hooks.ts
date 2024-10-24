@@ -7,6 +7,7 @@ import {
   ProfileDetails,
   ResendVerificationCodeRequest,
   ResendVerificationCodeResponse,
+  Role,
   SignInRequest,
   SignUpRequest,
   VerifyAccountRequest,
@@ -14,11 +15,14 @@ import {
 import {
   fetchCurrentProfile,
   resetProfileState,
+  setSelectedRole,
   updateCurrentProfile,
+  updateRoles,
 } from "~/state/features/profile";
 import { useAppDispatch } from "~/state/hooks";
 import { store } from "~/state/store";
 import {
+  createRoleAction,
   getAccountDetailsAction,
   getProfileDetailsAction,
   resendVerificationCodeAction,
@@ -184,3 +188,20 @@ export const useUpdateProfile = (
 export const useVerifyAccount = createMutationHook<void, VerifyAccountRequest>(
   (values: VerifyAccountRequest) => verifyAccountAction(values),
 );
+
+export const useCreateRole = (
+  params: Partial<MutationConfig<Role, unknown, Partial<Role>>> = {},
+) => {
+  const dispatch = useAppDispatch();
+
+  return createMutationHook<Role, Partial<Role>>(
+    (values: Partial<Role>) => createRoleAction(values),
+    {
+      onSuccess: (data: Role, variables: Partial<Role>, context: unknown) => {
+        dispatch(updateRoles(data));
+        dispatch(setSelectedRole(data.id));
+        params.onSuccess?.(data, variables, context);
+      },
+    },
+  )(params);
+};

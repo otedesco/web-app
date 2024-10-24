@@ -13,7 +13,7 @@ import {
 } from "~/components/ui";
 
 export const ThemeToggle = () => {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
   const t = useTranslations("components->theme-toggle"); // Initialize useTranslation hook
 
   return (

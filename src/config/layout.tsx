@@ -143,7 +143,7 @@ export const mobileConfig: Record<Paths, MobileConfig | null> = {
   [Paths.SETTINGS_PERSONAL_INFO]: baseMobileConfig,
   [Paths.WISHLIST]: baseMobileConfig,
   [Paths.MESSAGES]: baseMobileConfig,
-  [Paths.ONBOARDING]: baseMobileConfig,
+  [Paths.ONBOARDING]: null,
   [Paths.RESOURSES]: null,
   [Paths.RESOURCES_ALL_TOPICS]: null,
   [Paths.RESOURCES_LEARNING]: null,

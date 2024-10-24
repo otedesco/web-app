@@ -40,7 +40,7 @@ export default function ListingPage() {
 
   // TODO: Fix overflow issue on mobile
   return (
-    <PageContainer fullwitdh>
+    <PageContainer fullWidth>
       <div
         className={`transition-all duration-300 ease-in-out ${
           isExpanded

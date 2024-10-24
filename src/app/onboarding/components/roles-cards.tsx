@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { User } from "lucide-react";
+import { Loader2, User } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import ResponsiveDialog from "~/components/responsive-dialog";
@@ -17,6 +17,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import AvatarField from "~/components/forms/form-fields/avatar-field";
 import { cn } from "~/lib/utils";
+import { RoleType } from "~/lib/cerberus/types";
+import { useCreateRole } from "~/lib/cerberus/hooks";
 
 const Item = ({
   title,
@@ -85,12 +87,17 @@ const professionalProfileSchema = z.object({
   avatarUrl: z.string().optional(),
 });
 
-const ProfessionalProfileForm = () => {
+const ProfessionalProfileForm = ({ role }: { role: RoleType }) => {
   const form = useForm<z.infer<typeof professionalProfileSchema>>();
+  const { mutateAsync, isPending } = useCreateRole();
+
   const onSubmit = async (
     values: z.infer<typeof professionalProfileSchema>,
   ) => {
-    console.log(values);
+    await mutateAsync({
+      ...values,
+      role,
+    });
   };
   return (
     <Form {...form}>
@@ -102,25 +109,29 @@ const ProfessionalProfileForm = () => {
           Don&apos;t worry, you can change this later.
         </p>
         <AvatarField control={form.control} name="avatarUrl" />
-        <Button className="mb-4 min-w-24">Done</Button>
+        <Button className="mb-4 min-w-24" disabled={isPending}>
+          {isPending ? <Loader2 className="animate-spin" /> : "Done"}
+        </Button>
       </form>
     </Form>
   );
 };
 
 const ProfileCard = ({
+  role,
   title,
   description,
   img,
   dialogTitle,
 }: {
+  role: RoleType;
   title: string;
   description: string;
   img: string;
   dialogTitle: string;
 }) => {
   const [open, setOpen] = useState(false);
-  const Content = <ProfessionalProfileForm />;
+  const Content = <ProfessionalProfileForm role={role} />;
 
   return (
     <>
@@ -143,6 +154,7 @@ const ProfileCard = ({
 
 const LandLordCard = () => (
   <ProfileCard
+    role={RoleType.BASIC_AGENT}
     title="Rent or Sell Your Property"
     description="Got a property to list? Whether you're renting or selling, we make it easy for you to connect with the right people. Manage your listings, track offers, and find the perfect tenants or buyers—all in one place."
     img="/images/owner.jpg"
@@ -152,6 +164,7 @@ const LandLordCard = () => (
 
 const RealtorCard = () => (
   <ProfileCard
+    role={RoleType.BASIC_AGENT}
     title="Manage Your Property Portfolio"
     description="For agents managing properties on their own, streamline your business. Showcase your listings, manage inquiries, and grow your client base with powerful tools designed just for you."
     img="/images/realtor.jpg"
@@ -260,7 +273,7 @@ const CompanyCard = () => {
 };
 
 const RolesCards = () => (
-  <div className="flex min-h-[calc(100vh-10rem)] flex-col items-center justify-center gap-4 md:min-h-[calc(100vh-4rem)] md:flex-row">
+  <div className="mx-auto flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center gap-4 px-4 md:min-h-[calc(100vh-4rem)] md:flex-row">
     <LandLordCard />
     <RealtorCard />
     <CompanyCard />
