@@ -9,21 +9,9 @@ on:
 permissions: {}
 
 jobs:
-  security-workflow:
+  security:
+    name: Security / aggregate
     permissions:
       contents: read
       pull-requests: read
     uses: otedesco/gh-action-templates/.github/workflows/security.yml@dee28264b5f99ed00e72f1f017e952e3e83b74b3 # OPS-186 merged central security workflow
-
-  security-gate:
-    name: Security / aggregate
-    if: ${{ always() }}
-    needs: [security-workflow]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Require security workflow
-        env:
-          SECURITY_RESULT: ${{ needs.security-workflow.result }}
-        run: test "$SECURITY_RESULT" = success
