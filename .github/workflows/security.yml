@@ -16,6 +16,6 @@ jobs:
       pull-requests: read
       security-events: write
       packages: read
-    uses: otedesco/gh-action-templates/.github/workflows/security.yml@dee28264b5f99ed00e72f1f017e952e3e83b74b3 # OPS-186 merged central security workflow
+    uses: otedesco/gh-action-templates/.github/workflows/security.yml@f955d5f8e308d5eb351a29549a3fcd3f85dcf0e7 # OPS-186 npm-aware security workflow
     with:
       package-manager: npm
